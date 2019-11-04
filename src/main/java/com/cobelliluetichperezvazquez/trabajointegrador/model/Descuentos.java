@@ -1,7 +1,14 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Descuentos {
 
+    @Id
+    @GeneratedValue
     int idDescuentos;
     Float descuentoPorUnidad;
     Float descuentoPorPagoSemestral;

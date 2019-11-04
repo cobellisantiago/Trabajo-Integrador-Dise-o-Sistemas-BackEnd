@@ -1,14 +1,30 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import org.hibernate.annotations.ManyToAny;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Cuota {
 
+    @Id
+    @GeneratedValue
+    int idCuota;
     int numeroCuota;
+
     Date fechaDeVencimiento;
+
     Float valorActual;
+
     Float valorOriginal;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pago")
     Pago idPago;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_poliza")
     Poliza poliza;
 
     public Cuota() {

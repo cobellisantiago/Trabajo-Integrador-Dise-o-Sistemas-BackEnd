@@ -1,9 +1,15 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class Pago {
 
+    @Id
+    @GeneratedValue
     int idPago;
     Float monto;
     Date fechaDeRealizacion;

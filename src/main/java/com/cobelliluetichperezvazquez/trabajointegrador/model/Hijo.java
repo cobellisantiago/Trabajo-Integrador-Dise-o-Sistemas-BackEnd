@@ -5,9 +5,15 @@ import java.util.Date;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCivil;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.Sexo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Hijo {
 
+    @Id
+    @GeneratedValue
     int idHijo;
     Date fechaDeNacimiento;
     EstadoCivil estadoCivil;

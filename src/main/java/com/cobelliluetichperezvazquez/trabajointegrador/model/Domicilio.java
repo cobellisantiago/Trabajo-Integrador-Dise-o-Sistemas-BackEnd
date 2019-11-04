@@ -11,25 +11,20 @@ public class Domicilio {
 
     @GeneratedValue
     @Id
-    @Column(name = "ID")
     int idDomicilio;
 
-    @Column(name = "CALLE")
     String calle;
 
-    @Column(name = "NUMERO")
     int numero;
 
-    @Column(name = "PISO")
     int piso;
 
-    @Column(name = "DEPARTAMENTO")
     char departamento;
 
-    @Column(name = "CODIGO_POSTAL")
     int codigoPostal;
 
-    @Transient //Esta propiedad hace que ignore la localidad en la base de datos
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_localidad")
     Localidad localidad;
 
     public Domicilio() {

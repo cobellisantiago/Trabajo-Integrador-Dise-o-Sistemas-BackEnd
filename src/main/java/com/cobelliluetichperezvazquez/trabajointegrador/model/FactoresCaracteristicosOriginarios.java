@@ -1,14 +1,30 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class FactoresCaracteristicosOriginarios {
 
+    @Id
+    @GeneratedValue
+    int idFactoresCaracteristiscosOriginarios;
+
     Float porcentajeCobertura;
+
     Float porcentajeRoboMarca;
+
     Float porcentajeRoboModelo;
+
     Float porcentajeRoboProvincia;
+
     Float porcentajeRoboLocalidad;
+
     Float porcentajePorKilometros;
+
     Float porcentajeSiniestro;
+
     Float porcentajePorHijo;
 
     public FactoresCaracteristicosOriginarios() {

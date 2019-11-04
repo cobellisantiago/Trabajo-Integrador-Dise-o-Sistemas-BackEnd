@@ -2,13 +2,17 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 
+import javax.persistence.*;
 
+@Entity
 public class Poliza {
 
+    @Id
     String numeroDePoliza;
     Date fechaInicioVigencia;
     Date fechaFinVigencia;
@@ -21,13 +25,36 @@ public class Poliza {
     FormaDePago formaDePago;
     int añoVehiculo;
     EstadoPoliza estado;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente")
     Cliente cliente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_modelo")
     Modelo modelo;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_premio")
     Premio premio;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_descuento")
     Descuentos descuentos;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_medidas_seguridad")
     MedidasDeSeguridad medidasDeSeguridad;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
-    ArrayList<Hijo> hijos = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    List<Hijo> hijos;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_domicilio_riesgo")
     Localidad domicilioDeRiesgo;
 
     public Poliza() {
@@ -38,7 +65,7 @@ public class Poliza {
                   String motorVehiculo, String chasisVehiculo, Float sumaAsegurada, String patente, int kilometrosPorAño,
                   FormaDePago formaDePago, int añoVehiculo, EstadoPoliza estado, Cliente cliente, Modelo modelo,
                   Premio premio, Descuentos descuentos, MedidasDeSeguridad medidasDeSeguridad, Cobertura cobertura,
-                  ArrayList<Hijo> hijos, Localidad domicilioDeRiesgo) {
+                  List<Hijo> hijos, Localidad domicilioDeRiesgo) {
         this.numeroDePoliza = numeroDePoliza;
         this.fechaInicioVigencia = fechaInicioVigencia;
         this.fechaFinVigencia = fechaFinVigencia;
@@ -205,11 +232,11 @@ public class Poliza {
         this.cobertura = cobertura;
     }
 
-    public ArrayList<Hijo> getHijos() {
+    public List<Hijo> getHijos() {
         return hijos;
     }
 
-    public void setHijos(ArrayList<Hijo> hijos) {
+    public void setHijos(List<Hijo> hijos) {
         this.hijos = hijos;
     }
 

@@ -26,8 +26,5 @@ public class controllerBasic {
     }
 
 
-    @PostMapping(path="domicilio")
-    public boolean AltaNota(@RequestBody @Valid Domicilio domicilio){
 
-    }
 }

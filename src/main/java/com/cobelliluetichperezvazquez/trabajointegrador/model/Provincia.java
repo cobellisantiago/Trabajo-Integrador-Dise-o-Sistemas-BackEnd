@@ -1,10 +1,17 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Provincia {
 
+    @GeneratedValue
+    @Id
     int idProvincia;
     String nombre;
     Float porcentajeRobo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pais")
     Pais pais;
 
     public Provincia() {

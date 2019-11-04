@@ -1,8 +1,15 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class MedidasDeSeguridad {
 
-    int medidasDeSeguridad;
+    @GeneratedValue
+    @Id
+    int idMedidasDeSeguridad;
     boolean alarma;
     boolean seGuardaEnGarage;
     boolean rastreo;
@@ -15,7 +22,7 @@ public class MedidasDeSeguridad {
 
     public MedidasDeSeguridad(int medidasDeSeguridad, boolean alarma, boolean seGuardaEnGarage, boolean rastreo,
                               boolean tuercasAntirobo) {
-        this.medidasDeSeguridad = medidasDeSeguridad;
+        this.idMedidasDeSeguridad = medidasDeSeguridad;
         this.alarma = alarma;
         this.seGuardaEnGarage = seGuardaEnGarage;
         this.rastreo = rastreo;
@@ -23,11 +30,11 @@ public class MedidasDeSeguridad {
     }
 
     public int getMedidasDeSeguridad() {
-        return medidasDeSeguridad;
+        return idMedidasDeSeguridad;
     }
 
     public void setMedidasDeSeguridad(int medidasDeSeguridad) {
-        this.medidasDeSeguridad = medidasDeSeguridad;
+        this.idMedidasDeSeguridad = medidasDeSeguridad;
     }
 
     public boolean isAlarma() {

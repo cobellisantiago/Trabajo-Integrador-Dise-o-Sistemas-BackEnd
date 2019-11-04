@@ -1,7 +1,14 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Cobertura {
 
+    @Id
+    @GeneratedValue
     int idCobertura;
     String nombre;
     String descripcion;

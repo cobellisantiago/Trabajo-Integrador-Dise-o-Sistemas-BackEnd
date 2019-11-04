@@ -1,11 +1,20 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Modelo {
 
+    @Id
+    @GeneratedValue
     int idModelo;
     String nombre;
     Float porcentajeRobo;
-    AñoFabricacion añoFabricacion;
+    @ManyToMany(fetch = FetchType.LAZY)
+    List<AñoFabricacion> añosFabricacion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_marca")
     Marca marca;
 
 
@@ -13,11 +22,11 @@ public class Modelo {
 
     }
 
-    public Modelo(int idModelo, String nombre, Float porcentajeRobo, AñoFabricacion añoFabricacion, Marca marca) {
+    public Modelo(int idModelo, String nombre, Float porcentajeRobo, List<AñoFabricacion> añoFabricacion, Marca marca) {
         this.idModelo = idModelo;
         this.nombre = nombre;
         this.porcentajeRobo = porcentajeRobo;
-        this.añoFabricacion = añoFabricacion;
+        this.añosFabricacion = añoFabricacion;
         this.marca = marca;
     }
 
@@ -45,12 +54,12 @@ public class Modelo {
         this.porcentajeRobo = porcentajeRobo;
     }
 
-    public AñoFabricacion getAñoFabricacion() {
-        return añoFabricacion;
+    public List<AñoFabricacion> getAñoFabricacion() {
+        return añosFabricacion;
     }
 
-    public void setAñoFabricacion(AñoFabricacion añoFabricacion) {
-        this.añoFabricacion = añoFabricacion;
+    public void setAñoFabricacion(List<AñoFabricacion> añoFabricacion) {
+        this.añosFabricacion = añoFabricacion;
     }
 
     public Marca getMarca() {

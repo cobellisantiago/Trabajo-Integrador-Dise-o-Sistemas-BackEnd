@@ -1,19 +1,37 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class SolicitudDePoliza {
 
+    @Id
     String numeroSolicitudDePoliza;
     String motorVehiculo;
     String chasisVehiculo;
     String patente;
     int kilometrosPorAño;
     int añoVehiculo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente")
     Cliente cliente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_medidad_seguridad")
     MedidasDeSeguridad medidasDeSeguridad;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
-    ArrayList<Hijo> hijos = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    List<Hijo> hijos;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_domicilio_riesgo")
     Localidad domicilioDeRiesgo;
 
 
@@ -89,11 +107,11 @@ public class SolicitudDePoliza {
         this.cobertura = cobertura;
     }
 
-    public ArrayList<Hijo> getHijos() {
+    public List<Hijo> getHijos() {
         return hijos;
     }
 
-    public void setHijos(ArrayList<Hijo> hijos) {
+    public void setHijos(List<Hijo> hijos) {
         this.hijos = hijos;
     }
 

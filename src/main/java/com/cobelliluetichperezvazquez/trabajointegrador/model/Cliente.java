@@ -4,9 +4,13 @@ import java.util.Date;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.*;
 
+import javax.persistence.*;
 
+@Entity
 public class Cliente {
 
+    @Id
+    @GeneratedValue
     int idCliente;
     TipoDeDocumento tipoDeDocumento;
     String numeroDeDocumento;
@@ -22,6 +26,9 @@ public class Cliente {
     String correoElectronico;
     EstadoCivil estadoCivil;
     EstadoCliente estado;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_domicilio")
     Domicilio domicilio;
 
     public Cliente() {

@@ -1,10 +1,19 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import com.sun.javafx.beans.IDProperty;
+
+import javax.persistence.*;
+
+@Entity
 public class Localidad {
 
+    @Id
+    @GeneratedValue
     int idLocalidad;
     String nombre;
     Float porcentajeRobo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_provincia")
     Provincia provincia;
 
 

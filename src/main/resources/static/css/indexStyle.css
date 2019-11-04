@@ -1,0 +1,56 @@
+
+html {
+    font-family: "Open Sans";
+    /*line-height: 1.15;*/
+    background-color: #E5E5E5;
+}
+
+navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-text{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 41px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.btn-propio{
+    background-color: #84D098;
+    color: #ffffff;
+    border-color: #84D098;
+}
+
+
+.main-menu{
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.main-menu__item{
+    line-height: 2em;
+}
+
+.main-menu__link{
+    text-decoration: none;
+    font-size:1.2em;
+}

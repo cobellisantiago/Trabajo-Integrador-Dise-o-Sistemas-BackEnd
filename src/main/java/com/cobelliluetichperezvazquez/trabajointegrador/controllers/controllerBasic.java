@@ -3,14 +3,10 @@ package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
 
 //Los controllers manejan las vistas (HTML)
 
-import com.cobelliluetichperezvazquez.trabajointegrador.model.Domicilio;
-import com.cobelliluetichperezvazquez.trabajointegrador.repository.DomicilioRepository;
+import com.cobelliluetichperezvazquez.trabajointegrador.gestores.DomicilioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/hola")

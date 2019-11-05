@@ -1,4 +1,4 @@
-package com.cobelliluetichperezvazquez.trabajointegrador.repository;
+package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 
 import org.springframework.stereotype.Repository;
 

@@ -7,8 +7,8 @@ import javax.persistence.Id;
 @Entity
 public class Pais {
 
-    @GeneratedValue
     @Id
+    @GeneratedValue
     int idPais;
     String nombre;
 

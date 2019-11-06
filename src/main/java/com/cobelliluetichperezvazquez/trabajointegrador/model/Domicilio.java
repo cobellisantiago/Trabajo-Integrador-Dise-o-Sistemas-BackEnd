@@ -97,6 +97,10 @@ public class Domicilio {
         this.localidad = localidad;
     }
 
-
-
+    @Override
+    public String toString() {
+        String texto = this.calle+" "+this.numero+" "+this.localidad.getNombre()+" "+this.localidad.getProvincia().getNombre()
+                +" "+this.getLocalidad().getProvincia().getPais().getNombre();
+        return texto;
+    }
 }

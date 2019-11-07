@@ -10,6 +10,7 @@ public class Provincia {
     int idProvincia;
     String nombre;
     Float porcentajeRobo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pais")
     Pais pais;

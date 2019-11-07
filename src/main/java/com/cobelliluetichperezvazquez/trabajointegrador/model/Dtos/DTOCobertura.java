@@ -1,25 +1,10 @@
-package com.cobelliluetichperezvazquez.trabajointegrador.model;
+package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class DTOCobertura {
 
-@Entity
-public class Cobertura {
-
-    @Id
-    @GeneratedValue
     int idCobertura;
     String nombre;
     String descripcion;
-
-    public Cobertura() {}
-
-    public Cobertura(int idCobertura, String nombre, String descripcion) {
-        this.idCobertura = idCobertura;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
 
     public int getIdCobertura() {
         return idCobertura;
@@ -44,7 +29,4 @@ public class Cobertura {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-
-
 }

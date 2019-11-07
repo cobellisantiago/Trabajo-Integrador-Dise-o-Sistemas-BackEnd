@@ -3,7 +3,7 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity()
 public class Modelo {
 
     @Id

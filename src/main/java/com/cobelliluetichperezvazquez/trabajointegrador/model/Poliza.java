@@ -26,15 +26,15 @@ public class Poliza {
     int añoVehiculo;
     EstadoPoliza estado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_cliente")
     Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_modelo")
     Modelo modelo;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_premio")
     Premio premio;
 
@@ -42,18 +42,18 @@ public class Poliza {
     @JoinColumn(name = "id_descuento")
     Descuentos descuentos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_medidas_seguridad")
     MedidasDeSeguridad medidasDeSeguridad;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.ALL})
     List<Hijo> hijos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_domicilio_riesgo")
     Localidad domicilioDeRiesgo;
 
@@ -66,6 +66,7 @@ public class Poliza {
                   FormaDePago formaDePago, int añoVehiculo, EstadoPoliza estado, Cliente cliente, Modelo modelo,
                   Premio premio, Descuentos descuentos, MedidasDeSeguridad medidasDeSeguridad, Cobertura cobertura,
                   List<Hijo> hijos, Localidad domicilioDeRiesgo) {
+
         this.numeroDePoliza = numeroDePoliza;
         this.fechaInicioVigencia = fechaInicioVigencia;
         this.fechaFinVigencia = fechaFinVigencia;

@@ -1,6 +1,6 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
-import com.sun.javafx.beans.IDProperty;
+
 
 import javax.persistence.*;
 

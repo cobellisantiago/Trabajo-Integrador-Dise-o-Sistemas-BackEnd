@@ -1,7 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;

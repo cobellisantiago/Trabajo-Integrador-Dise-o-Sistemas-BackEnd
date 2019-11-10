@@ -15,7 +15,10 @@ public class Premio {
     Float totalPremio;
 
     public Premio() {
+    }
 
+    public Premio(int idPremio){
+        this.idPremio = idPremio;
     }
 
     public Premio(int idPremio, Float prima, Float derechoDeEmision, Float totalPremio) {

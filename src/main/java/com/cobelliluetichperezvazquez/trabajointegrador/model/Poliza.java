@@ -1,6 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import javax.persistence.*;
 
 @Entity
 public class Poliza {
-
     @Id
     String numeroDePoliza;
     Date fechaInicioVigencia;
@@ -25,6 +25,14 @@ public class Poliza {
     FormaDePago formaDePago;
     int añoVehiculo;
     EstadoPoliza estado;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_FactoresCaracteristicosOriginarios")
+    FactoresCaracteristicosOriginarios factoresCaracteristicosOriginarios;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_solicitudPoliza")
+    SolicitudDePoliza solicitudDePoliza;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_cliente")
@@ -49,6 +57,9 @@ public class Poliza {
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    List<Cuota> cuotas;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     List<Hijo> hijos;
@@ -86,7 +97,107 @@ public class Poliza {
         this.medidasDeSeguridad = medidasDeSeguridad;
         this.cobertura = cobertura;
         this.hijos = hijos;
-        this.domicilioDeRiesgo = domicilioDeRiesgo;
+    }
+
+
+    public FactoresCaracteristicosOriginarios getFactoresCaracteristicosOriginarios() {
+        return factoresCaracteristicosOriginarios;
+    }
+
+    public void setFactoresCaracteristicosOriginarios(FactoresCaracteristicosOriginarios factoresCaracteristicosOriginarios) {
+        this.factoresCaracteristicosOriginarios = factoresCaracteristicosOriginarios;
+    }
+
+    public SolicitudDePoliza getSolicitudDePoliza() {
+        return solicitudDePoliza;
+    }
+
+    public void setSolicitudDePoliza(SolicitudDePoliza solicitudDePoliza) {
+        this.solicitudDePoliza = solicitudDePoliza;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public void setFechaDeEmision(Date fechaDeEmision) {
+        this.fechaDeEmision = fechaDeEmision;
+    }
+
+    public int getIdCobertura() {
+        return idCobertura;
+    }
+
+    public void setIdCobertura(int idCobertura) {
+        this.idCobertura = idCobertura;
+    }
+
+    public int getIdLocalidad() {
+        return idLocalidad;
+    }
+
+    public void setIdLocalidad(int idLocalidad) {
+        this.idLocalidad = idLocalidad;
+    }
+
+    public int getIdModelo() {
+        return idModelo;
+    }
+
+    public void setIdModelo(int idModelo) {
+        this.idModelo = idModelo;
+    }
+
+    public int getIdPremio() {
+        return idPremio;
+    }
+
+    public void setIdPremio(int idPremio) {
+        this.idPremio = idPremio;
+    }
+
+    public int getIdDescuentos() {
+        return idDescuentos;
+    }
+
+    public void setIdDescuentos(int idDescuentos) {
+        this.idDescuentos = idDescuentos;
+    }
+
+    public List<Cuota> getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(List<Cuota> cuotas) {
+        this.cuotas = cuotas;
+    }
+
+    public int getIdFactoresCaracteristicosOriginarios() {
+        return idFactoresCaracteristicosOriginarios;
+    }
+
+    public void setIdFactoresCaracteristicosOriginarios(int idFactoresCaracteristicosOriginarios) {
+        this.idFactoresCaracteristicosOriginarios = idFactoresCaracteristicosOriginarios;
+    }
+
+    public int getIdMedidasDeSeguridad() {
+        return idMedidasDeSeguridad;
+    }
+
+    public void setIdMedidasDeSeguridad(int idMedidasDeSeguridad) {
+        this.idMedidasDeSeguridad = idMedidasDeSeguridad;
+    }
+
+    public String getNumeroSolicitudDePoliza() {
+        return numeroSolicitudDePoliza;
+    }
+
+    public void setNumeroSolicitudDePoliza(String numeroSolicitudDePoliza) {
+        this.numeroSolicitudDePoliza = numeroSolicitudDePoliza;
     }
 
     public String getNumeroDePoliza() {
@@ -117,7 +228,7 @@ public class Poliza {
         return fechaDeEmision;
     }
 
-    public void setFechaDeEmision(Date fechaDeEmision) {
+    public void setFechaDeEmision(Calendar fechaDeEmision) {
         this.fechaDeEmision = fechaDeEmision;
     }
 

@@ -32,7 +32,6 @@ public class Cliente {
     Domicilio domicilio;
 
     public Cliente() {
-
     }
 
     public Cliente(int idCliente, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento, String apellido,

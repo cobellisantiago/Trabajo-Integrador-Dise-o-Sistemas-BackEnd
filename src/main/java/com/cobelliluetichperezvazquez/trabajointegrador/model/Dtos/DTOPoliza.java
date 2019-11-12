@@ -16,6 +16,7 @@ public class DTOPoliza {
     String patente;
     Date fechaInicioVigencia;
     Date fechaFinVigencia;
+
     float sumaAsegurada;
     int idPremio;
     float importesporDescuentos;
@@ -28,7 +29,16 @@ public class DTOPoliza {
     String numeroDePoliza;
     EstadoPoliza estado;
     String numeroDeSolicitud;
+    int idCliente;
 
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
     public int getIdLocalidad() {
         return idLocalidad;
     }
@@ -187,5 +197,9 @@ public class DTOPoliza {
 
     public void setNumeroDeSolicitud(String numeroDeSolicitud) {
         this.numeroDeSolicitud = numeroDeSolicitud;
+    }
+
+    public int getidCliente() {
+        return idCliente;
     }
 }

@@ -17,12 +17,11 @@ public class MedidasDeSeguridad {
 
 
     public MedidasDeSeguridad() {
-
     }
 
-    public MedidasDeSeguridad(int medidasDeSeguridad, boolean alarma, boolean seGuardaEnGarage, boolean rastreo,
+    public MedidasDeSeguridad(int idMedidasDeSeguridad, boolean alarma, boolean seGuardaEnGarage, boolean rastreo,
                               boolean tuercasAntirobo) {
-        this.idMedidasDeSeguridad = medidasDeSeguridad;
+        this.idMedidasDeSeguridad = idMedidasDeSeguridad;
         this.alarma = alarma;
         this.seGuardaEnGarage = seGuardaEnGarage;
         this.rastreo = rastreo;
@@ -68,7 +67,6 @@ public class MedidasDeSeguridad {
     public void setTuercasAntirobo(boolean tuercasAntirobo) {
         this.tuercasAntirobo = tuercasAntirobo;
     }
-
 
 
 }

@@ -11,15 +11,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Repository
 @Transactional
 public class GestorBaseDeDatos {
-
     @Autowired
     private SessionFactory sessionFactory;
-
 
     public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
@@ -76,6 +75,13 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
+    public Cobertura findCoberturaById(int idCobertura) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Cobertura cobertura =  session.get(Cobertura.class, idCobertura);
+        //this.sessionFactory.close();
+        return cobertura;
+    }
+
     public List<Marca> findAllMarca() {
         List objects = null;
         try {
@@ -116,8 +122,6 @@ public class GestorBaseDeDatos {
         session.getTransaction().commit();
         //this.sessionFactory.close();
         return true;
-//
-
     }
 
     public Poliza findPolizaById(String id) {
@@ -125,6 +129,33 @@ public class GestorBaseDeDatos {
         Poliza poliza =  session.get(Poliza.class, id);
         //this.sessionFactory.close();
         return poliza;
+    }
+
+    public boolean findPoliza(String patente, String motor, String chasis){
+        boolean check = false;
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query1 = session.createQuery("SELECT p.patente FROM Poliza p");
+        List<String[]> listaPatente = query.list();
+        Query query = session.createQuery("SELECT p.chasisVehiculo FROM Poliza p");
+        List<String[]> listaChasis = query.list();
+        Query query = session.createQuery("SELECT p.motorVehiculo FROM Poliza p");
+        List<String[]> listaMotorVehiculo = query.list();
+
+        for( String[] datos : listaPatente ){
+            if(datos.equals(patente)){
+                check = true;
+            }
+        }
+        for( String[] datos : listaChasis ){
+            if(datos.equals(chasis)){
+                check = true;
+            }
+        }for( String[] datos : listaMotorVehiculo ){
+            if(datos.equals(motor)){
+                check = true;
+            }
+        }
+        return check;
     }
 
     public boolean savePoliza(Poliza poliza){
@@ -137,7 +168,27 @@ public class GestorBaseDeDatos {
         session.getTransaction().commit();
 
         return true;
-//
+    }
+
+    public boolean saveMedidasDeSeguridad(MedidasDeSeguridad medidasDeSeguridad){
+        Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction();
+
+        session.save(medidasDeSeguridad);
+
+        session.getTransaction().commit();
+
+        return true;
+    }
+
+    public void savePremio(Premio premio) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction();
+
+        session.save(premio);
+
+        session.getTransaction().commit();
+
 
     }
 
@@ -167,5 +218,11 @@ public class GestorBaseDeDatos {
             // HibernateFactory.close(session);
         }
         return objects;
+    }
+    public Modelo findModeloById(int idModelo) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Modelo modelo =  session.get(Modelo.class, id);
+        //this.sessionFactory.close();
+        return modelo;
     }
 }

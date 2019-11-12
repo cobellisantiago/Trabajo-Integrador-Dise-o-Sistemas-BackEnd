@@ -94,7 +94,7 @@ public class GestorBaseDeDatos {
         try {
 
             Query query = this.sessionFactory.getCurrentSession().createQuery(
-                    "from " + Modelo.class.getName() + " m where m.marca=1");
+                    "from " + Modelo.class.getName() + " m where m.marca="+idMarca);
 
             objects = query.list();
             System.out.println(objects);
@@ -141,4 +141,31 @@ public class GestorBaseDeDatos {
 
     }
 
+    public List<Provincia> findAllProvincia(){
+        System.out.println("Voy a buscar provincias");
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Provincia.class.getName());
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener las provincias");//handleException(e);
+        } finally {
+            // HibernateFactory.close(session);
+        }
+        return objects;
+    }
+
+    public List<Localidad> findAllLocalidadByProvincia(Integer idProvincia){
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Localidad.class.getName()
+            +" l where l.provincia="+idProvincia);
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener las localidades");//handleException(e);
+        } finally {
+            // HibernateFactory.close(session);
+        }
+        return objects;
+    }
 }

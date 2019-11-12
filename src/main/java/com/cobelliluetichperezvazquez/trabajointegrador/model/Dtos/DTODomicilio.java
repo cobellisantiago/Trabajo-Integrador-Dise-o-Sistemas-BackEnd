@@ -3,6 +3,7 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Domicilio;
 
 public class DTODomicilio {
+    int idDomicilio;
     String calle;
     int numero;
     int piso;

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-
 @RequestMapping("/api")
 public class controllerBasic {
 
@@ -75,7 +74,55 @@ public class controllerBasic {
 
     }
 
-    @GetMapping(path = "/modelo/marca/{id}")
+    @GetMapping(path = "/domicilio/provincia")
+    public ResponseEntity<Object> getProvincia(){
+
+        List<Provincia> provincias = gestorBaseDeDatos.findAllProvincia();
+        Type listType = new TypeToken<List<DTOProvincia>>(){}.getType();
+        List<DTOProvincia> dtoProvincias = modelMapper.map(provincias, listType);
+
+        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
+        if(dtoProvincias!=null) {
+            return new ResponseEntity<>(dtoProvincias,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
+
+    @GetMapping(path = "/domicilio/provincia/{id}/localidad")
+    public ResponseEntity<Object> getLocalidad(@RequestParam(value="id", defaultValue="0") int idProvincia){
+
+        List<Localidad> localidades = gestorBaseDeDatos.findAllLocalidadByProvincia(idProvincia);
+        Type listType = new TypeToken<List<DTOLocalidad>>(){}.getType();
+        List<DTOLocalidad> dtoLocalidades = modelMapper.map(localidades, listType);
+
+        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
+        if(dtoLocalidades!=null) {
+            return new ResponseEntity<>(dtoLocalidades,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
+
+    @GetMapping(path = "/marca")
+    public ResponseEntity<Object> getMarca(){
+
+        List<Marca> marcas = gestorBaseDeDatos.findAllMarca();
+        Type listDTOMarca = new TypeToken<List<DTOMarca>>() {}.getType();
+        List<DTOMarca> dtoMarcas = modelMapper.map(marcas, listDTOMarca);
+
+        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
+        if(dtoMarcas!=null) {
+            return new ResponseEntity<>(dtoMarcas,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
+
+    @GetMapping(path = "/marca/{id}/modelo")
     public ResponseEntity<Object> getModelosByMarca(@RequestParam(value = "id",defaultValue = "0") int id){
 
         List<Modelo> modelos = gestorBaseDeDatos.findAllModeloByMarca(id);

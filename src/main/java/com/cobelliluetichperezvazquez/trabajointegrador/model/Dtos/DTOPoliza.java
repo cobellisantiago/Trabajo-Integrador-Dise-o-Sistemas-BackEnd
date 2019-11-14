@@ -1,30 +1,34 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 
 public class DTOPoliza {
-    int idLocalidad;
-    int idProvincia;
-    int idMarca;
-    int idModelo;
+
+    Integer idLocalidad;
+    Integer idProvincia;
+    Integer idMarca;
+    Integer idModelo;
+    Integer idAñoVehiculo;
+    int idCobertura;
+
     String motorVehiculo;
     String chasisVehiculo;
     String patente;
-    Date fechaInicioVigencia;
-    Date fechaFinVigencia;
+    Calendar fechaInicioVigencia;
+    Calendar fechaFinVigencia;
 
     float sumaAsegurada;
     int idPremio;
     float importesporDescuentos;
     float montoTotalAbonar;
-    int añoVehiculo;
     int kilometrosPorAño;
     //NumeroDeSiniestros numeroSiniestrosUltimoAño;
-    int idCobertura;
     FormaDePago formaDePago;
     String numeroDePoliza;
     EstadoPoliza estado;
@@ -36,38 +40,39 @@ public class DTOPoliza {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
-    public int getIdLocalidad() {
+
+    public Integer getIdLocalidad() {
         return idLocalidad;
     }
 
-    public void setIdLocalidad(int idLocalidad) {
+    public void setIdLocalidad(Integer idLocalidad) {
         this.idLocalidad = idLocalidad;
     }
 
-    public int getIdProvincia() {
+    public Integer getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(int idProvincia) {
+    public void setIdProvincia(Integer idProvincia) {
         this.idProvincia = idProvincia;
     }
 
-    public int getIdMarca() {
+    public Integer getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 
-    public int getIdModelo() {
+    public Integer getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(int idModelo) {
+    public void setIdModelo(Integer idModelo) {
         this.idModelo = idModelo;
     }
 
@@ -95,19 +100,19 @@ public class DTOPoliza {
         this.patente = patente;
     }
 
-    public Date getFechaInicioVigencia() {
+    public Calendar getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
 
-    public void setFechaInicioVigencia(Date fechaInicioVigencia) {
+    public void setFechaInicioVigencia(Calendar fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
 
-    public Date getFechaFinVigencia() {
+    public Calendar getFechaFinVigencia() {
         return fechaFinVigencia;
     }
 
-    public void setFechaFinVigencia(Date fechaFinVigencia) {
+    public void setFechaFinVigencia(Calendar fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
@@ -143,12 +148,12 @@ public class DTOPoliza {
         this.montoTotalAbonar = montoTotalAbonar;
     }
 
-    public int getAñoVehiculo() {
-        return añoVehiculo;
+    public Integer getIdAñoVehiculo() {
+        return idAñoVehiculo;
     }
 
-    public void setAñoVehiculo(int añoVehiculo) {
-        this.añoVehiculo = añoVehiculo;
+    public void setAñoVehiculo(Integer idAñoVehiculo) {
+        this.idAñoVehiculo = idAñoVehiculo;
     }
 
     public int getKilometrosPorAño() {
@@ -202,4 +207,9 @@ public class DTOPoliza {
     public int getidCliente() {
         return idCliente;
     }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
 }

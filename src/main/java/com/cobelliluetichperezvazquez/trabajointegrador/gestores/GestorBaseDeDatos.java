@@ -17,6 +17,7 @@ import java.util.Objects;
 @Repository
 @Transactional
 public class GestorBaseDeDatos {
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -133,29 +134,34 @@ public class GestorBaseDeDatos {
 
     public boolean findPoliza(String patente, String motor, String chasis){
         boolean check = false;
+        List objects = null;
         Session session = this.sessionFactory.getCurrentSession();
-        Query query1 = session.createQuery("SELECT p.patente FROM Poliza p");
-        List<String[]> listaPatente = query.list();
-        Query query = session.createQuery("SELECT p.chasisVehiculo FROM Poliza p");
-        List<String[]> listaChasis = query.list();
-        Query query = session.createQuery("SELECT p.motorVehiculo FROM Poliza p");
-        List<String[]> listaMotorVehiculo = query.list();
+        Query query = session.createQuery("id from " + Poliza.class.getName() + " p where p.patente="+patente+" or p.motor="+ motor + " or p.chasis="+chasis);
+        objects = query.list();
 
-        for( String[] datos : listaPatente ){
-            if(datos.equals(patente)){
-                check = true;
-            }
-        }
-        for( String[] datos : listaChasis ){
-            if(datos.equals(chasis)){
-                check = true;
-            }
-        }for( String[] datos : listaMotorVehiculo ){
-            if(datos.equals(motor)){
-                check = true;
-            }
-        }
-        return check;
+        //        Query query1 = session.createQuery("SELECT p.patente FROM Poliza p");
+//        List<String[]> listaPatente = query.list();
+//        Query query = session.createQuery("SELECT p.chasisVehiculo FROM Poliza p");
+//        List<String[]> listaChasis = query.list();
+//        Query query = session.createQuery("SELECT p.motorVehiculo FROM Poliza p");
+//        List<String[]> listaMotorVehiculo = query.list();
+
+//        for( String[] datos : listaPatente ){
+//            if(datos.equals(patente)){
+//                check = true;
+//            }
+//        }
+//        for( String[] datos : listaChasis ){
+//            if(datos.equals(chasis)){
+//                check = true;
+//            }
+//        }for( String[] datos : listaMotorVehiculo ){
+//            if(datos.equals(motor)){
+//                check = true;
+//            }
+//        }
+
+        return (objects.isEmpty());
     }
 
     public boolean savePoliza(Poliza poliza){
@@ -206,7 +212,7 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
-    public List<Localidad> findAllLocalidadByProvincia(Integer idProvincia){
+    public List<Localidad> findAllLocalidadByProvincia(int idProvincia){
         List objects = null;
         try {
             Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Localidad.class.getName()
@@ -221,7 +227,7 @@ public class GestorBaseDeDatos {
     }
     public Modelo findModeloById(int idModelo) {
         Session session = this.sessionFactory.getCurrentSession();
-        Modelo modelo =  session.get(Modelo.class, id);
+        Modelo modelo =  session.get(Modelo.class, idModelo);
         //this.sessionFactory.close();
         return modelo;
     }

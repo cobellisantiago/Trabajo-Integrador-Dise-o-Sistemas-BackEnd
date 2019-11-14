@@ -11,7 +11,7 @@ public class Modelo {
     int idModelo;
     String nombre;
     Float porcentajeRobo;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     List<AñoFabricacion> añosFabricacion;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_marca")

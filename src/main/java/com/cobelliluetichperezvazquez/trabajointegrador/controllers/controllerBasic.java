@@ -4,6 +4,7 @@ package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
 //Los controllers manejan las vistas (HTML)
 
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorBaseDeDatos;
+import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorCliente;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.*;
 import org.modelmapper.ModelMapper;
@@ -27,6 +28,9 @@ public class controllerBasic {
     private GestorBaseDeDatos gestorBaseDeDatos;
 
     @Autowired
+    private GestorCliente gestorCliente;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/domicilio/{id}")
@@ -46,7 +50,7 @@ public class controllerBasic {
     @GetMapping(path = "/cliente/{id}")
     public ResponseEntity<Object> getCliente(@RequestParam(value="id", defaultValue="0") int id){
 
-        Cliente cliente = gestorBaseDeDatos.findClienteById(id);
+        Cliente cliente = gestorCliente.obtener(id); //gestorBaseDeDatos.findClienteById(id);
         DTOCliente dtoCliente = modelMapper.map(cliente, DTOCliente.class);
 
 
@@ -90,10 +94,11 @@ public class controllerBasic {
 
     }
 
-    @GetMapping(path = "/domicilio/provincia/{id}/localidad")
-    public ResponseEntity<Object> getLocalidad(@RequestParam(value="id", defaultValue="0") int idProvincia){
-
+    @GetMapping(path = "/domicilio/provincia/{id}/localidad") //Esta es la forma correcta de obtner el parametro
+    public ResponseEntity<Object> getAllLocalidad(@PathVariable(name = "id") int idProvincia){
+        System.out.println("Id provincia recivido: "+idProvincia);
         List<Localidad> localidades = gestorBaseDeDatos.findAllLocalidadByProvincia(idProvincia);
+        System.out.println(localidades);
         Type listType = new TypeToken<List<DTOLocalidad>>(){}.getType();
         List<DTOLocalidad> dtoLocalidades = modelMapper.map(localidades, listType);
 

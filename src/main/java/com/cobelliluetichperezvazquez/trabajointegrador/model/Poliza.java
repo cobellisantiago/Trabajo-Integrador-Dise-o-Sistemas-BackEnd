@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class Poliza {
     @Id
     String numeroDePoliza;
-    Date fechaInicioVigencia;
-    Date fechaFinVigencia;
-    Date fechaDeEmision;
+    Calendar fechaInicioVigencia;
+    Calendar fechaFinVigencia;
+    Calendar fechaDeEmision;
     String motorVehiculo;
     String chasisVehiculo;
     Float sumaAsegurada;
@@ -58,7 +58,7 @@ public class Poliza {
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     List<Cuota> cuotas;
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -72,7 +72,7 @@ public class Poliza {
 
     }
 
-    public Poliza(String numeroDePoliza, Date fechaInicioVigencia, Date fechaFinVigencia, Date fechaDeEmision,
+    public Poliza(String numeroDePoliza, Calendar fechaInicioVigencia, Calendar fechaFinVigencia, Calendar fechaDeEmision,
                   String motorVehiculo, String chasisVehiculo, Float sumaAsegurada, String patente, int kilometrosPorAño,
                   FormaDePago formaDePago, int añoVehiculo, EstadoPoliza estado, Cliente cliente, Modelo modelo,
                   Premio premio, Descuentos descuentos, MedidasDeSeguridad medidasDeSeguridad, Cobertura cobertura,
@@ -116,43 +116,39 @@ public class Poliza {
         this.solicitudDePoliza = solicitudDePoliza;
     }
 
-    public int getIdCliente() {
-        return idCliente;
-    }
+//    public int getIdCliente() {
+//        return idCliente;
+//    }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
+//    public void setIdCliente(int idCliente) {
+//        this.idCliente = idCliente;
+//    }
 
-    public void setFechaDeEmision(Date fechaDeEmision) {
-        this.fechaDeEmision = fechaDeEmision;
-    }
+//    public int getIdCobertura() {
+//        return idCobertura;
+//    }
 
-    public int getIdCobertura() {
-        return idCobertura;
-    }
+//    public void setIdCobertura(int idCobertura) {
+//        this.idCobertura = idCobertura;
+//    }
 
-    public void setIdCobertura(int idCobertura) {
-        this.idCobertura = idCobertura;
-    }
+//    public int getIdLocalidad() {
+//        return idLocalidad;
+//    }
 
-    public int getIdLocalidad() {
-        return idLocalidad;
-    }
+//    public void setIdLocalidad(int idLocalidad) {
+//        this.idLocalidad = idLocalidad;
+//    }
 
-    public void setIdLocalidad(int idLocalidad) {
-        this.idLocalidad = idLocalidad;
-    }
+//    public int getIdModelo() {
+//        return idModelo;
+//    }
 
-    public int getIdModelo() {
-        return idModelo;
-    }
+//    public void setIdModelo(int idModelo) {
+//        this.idModelo = idModelo;
+//    }
 
-    public void setIdModelo(int idModelo) {
-        this.idModelo = idModelo;
-    }
-
-    public int getIdPremio() {
+   /* public int getIdPremio() {
         return idPremio;
     }
 
@@ -166,7 +162,7 @@ public class Poliza {
 
     public void setIdDescuentos(int idDescuentos) {
         this.idDescuentos = idDescuentos;
-    }
+    }*/
 
     public List<Cuota> getCuotas() {
         return cuotas;
@@ -176,7 +172,7 @@ public class Poliza {
         this.cuotas = cuotas;
     }
 
-    public int getIdFactoresCaracteristicosOriginarios() {
+  /*  public int getIdFactoresCaracteristicosOriginarios() {
         return idFactoresCaracteristicosOriginarios;
     }
 
@@ -190,15 +186,15 @@ public class Poliza {
 
     public void setIdMedidasDeSeguridad(int idMedidasDeSeguridad) {
         this.idMedidasDeSeguridad = idMedidasDeSeguridad;
-    }
+    }*/
 
-    public String getNumeroSolicitudDePoliza() {
+    /*public String getNumeroSolicitudDePoliza() {
         return numeroSolicitudDePoliza;
     }
 
     public void setNumeroSolicitudDePoliza(String numeroSolicitudDePoliza) {
         this.numeroSolicitudDePoliza = numeroSolicitudDePoliza;
-    }
+    }*/
 
     public String getNumeroDePoliza() {
         return numeroDePoliza;
@@ -208,23 +204,23 @@ public class Poliza {
         this.numeroDePoliza = numeroDePoliza;
     }
 
-    public Date getFechaInicioVigencia() {
+    public Calendar getFechaInicioVigencia() {
         return fechaInicioVigencia;
     }
 
-    public void setFechaInicioVigencia(Date fechaInicioVigencia) {
+    public void setFechaInicioVigencia(Calendar fechaInicioVigencia) {
         this.fechaInicioVigencia = fechaInicioVigencia;
     }
 
-    public Date getFechaFinVigencia() {
+    public Calendar getFechaFinVigencia() {
         return fechaFinVigencia;
     }
 
-    public void setFechaFinVigencia(Date fechaFinVigencia) {
+    public void setFechaFinVigencia(Calendar fechaFinVigencia) {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
-    public Date getFechaDeEmision() {
+    public Calendar getFechaDeEmision() {
         return fechaDeEmision;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -28,8 +29,8 @@ import java.util.Properties;
 
 public class TrabajoIntegradorApplication {
 
-//    @Autowired
-//    private Environment env;
+    @Autowired
+    private Environment env;
 
     public static void main(String[] args) {
 
@@ -55,7 +56,7 @@ public class TrabajoIntegradorApplication {
 //
 //        return dataSource;
 //    }
-//
+
 //    @Autowired
 //    @Bean(name = "sessionFactory")
 //    public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
@@ -66,12 +67,12 @@ public class TrabajoIntegradorApplication {
 //        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
 //        properties.put("current_session_context_class", //
 //                env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
-//
-//
-//        // Fix Postgres JPA Error:
-//        // Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
-//        // properties.put("hibernate.temp.use_jdbc_metadata_defaults",false);
-//
+
+
+        // Fix Postgres JPA Error:
+        // Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+        // properties.put("hibernate.temp.use_jdbc_metadata_defaults",false);
+
 //        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 //
 //        // Package contain entity classes
@@ -84,7 +85,7 @@ public class TrabajoIntegradorApplication {
 //        System.out.println("## getSessionFactory: " + sf);
 //        return sf;
 //    }
-//
+
 //    @Autowired
 //    @Bean(name = "transactionManager")
 //    public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {

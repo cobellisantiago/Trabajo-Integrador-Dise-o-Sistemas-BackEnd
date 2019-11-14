@@ -7,15 +7,16 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCivil;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.Sexo;
 
 public class DTOHijo {
-    Date fechaDeNacimiento;
+
+    Calendar fechaDeNacimiento;
     Sexo sexo;
     EstadoCivil estadoCivil;
 
-    public Date getFechaDeNacimiento() {
+    public Calendar getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+    public void setFechaDeNacimiento(Calendar fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 

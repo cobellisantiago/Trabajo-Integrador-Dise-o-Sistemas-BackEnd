@@ -23,12 +23,12 @@ public class DTOCliente {
     int añoDeRegistro;
     Integer idDomicilio;
 
-    public Integer getIdDomicilio() {
-        return idDomicilio;
+    public void setIdDomicilio(Integer idDomicilio) {
+        this.idDomicilio = idDomicilio;
     }
 
-    public void setIdDomicilio(int idDomicilio) {
-        this.idDomicilio = idDomicilio;
+    public Integer getIdDomicilio() {
+        return idDomicilio;
     }
 
     public int getIdCliente() {

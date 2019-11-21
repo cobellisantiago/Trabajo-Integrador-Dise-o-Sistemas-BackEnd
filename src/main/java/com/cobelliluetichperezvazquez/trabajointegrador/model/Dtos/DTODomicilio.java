@@ -3,15 +3,15 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Domicilio;
 
 public class DTODomicilio {
-    int idDomicilio;
+    Integer idDomicilio;
     String calle;
-    int numero;
-    int piso;
+    Integer numero;
+    Integer piso;
     char departamento;
-    int codigoPostal;
-    int idLocalidad;
-    int idProvincia;
-    int idPais;
+    Integer codigoPostal;
+    Integer idLocalidad;
+    Integer idProvincia;
+    Integer idPais;
 
     public String getCalle() {
         return calle;
@@ -21,19 +21,19 @@ public class DTODomicilio {
         this.calle = calle;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
-    public int getPiso() {
+    public Integer getPiso() {
         return piso;
     }
 
-    public void setPiso(int piso) {
+    public void setPiso(Integer piso) {
         this.piso = piso;
     }
 
@@ -45,35 +45,35 @@ public class DTODomicilio {
         this.departamento = departamento;
     }
 
-    public int getCodigoPostal() {
+    public Integer getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(Integer codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 
-    public int getIdLocalidad() {
+    public Integer getIdLocalidad() {
         return idLocalidad;
     }
 
-    public void setIdLocalidad(int idLocalidad) {
+    public void setIdLocalidad(Integer idLocalidad) {
         this.idLocalidad = idLocalidad;
     }
 
-    public int getIdProvincia() {
+    public Integer getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(int idProvincia) {
+    public void setIdProvincia(Integer idProvincia) {
         this.idProvincia = idProvincia;
     }
 
-    public int getIdPais() {
+    public Integer getIdPais() {
         return idPais;
     }
 
-    public void setIdPais(int idPais) {
+    public void setIdPais(Integer idPais) {
         this.idPais = idPais;
     }
 }

@@ -1,10 +1,9 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
-
-
 //Los controllers manejan las vistas (HTML)
 
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorBaseDeDatos;
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorCliente;
+import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.*;
 import org.modelmapper.ModelMapper;
@@ -26,6 +25,9 @@ public class controllerBasic {
 
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
+
+    @Autowired
+    private GestorPoliza gestorPoliza;
 
     @Autowired
     private GestorCliente gestorCliente;
@@ -94,7 +96,7 @@ public class controllerBasic {
 
     }
 
-    @GetMapping(path = "/domicilio/provincia/{id}/localidad") //Esta es la forma correcta de obtner el parametro
+    @GetMapping(path = "/domicilio/provincia/{id}/localidad") //Esta es la forma correcta de obtener el parametro
     public ResponseEntity<Object> getAllLocalidad(@PathVariable(name = "id") int idProvincia){
         System.out.println("Id provincia recivido: "+idProvincia);
         List<Localidad> localidades = gestorBaseDeDatos.findAllLocalidadByProvincia(idProvincia);
@@ -160,12 +162,18 @@ public class controllerBasic {
     }
 
     @PostMapping(path = "/poliza/new")
-    public ResponseEntity<Object> savePoliza(@RequestBody DTOPoliza dtoPoliza){
+    public ResponseEntity<Object> savePoliza(@RequestBody DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos){
 
-        System.out.println(dtoPoliza);
-        Poliza poli = modelMapper.map(dtoPoliza, Poliza.class);
-        System.out.println(poli.getNumeroDePoliza());
-        gestorBaseDeDatos.savePoliza(poli);
+        try {
+            gestorPoliza.darDeAltaPoliza(dtoPoliza, dtoMedidasDeSeguridad, dtoHijos);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+       /* Poliza poliza = modelMapper.map(dtoPoliza, Poliza.class);
+        System.out.println(poliza.getNumeroDePoliza());
+        gestorBaseDeDatos.savePoliza(poliza);
         Poliza poliza = gestorBaseDeDatos.findPolizaById(dtoPoliza.getNumeroDePoliza());
         //Type listDTOModelo = new TypeToken<List<DTOModelo>>() {}.getType();
         System.out.println(poliza);
@@ -176,7 +184,7 @@ public class controllerBasic {
             return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
-        }
+        }*/
 
 
 

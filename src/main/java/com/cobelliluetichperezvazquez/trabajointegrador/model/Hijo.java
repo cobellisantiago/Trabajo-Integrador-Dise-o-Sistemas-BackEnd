@@ -1,5 +1,6 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCivil;
@@ -15,7 +16,7 @@ public class Hijo {
     @Id
     @GeneratedValue
     int idHijo;
-    Date fechaDeNacimiento;
+    Calendar fechaDeNacimiento;
     EstadoCivil estadoCivil;
     Sexo sexo;
 
@@ -23,7 +24,7 @@ public class Hijo {
 
     }
 
-    public Hijo(int idHijo, Date fechaDeNacimiento, EstadoCivil estadoCivil, Sexo sexo) {
+    public Hijo(int idHijo, Calendar fechaDeNacimiento, EstadoCivil estadoCivil, Sexo sexo) {
         this.idHijo = idHijo;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.estadoCivil = estadoCivil;
@@ -38,11 +39,11 @@ public class Hijo {
         this.idHijo = idHijo;
     }
 
-    public Date getFechaDeNacimiento() {
+    public Calendar getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+    public void setFechaDeNacimiento(Calendar fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 

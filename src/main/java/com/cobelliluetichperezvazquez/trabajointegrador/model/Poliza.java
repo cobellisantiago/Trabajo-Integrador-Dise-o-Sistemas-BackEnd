@@ -26,23 +26,23 @@ public class Poliza {
     int añoVehiculo;
     EstadoPoliza estado;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_FactoresCaracteristicosOriginarios")
     FactoresCaracteristicosOriginarios factoresCaracteristicosOriginarios;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitudPoliza")
     SolicitudDePoliza solicitudDePoliza;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
     Cliente cliente;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_modelo")
     Modelo modelo;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_premio")
     Premio premio;
 
@@ -50,21 +50,21 @@ public class Poliza {
     @JoinColumn(name = "id_descuento")
     Descuentos descuentos;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_medidas_seguridad")
     MedidasDeSeguridad medidasDeSeguridad;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY)
     List<Cuota> cuotas;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY)
     List<Hijo> hijos;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_domicilio_riesgo")
     Localidad domicilioDeRiesgo;
 

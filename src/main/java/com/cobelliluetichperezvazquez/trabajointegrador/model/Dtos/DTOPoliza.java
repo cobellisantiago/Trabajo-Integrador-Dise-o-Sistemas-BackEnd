@@ -33,10 +33,10 @@ public class DTOPoliza {
     String numeroDePoliza;
     EstadoPoliza estado;
     String numeroDeSolicitud;
-    int idCliente;
+    Integer idCliente;
 
 
-    public int getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
@@ -203,13 +203,4 @@ public class DTOPoliza {
     public void setNumeroDeSolicitud(String numeroDeSolicitud) {
         this.numeroDeSolicitud = numeroDeSolicitud;
     }
-
-    public int getidCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
 }

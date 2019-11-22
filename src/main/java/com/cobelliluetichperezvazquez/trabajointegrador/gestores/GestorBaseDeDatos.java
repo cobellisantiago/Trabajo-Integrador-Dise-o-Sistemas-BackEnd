@@ -141,6 +141,17 @@ public class GestorBaseDeDatos {
         return true;
     }
 
+    public Integer saveHijo(Hijo hijo){
+        Session session = this.sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        //Save employee
+        Integer id = (Integer) session.save(hijo);
+
+        session.getTransaction().commit();
+        //this.sessionFactory.close();
+        return id;
+    }
+
     public Poliza findPolizaById(String id) {
         Session session = this.sessionFactory.getCurrentSession();
         Poliza poliza =  session.get(Poliza.class, id);

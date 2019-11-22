@@ -9,7 +9,6 @@ public class Provincia {
     @Id
     int idProvincia;
     String nombre;
-    Float porcentajeRobo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pais")
@@ -19,10 +18,9 @@ public class Provincia {
 
     }
 
-    public Provincia(int idProvincia, String nombre, Float porcentajeRobo, Pais pais) {
+    public Provincia(int idProvincia, String nombre, Pais pais) {
         this.idProvincia = idProvincia;
         this.nombre = nombre;
-        this.porcentajeRobo = porcentajeRobo;
         this.pais = pais;
     }
 
@@ -42,14 +40,6 @@ public class Provincia {
         this.nombre = nombre;
     }
 
-    public Float getPorcentajeRobo() {
-        return porcentajeRobo;
-    }
-
-    public void setPorcentajeRobo(Float porcentajeRobo) {
-        this.porcentajeRobo = porcentajeRobo;
-    }
-
     public Pais getPais() {
         return pais;
     }
@@ -57,7 +47,5 @@ public class Provincia {
     public void setPais(Pais pais) {
         this.pais = pais;
     }
-
-
 
 }

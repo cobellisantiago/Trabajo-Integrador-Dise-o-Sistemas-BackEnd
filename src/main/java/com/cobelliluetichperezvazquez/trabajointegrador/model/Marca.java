@@ -11,16 +11,14 @@ public class Marca {
     @GeneratedValue
     int idMarca;
     String nombre;
-    Float porcentajeRobo;
 
     public Marca() {
 
     }
 
-    public Marca(int idMarca, String nombre, Float porcentajeRobo) {
+    public Marca(int idMarca, String nombre) {
         this.idMarca = idMarca;
         this.nombre = nombre;
-        this.porcentajeRobo = porcentajeRobo;
     }
 
     public int getIdMarca() {
@@ -38,15 +36,5 @@ public class Marca {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public Float getPorcentajeRobo() {
-        return porcentajeRobo;
-    }
-
-    public void setPorcentajeRobo(Float porcentajeRobo) {
-        this.porcentajeRobo = porcentajeRobo;
-    }
-
-
 
 }

@@ -7,11 +7,10 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOHijo;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOMedidasDeSeguridad;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
-import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.Null;
-
+@Repository
 public class GestorPoliza {
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
@@ -27,25 +26,24 @@ public class GestorPoliza {
     private GestorMedidasDeSeguridad gestorMedidasDeSeguridad;
     @Autowired
     private GestorLocalidad gestorLocalidad;
+    @Autowired
+    private GestorHijos gestorHijos;
 
-
-    public boolean encontrarPoliza(String patente, String motor, String chasis){
+    public boolean encontrarPolizaVigente(String patente, String motor, String chasis) {
        return (gestorBaseDeDatos.findPoliza(patente, motor, chasis));
     }
 
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos) {
 
         //TODO CU17 3.
-        Cliente cliente = gestorCliente.obtener(dtoPoliza.getidCliente()); //gestorBaseDeDatos.findClienteById(dtoPoliza.getidCliente());
+        Cliente cliente = gestorCliente.obtener(dtoPoliza.getIdCliente());
 
         //TODO !! Mostrar datos del cliente
 
         //Validaciones de datos (falta todo mostrar en pantalla):
-        //Ver el tema del int↓
 
         //TODO  manejar esto para que desde el front se sepa de este error
-
-        if (dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
+        if(dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
         if( dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
         if( dtoPoliza.getIdModelo() == null ) throw new NullPointerException("Id modelo null");
         if( dtoPoliza.getIdMarca() == null ) throw new NullPointerException("Id marca null");
@@ -54,7 +52,6 @@ public class GestorPoliza {
         if( dtoPoliza.getChasisVehiculo() == null ) throw new NullPointerException("Chasis vehiculo null");
         if( dtoPoliza.getKilometrosPorAño() == -1 ) throw new NullPointerException("kilometro por año null");
 
-
         boolean i = true;
         int cont = 0;
         while (i && dtoHijos.get(cont) != null) {
@@ -62,9 +59,13 @@ public class GestorPoliza {
                 i = false;
             cont++;
         }
-        if (!i) System.out.println("Ingresó un hijo con edad fuera de rango."); //Vuelve a compeltar datos
+        if (!i) throw new NullPointerException("Ingresó un hijo con edad fuera de rango."); //Vuelve a compeltar datos
+        else {
+            List<Integer> idHijos = gestorHijos.crear(dtoHijos);
+        }
 
-        if (this.encontrarPoliza(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
+
+        if (this.encontrarPolizaVigente(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
             System.out.println("Ya existe una póliza vigente para los datos ingresados.");
             //Vuelve a completar datos
         }
@@ -123,7 +124,7 @@ public class GestorPoliza {
         //TODO opcion de que el actor, dsps de todo, seleccione otra cobertura y vuelva al paso 7
 
     private static boolean estaEnRangoEdad(Calendar fechaNacimiento) {
-        boolean check = false;
+        boolean check = true;
         Calendar fechaMenor = Calendar.getInstance();
         Calendar fechaMayor = Calendar.getInstance();
         fechaMenor.add(Calendar.YEAR, -18);

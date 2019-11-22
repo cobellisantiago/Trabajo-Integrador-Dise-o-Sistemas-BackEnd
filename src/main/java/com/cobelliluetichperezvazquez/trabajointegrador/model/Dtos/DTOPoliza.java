@@ -15,7 +15,6 @@ public class DTOPoliza {
     Integer idMarca;
     Integer idModelo;
     Integer idAñoVehiculo;
-    int idCliente;
     int idCobertura;
 
     String motorVehiculo;
@@ -34,10 +33,10 @@ public class DTOPoliza {
     String numeroDePoliza;
     EstadoPoliza estado;
     String numeroDeSolicitud;
+    Integer idCliente;
 
 
-
-    public int getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
@@ -204,13 +203,4 @@ public class DTOPoliza {
     public void setNumeroDeSolicitud(String numeroDeSolicitud) {
         this.numeroDeSolicitud = numeroDeSolicitud;
     }
-
-    public int getidCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
 }

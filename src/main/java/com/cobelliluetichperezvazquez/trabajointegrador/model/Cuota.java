@@ -21,8 +21,10 @@ public class Cuota {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pago")
-    Pago idPago;
+    Pago pago;
 
+
+    //Verificar si es necesario hacer que la cuota sepa de la poliza
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_poliza")
     Poliza poliza;
@@ -36,7 +38,7 @@ public class Cuota {
         this.fechaDeVencimiento = fechaDeVencimiento;
         this.valorActual = valorActual;
         this.valorOriginal = valorOriginal;
-        this.idPago = idPago;
+        this.pago = idPago;
         this.poliza = poliza;
     }
 

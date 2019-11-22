@@ -15,6 +15,7 @@ public class DTOPoliza {
     Integer idMarca;
     Integer idModelo;
     Integer idAñoVehiculo;
+    int idCliente;
     int idCobertura;
 
     String motorVehiculo;
@@ -33,7 +34,7 @@ public class DTOPoliza {
     String numeroDePoliza;
     EstadoPoliza estado;
     String numeroDeSolicitud;
-    int idCliente;
+
 
 
     public int getIdCliente() {

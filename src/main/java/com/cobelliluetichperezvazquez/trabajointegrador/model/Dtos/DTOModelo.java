@@ -9,7 +9,7 @@ public class DTOModelo {
     int idModelo;
     String nombre;
     Float porcentajeRobo;
-    List<AñoFabricacion> añosFabricacion;
+    List<DTOAñoFabricacion> añosFabricacion;
     int idMarca;
 
     public int getIdModelo() {
@@ -36,11 +36,11 @@ public class DTOModelo {
         this.porcentajeRobo = porcentajeRobo;
     }
 
-    public List<AñoFabricacion> getAñosFabricacion() {
+    public List<DTOAñoFabricacion> getAñosFabricacion() {
         return añosFabricacion;
     }
 
-    public void setAñosFabricacion(List<AñoFabricacion> añosFabricacion) {
+    public void setAñosFabricacion(List<DTOAñoFabricacion> añosFabricacion) {
         this.añosFabricacion = añosFabricacion;
     }
 

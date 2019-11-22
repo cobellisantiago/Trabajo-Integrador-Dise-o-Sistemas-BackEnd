@@ -1,11 +1,8 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Table()
+
 @Entity
 public class AñoFabricacion {
 
@@ -14,6 +11,9 @@ public class AñoFabricacion {
     Integer id;
     int año;
     int porcentajeRobo;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_modelo")
+    Modelo modelo;
 
 
 
@@ -50,4 +50,11 @@ public class AñoFabricacion {
         this.porcentajeRobo = porcentajeRobo;
     }
 
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
 }

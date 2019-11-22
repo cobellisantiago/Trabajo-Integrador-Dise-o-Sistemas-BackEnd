@@ -3,17 +3,17 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 
 @Entity
 public class Cuota {
 
     @Id
     @GeneratedValue
-    int idCuota;
-    int numeroCuota;
+    Integer idCuota;
+    Integer numeroCuota;
 
-    Date fechaDeVencimiento;
+    Calendar fechaDeVencimiento;
 
     Float valorActual;
 
@@ -31,7 +31,7 @@ public class Cuota {
 
     }
 
-    public Cuota(int numeroCuota, Date fechaDeVencimiento, Float valorActual, Float valorOriginal, Pago idPago, Poliza poliza) {
+    public Cuota(Integer numeroCuota, Calendar fechaDeVencimiento, Float valorActual, Float valorOriginal, Pago idPago, Poliza poliza) {
         this.numeroCuota = numeroCuota;
         this.fechaDeVencimiento = fechaDeVencimiento;
         this.valorActual = valorActual;
@@ -39,20 +39,27 @@ public class Cuota {
         this.idPago = idPago;
         this.poliza = poliza;
     }
+    public Integer getIdCuota() {
+        return idCuota;
+    }
 
-    public int getNumeroCuota() {
+    public void setIdCuota(Integer idCuota) {
+        this.idCuota = idCuota;
+    }
+
+    public Integer getNumeroCuota() {
         return numeroCuota;
     }
 
-    public void setNumeroCuota(int numeroCuota) {
+    public void setNumeroCuota(Integer numeroCuota) {
         this.numeroCuota = numeroCuota;
     }
 
-    public Date getFechaDeVencimiento() {
+    public Calendar getFechaDeVencimiento() {
         return fechaDeVencimiento;
     }
 
-    public void setFechaDeVencimiento(Date fechaDeVencimiento) {
+    public void setFechaDeVencimiento(Calendar fechaDeVencimiento) {
         this.fechaDeVencimiento = fechaDeVencimiento;
     }
 

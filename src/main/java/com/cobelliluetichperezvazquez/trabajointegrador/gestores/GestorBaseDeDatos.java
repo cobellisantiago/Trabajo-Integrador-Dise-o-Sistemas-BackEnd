@@ -56,6 +56,19 @@ public class GestorBaseDeDatos {
         return domicilio;
     }
 
+    public List<Cliente> findAllCliente() {
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Cliente.class.getName());
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener los clientes");//handleException(e);
+        } finally {
+            // HibernateFactory.close(session);
+        }
+        return objects;
+    }
+
     public Cliente findClienteById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Cliente cliente =  session.get(Cliente.class, id);
@@ -130,7 +143,6 @@ public class GestorBaseDeDatos {
         session.beginTransaction();
         //Save employee
         Integer id = (Integer) session.save(hijo);
-
         session.getTransaction().commit();
         //this.sessionFactory.close();
         return id;

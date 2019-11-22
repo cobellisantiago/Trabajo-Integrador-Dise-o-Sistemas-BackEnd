@@ -22,7 +22,7 @@ public class Modelo {
 
     }
 
-    public Modelo(int idModelo, String nombre, Float porcentajeRobo, List<AñoFabricacion> añoFabricacion, Marca marca) {
+    public Modelo(Integer idModelo, String nombre, Float porcentajeRobo, List<AñoFabricacion> añoFabricacion, Marca marca) {
         this.idModelo = idModelo;
         this.nombre = nombre;
         this.porcentajeRobo = porcentajeRobo;
@@ -30,11 +30,11 @@ public class Modelo {
         this.marca = marca;
     }
 
-    public int getIdModelo() {
+    public Integer getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(int idModelo) {
+    public void setIdModelo(Integer idModelo) {
         this.idModelo = idModelo;
     }
 

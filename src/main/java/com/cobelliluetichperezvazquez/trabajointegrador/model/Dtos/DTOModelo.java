@@ -6,17 +6,17 @@ import java.util.List;
 
 public class DTOModelo {
 
-    int idModelo;
+    Integer idModelo;
     String nombre;
     Float porcentajeRobo;
     List<AñoFabricacion> añosFabricacion;
-    int idMarca;
+    Integer idMarca;
 
-    public int getIdModelo() {
+    public Integer getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(int idModelo) {
+    public void setIdModelo(Integer idModelo) {
         this.idModelo = idModelo;
     }
 
@@ -44,11 +44,11 @@ public class DTOModelo {
         this.añosFabricacion = añosFabricacion;
     }
 
-    public int getIdMarca() {
+    public Integer getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 

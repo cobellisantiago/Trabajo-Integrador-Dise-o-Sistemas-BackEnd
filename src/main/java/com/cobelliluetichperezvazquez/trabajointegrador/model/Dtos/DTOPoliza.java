@@ -15,7 +15,7 @@ public class DTOPoliza {
     Integer idMarca;
     Integer idModelo;
     Integer idAñoVehiculo;
-    int idCobertura;
+    Integer idCobertura;
 
     String motorVehiculo;
     String chasisVehiculo;
@@ -24,10 +24,10 @@ public class DTOPoliza {
     Calendar fechaFinVigencia;
 
     float sumaAsegurada;
-    int idPremio;
+    Integer idPremio;
     float importesporDescuentos;
     float montoTotalAbonar;
-    int kilometrosPorAño;
+    Integer kilometrosPorAño;
     //NumeroDeSiniestros numeroSiniestrosUltimoAño;
     FormaDePago formaDePago;
     String numeroDePoliza;
@@ -124,11 +124,11 @@ public class DTOPoliza {
         this.sumaAsegurada = sumaAsegurada;
     }
 
-    public int getIdPremio() {
+    public Integer getIdPremio() {
         return idPremio;
     }
 
-    public void setIdPremio(int idPremio) {
+    public void setIdPremio(Integer idPremio) {
         this.idPremio = idPremio;
     }
 
@@ -156,19 +156,19 @@ public class DTOPoliza {
         this.idAñoVehiculo = idAñoVehiculo;
     }
 
-    public int getKilometrosPorAño() {
+    public Integer getKilometrosPorAño() {
         return kilometrosPorAño;
     }
 
-    public void setKilometrosPorAño(int kilometrosPorAño) {
+    public void setKilometrosPorAño(Integer kilometrosPorAño) {
         this.kilometrosPorAño = kilometrosPorAño;
     }
 
-    public int getIdCobertura() {
+    public Integer getIdCobertura() {
         return idCobertura;
     }
 
-    public void setIdCobertura(int idCobertura) {
+    public void setIdCobertura(Integer idCobertura) {
         this.idCobertura = idCobertura;
     }
 

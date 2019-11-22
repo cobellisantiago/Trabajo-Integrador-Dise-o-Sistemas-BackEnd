@@ -1,6 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
 public class DTOMedidasDeSeguridad {
+    Integer idMedidasDeSeguridad;
     boolean seGuardaEnGarage;
     boolean alarma;
     boolean tuercasAntirrobo;

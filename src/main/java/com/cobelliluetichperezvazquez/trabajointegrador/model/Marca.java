@@ -9,23 +9,23 @@ public class Marca {
 
     @Id
     @GeneratedValue
-    int idMarca;
+    Integer idMarca;
     String nombre;
 
     public Marca() {
 
     }
 
-    public Marca(int idMarca, String nombre) {
+    public Marca(Integer idMarca, String nombre) {
         this.idMarca = idMarca;
         this.nombre = nombre;
     }
 
-    public int getIdMarca() {
+    public Integer getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 

@@ -1,6 +1,6 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.*;
 
@@ -11,7 +11,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue
-    int idCliente;
+    Integer idCliente;
     TipoDeDocumento tipoDeDocumento;
     String numeroDeDocumento;
     String apellido;
@@ -19,14 +19,13 @@ public class Cliente {
     NumeroDeSiniestros numeroSiniestrosUltimoAño;
     CondicionIVA condicionIVA;
     String profesion;
-    int añoDeRegistro;
+    Integer añoDeRegistro;
     Sexo sexo;
-    Date fechaDeNacimiento;
+    Calendar fechaDeNacimiento;
     String CUIL;
     String correoElectronico;
     EstadoCivil estadoCivil;
     EstadoCliente estado;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_domicilio")
     Domicilio domicilio;
@@ -34,9 +33,9 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int idCliente, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento, String apellido,
+    public Cliente(Integer idCliente, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento, String apellido,
                    String nombre, NumeroDeSiniestros numeroSiniestrosUltimoAño, CondicionIVA condicionIVA, String profesion,
-                   int añoDeRegistro, Sexo sexo, Date fechaDeNacimiento, String CUIL, String correoElectronico,
+                   Integer añoDeRegistro, Sexo sexo, Calendar fechaDeNacimiento, String CUIL, String correoElectronico,
                    EstadoCivil estadoCivil, EstadoCliente estado, Domicilio domicilio) {
         this.idCliente = idCliente;
         this.tipoDeDocumento = tipoDeDocumento;
@@ -56,11 +55,11 @@ public class Cliente {
         this.domicilio = domicilio;
     }
 
-    public int getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -120,11 +119,11 @@ public class Cliente {
         this.profesion = profesion;
     }
 
-    public int getAñoDeRegistro() {
+    public Integer getAñoDeRegistro() {
         return añoDeRegistro;
     }
 
-    public void setAñoDeRegistro(int añoDeRegistro) {
+    public void setAñoDeRegistro(Integer añoDeRegistro) {
         this.añoDeRegistro = añoDeRegistro;
     }
 
@@ -136,11 +135,11 @@ public class Cliente {
         this.sexo = sexo;
     }
 
-    public Date getFechaDeNacimiento() {
+    public Calendar getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+    public void setFechaDeNacimiento(Calendar fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 

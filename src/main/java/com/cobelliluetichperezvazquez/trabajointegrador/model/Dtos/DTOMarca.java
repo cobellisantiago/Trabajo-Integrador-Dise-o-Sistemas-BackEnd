@@ -2,15 +2,15 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
 public class DTOMarca {
 
-    int idMarca;
+    Integer idMarca;
     String nombre;
     Float porcentajeRobo;
 
-    public int getIdMarca() {
+    public Integer getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 

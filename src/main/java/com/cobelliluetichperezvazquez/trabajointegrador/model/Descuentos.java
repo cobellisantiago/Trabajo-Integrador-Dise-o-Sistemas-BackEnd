@@ -9,7 +9,7 @@ public class Descuentos {
 
     @Id
     @GeneratedValue
-    int idDescuentos;
+    Integer idDescuentos;
     Float descuentoPorUnidad;
     Float descuentoPorPagoSemestral;
 
@@ -17,17 +17,17 @@ public class Descuentos {
 
     }
 
-    public Descuentos(int idDescuentos, Float descuentoPorUnidad, Float descuentoPorPagoSemestral) {
+    public Descuentos(Integer idDescuentos, Float descuentoPorUnidad, Float descuentoPorPagoSemestral) {
         this.idDescuentos = idDescuentos;
         this.descuentoPorUnidad = descuentoPorUnidad;
         this.descuentoPorPagoSemestral = descuentoPorPagoSemestral;
     }
 
-    public int getIdDescuentos() {
+    public Integer getIdDescuentos() {
         return idDescuentos;
     }
 
-    public void setIdDescuentos(int idDescuentos) {
+    public void setIdDescuentos(Integer idDescuentos) {
         this.idDescuentos = idDescuentos;
     }
 

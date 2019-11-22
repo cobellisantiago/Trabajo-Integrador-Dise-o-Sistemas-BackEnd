@@ -9,7 +9,7 @@ public class Localidad {
 
     @Id
     @GeneratedValue
-    int idLocalidad;
+    Integer idLocalidad;
     String nombre;
     Float porcentajeRobo;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,18 +21,18 @@ public class Localidad {
 
     }
 
-    public Localidad(int idLocalidad, String nombre, Float porcentajeRobo, Provincia provincia) {
+    public Localidad(Integer idLocalidad, String nombre, Float porcentajeRobo, Provincia provincia) {
         this.idLocalidad = idLocalidad;
         this.nombre = nombre;
         this.porcentajeRobo = porcentajeRobo;
         this.provincia = provincia;
     }
 
-    public int getIdLocalidad() {
+    public Integer getIdLocalidad() {
         return idLocalidad;
     }
 
-    public void setIdLocalidad(int idLocalidad) {
+    public void setIdLocalidad(Integer idLocalidad) {
         this.idLocalidad = idLocalidad;
     }
 

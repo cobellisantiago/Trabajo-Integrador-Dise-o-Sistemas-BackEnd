@@ -3,33 +3,33 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+import java.util.Calendar;
 
 @Entity
 public class Pago {
 
     @Id
     @GeneratedValue
-    int idPago;
+    Integer idPago;
     Float monto;
-    Date fechaDeRealizacion;
+    Calendar fechaDeRealizacion;
 
 
     public Pago() {
 
     }
 
-    public Pago(int idPago, Float monto, Date fechaDeRealizacion) {
+    public Pago(Integer idPago, Float monto, Calendar fechaDeRealizacion) {
         this.idPago = idPago;
         this.monto = monto;
         this.fechaDeRealizacion = fechaDeRealizacion;
     }
 
-    public int getIdPago() {
+    public Integer getIdPago() {
         return idPago;
     }
 
-    public void setIdPago(int idPago) {
+    public void setIdPago(Integer idPago) {
         this.idPago = idPago;
     }
 
@@ -41,11 +41,11 @@ public class Pago {
         this.monto = monto;
     }
 
-    public Date getFechaDeRealizacion() {
+    public Calendar getFechaDeRealizacion() {
         return fechaDeRealizacion;
     }
 
-    public void setFechaDeRealizacion(Date fechaDeRealizacion) {
+    public void setFechaDeRealizacion(Calendar fechaDeRealizacion) {
         this.fechaDeRealizacion = fechaDeRealizacion;
     }
 

@@ -2,7 +2,6 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
@@ -21,9 +20,9 @@ public class Poliza {
     String chasisVehiculo;
     Float sumaAsegurada;
     String patente;
-    int kilometrosPorAño;
+    Integer kilometrosPorAño;
     FormaDePago formaDePago;
-    int añoVehiculo;
+    Integer añoVehiculo;
     EstadoPoliza estado;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -73,8 +72,8 @@ public class Poliza {
     }
 
     public Poliza(String numeroDePoliza, Calendar fechaInicioVigencia, Calendar fechaFinVigencia, Calendar fechaDeEmision,
-                  String motorVehiculo, String chasisVehiculo, Float sumaAsegurada, String patente, int kilometrosPorAño,
-                  FormaDePago formaDePago, int añoVehiculo, EstadoPoliza estado, Cliente cliente, Modelo modelo,
+                  String motorVehiculo, String chasisVehiculo, Float sumaAsegurada, String patente, Integer kilometrosPorAño,
+                  FormaDePago formaDePago, Integer añoVehiculo, EstadoPoliza estado, Cliente cliente, Modelo modelo,
                   Premio premio, Descuentos descuentos, MedidasDeSeguridad medidasDeSeguridad, Cobertura cobertura,
                   List<Hijo> hijos, Localidad domicilioDeRiesgo) {
 
@@ -116,51 +115,51 @@ public class Poliza {
         this.solicitudDePoliza = solicitudDePoliza;
     }
 
-//    public int getIdCliente() {
+//    public Integer getIdCliente() {
 //        return idCliente;
 //    }
 
-//    public void setIdCliente(int idCliente) {
+//    public void setIdCliente(Integer idCliente) {
 //        this.idCliente = idCliente;
 //    }
 
-//    public int getIdCobertura() {
+//    public Integer getIdCobertura() {
 //        return idCobertura;
 //    }
 
-//    public void setIdCobertura(int idCobertura) {
+//    public void setIdCobertura(Integer idCobertura) {
 //        this.idCobertura = idCobertura;
 //    }
 
-//    public int getIdLocalidad() {
+//    public Integer getIdLocalidad() {
 //        return idLocalidad;
 //    }
 
-//    public void setIdLocalidad(int idLocalidad) {
+//    public void setIdLocalidad(Integer idLocalidad) {
 //        this.idLocalidad = idLocalidad;
 //    }
 
-//    public int getIdModelo() {
+//    public Integer getIdModelo() {
 //        return idModelo;
 //    }
 
-//    public void setIdModelo(int idModelo) {
+//    public void setIdModelo(Integer idModelo) {
 //        this.idModelo = idModelo;
 //    }
 
-   /* public int getIdPremio() {
+   /* public Integer getIdPremio() {
         return idPremio;
     }
 
-    public void setIdPremio(int idPremio) {
+    public void setIdPremio(Integer idPremio) {
         this.idPremio = idPremio;
     }
 
-    public int getIdDescuentos() {
+    public Integer getIdDescuentos() {
         return idDescuentos;
     }
 
-    public void setIdDescuentos(int idDescuentos) {
+    public void setIdDescuentos(Integer idDescuentos) {
         this.idDescuentos = idDescuentos;
     }*/
 
@@ -172,19 +171,19 @@ public class Poliza {
         this.cuotas = cuotas;
     }
 
-  /*  public int getIdFactoresCaracteristicosOriginarios() {
+  /*  public Integer getIdFactoresCaracteristicosOriginarios() {
         return idFactoresCaracteristicosOriginarios;
     }
 
-    public void setIdFactoresCaracteristicosOriginarios(int idFactoresCaracteristicosOriginarios) {
+    public void setIdFactoresCaracteristicosOriginarios(Integer idFactoresCaracteristicosOriginarios) {
         this.idFactoresCaracteristicosOriginarios = idFactoresCaracteristicosOriginarios;
     }
 
-    public int getIdMedidasDeSeguridad() {
+    public Integer getIdMedidasDeSeguridad() {
         return idMedidasDeSeguridad;
     }
 
-    public void setIdMedidasDeSeguridad(int idMedidasDeSeguridad) {
+    public void setIdMedidasDeSeguridad(Integer idMedidasDeSeguridad) {
         this.idMedidasDeSeguridad = idMedidasDeSeguridad;
     }*/
 
@@ -260,11 +259,11 @@ public class Poliza {
         this.patente = patente;
     }
 
-    public int getKilometrosPorAño() {
+    public Integer getKilometrosPorAño() {
         return kilometrosPorAño;
     }
 
-    public void setKilometrosPorAño(int kilometrosPorAño) {
+    public void setKilometrosPorAño(Integer kilometrosPorAño) {
         this.kilometrosPorAño = kilometrosPorAño;
     }
 
@@ -276,11 +275,11 @@ public class Poliza {
         this.formaDePago = formaDePago;
     }
 
-    public int getAñoVehiculo() {
+    public Integer getAñoVehiculo() {
         return añoVehiculo;
     }
 
-    public void setAñoVehiculo(int añoVehiculo) {
+    public void setAñoVehiculo(Integer añoVehiculo) {
         this.añoVehiculo = añoVehiculo;
     }
 

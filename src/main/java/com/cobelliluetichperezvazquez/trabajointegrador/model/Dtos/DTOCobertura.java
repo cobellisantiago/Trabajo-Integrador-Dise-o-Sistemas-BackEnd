@@ -2,15 +2,15 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
 public class DTOCobertura {
 
-    int idCobertura;
+    Integer idCobertura;
     String nombre;
     String descripcion;
 
-    public int getIdCobertura() {
+    public Integer getIdCobertura() {
         return idCobertura;
     }
 
-    public void setIdCobertura(int idCobertura) {
+    public void setIdCobertura(Integer idCobertura) {
         this.idCobertura = idCobertura;
     }
 

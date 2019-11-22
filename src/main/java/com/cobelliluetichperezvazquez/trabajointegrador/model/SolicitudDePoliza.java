@@ -12,8 +12,8 @@ public class SolicitudDePoliza {
     String motorVehiculo;
     String chasisVehiculo;
     String patente;
-    int kilometrosPorAño;
-    int añoVehiculo;
+    Integer kilometrosPorAño;
+    Integer añoVehiculo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
@@ -33,7 +33,6 @@ public class SolicitudDePoliza {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_domicilio_riesgo")
     Localidad domicilioDeRiesgo;
-
 
     public String getNumeroSolicitudDePoliza() {
         return numeroSolicitudDePoliza;
@@ -67,19 +66,19 @@ public class SolicitudDePoliza {
         this.patente = patente;
     }
 
-    public int getKilometrosPorAño() {
+    public Integer getKilometrosPorAño() {
         return kilometrosPorAño;
     }
 
-    public void setKilometrosPorAño(int kilometrosPorAño) {
+    public void setKilometrosPorAño(Integer kilometrosPorAño) {
         this.kilometrosPorAño = kilometrosPorAño;
     }
 
-    public int getAñoVehiculo() {
+    public Integer getAñoVehiculo() {
         return añoVehiculo;
     }
 
-    public void setAñoVehiculo(int añoVehiculo) {
+    public void setAñoVehiculo(Integer añoVehiculo) {
         this.añoVehiculo = añoVehiculo;
     }
 

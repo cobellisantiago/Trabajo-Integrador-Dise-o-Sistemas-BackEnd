@@ -1,6 +1,6 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.CondicionIVA;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCivil;
@@ -8,19 +8,19 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.Sexo;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 
 public class DTOCliente {
-    int idCliente;
+    Integer idCliente;
     String apellido;
     String nombre;
     TipoDeDocumento tipoDeDocumento;
     String numeroDeDocumento;
     String CUIL;
     Sexo sexo;
-    Date fechaDeNacimiento;
+    Calendar fechaDeNacimiento;
     CondicionIVA condicionIVA;
     String correoElectronico;
     EstadoCivil estadoCivil;
     String profesion;
-    int añoDeRegistro;
+    Integer añoDeRegistro;
     Integer idDomicilio;
 
     public void setIdDomicilio(Integer idDomicilio) {
@@ -31,11 +31,11 @@ public class DTOCliente {
         return idDomicilio;
     }
 
-    public int getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -87,11 +87,11 @@ public class DTOCliente {
         this.sexo = sexo;
     }
 
-    public Date getFechaDeNacimiento() {
+    public Calendar getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+    public void setFechaDeNacimiento(Calendar fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
@@ -127,11 +127,11 @@ public class DTOCliente {
         this.profesion = profesion;
     }
 
-    public int getAñoDeRegistro() {
+    public Integer getAñoDeRegistro() {
         return añoDeRegistro;
     }
 
-    public void setAñoDeRegistro(int añoDeRegistro) {
+    public void setAñoDeRegistro(Integer añoDeRegistro) {
         this.añoDeRegistro = añoDeRegistro;
     }
 }

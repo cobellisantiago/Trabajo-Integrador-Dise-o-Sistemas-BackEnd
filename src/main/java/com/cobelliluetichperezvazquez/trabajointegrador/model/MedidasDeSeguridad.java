@@ -9,7 +9,7 @@ public class MedidasDeSeguridad {
 
     @GeneratedValue
     @Id
-    int idMedidasDeSeguridad;
+    Integer idMedidasDeSeguridad;
     boolean alarma;
     boolean seGuardaEnGarage;
     boolean rastreo;
@@ -19,7 +19,7 @@ public class MedidasDeSeguridad {
     public MedidasDeSeguridad() {
     }
 
-    public MedidasDeSeguridad(int idMedidasDeSeguridad, boolean alarma, boolean seGuardaEnGarage, boolean rastreo,
+    public MedidasDeSeguridad(Integer idMedidasDeSeguridad, boolean alarma, boolean seGuardaEnGarage, boolean rastreo,
                               boolean tuercasAntirobo) {
         this.idMedidasDeSeguridad = idMedidasDeSeguridad;
         this.alarma = alarma;
@@ -28,11 +28,11 @@ public class MedidasDeSeguridad {
         this.tuercasAntirobo = tuercasAntirobo;
     }
 
-    public int getMedidasDeSeguridad() {
+    public Integer getMedidasDeSeguridad() {
         return idMedidasDeSeguridad;
     }
 
-    public void setMedidasDeSeguridad(int medidasDeSeguridad) {
+    public void setMedidasDeSeguridad(Integer medidasDeSeguridad) {
         this.idMedidasDeSeguridad = medidasDeSeguridad;
     }
 

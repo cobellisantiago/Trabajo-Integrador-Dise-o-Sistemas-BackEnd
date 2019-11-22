@@ -12,17 +12,17 @@ public class Domicilio {
 
     @GeneratedValue
     @Id
-    int idDomicilio;
+    Integer idDomicilio;
 
     String calle;
 
-    int numero;
+    Integer numero;
 
     Integer piso;
 
     char departamento;
 
-    int codigoPostal;
+    Integer codigoPostal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_localidad")
@@ -32,7 +32,7 @@ public class Domicilio {
 
     }
 
-    public Domicilio(int idDomicilio, String calle, int numero, int piso, char departamento, int codigoPostal, Localidad localidad) {
+    public Domicilio(Integer idDomicilio, String calle, Integer numero, Integer piso, char departamento, Integer codigoPostal, Localidad localidad) {
         this.idDomicilio = idDomicilio;
         this.calle = calle;
         this.numero = numero;
@@ -42,11 +42,11 @@ public class Domicilio {
         this.localidad = localidad;
     }
 
-    public int getIdDomicilio() {
+    public Integer getIdDomicilio() {
         return idDomicilio;
     }
 
-    public void setIdDomicilio(int idDomicilio) {
+    public void setIdDomicilio(Integer idDomicilio) {
         this.idDomicilio = idDomicilio;
     }
 
@@ -58,19 +58,19 @@ public class Domicilio {
         this.calle = calle;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
-    public int getPiso() {
+    public Integer getPiso() {
         return piso;
     }
 
-    public void setPiso(int piso) {
+    public void setPiso(Integer piso) {
         this.piso = piso;
     }
 
@@ -82,11 +82,11 @@ public class Domicilio {
         this.departamento = departamento;
     }
 
-    public int getCodigoPostal() {
+    public Integer getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(Integer codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 

@@ -1,6 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -69,6 +70,24 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
+    public List<Cliente> findAllCliente(String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
+        List objects = null;
+        String consulta=("from " + Cliente.class.getName()+" c where 1=1");
+        try {
+            if(apellido!=null) consulta = consulta+" and c.apellido="+apellido;
+            if(nombre!=null) consulta = consulta+" and c.nombre="+nombre;
+            if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento="+tipoDeDocumento;
+            if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento="+numeroDeDocumento;
+            System.out.println(consulta);
+            Query query = this.sessionFactory.getCurrentSession().createQuery(consulta);
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener los clientes");//handleException(e);
+        } finally {
+            // HibernateFactory.close(session);
+        }
+        return objects;
+    }
     public Cliente findClienteById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Cliente cliente =  session.get(Cliente.class, id);
@@ -112,10 +131,7 @@ public class GestorBaseDeDatos {
     public List<Modelo> findAllModeloByMarca(int idMarca) {
         List objects = null;
         try {
-
-            Query query = this.sessionFactory.getCurrentSession().createQuery(
-                    "from " + Modelo.class.getName() + " m where m.marca="+idMarca);
-
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Modelo.class.getName() + " m where m.marca="+idMarca);
             objects = query.list();
             System.out.println(objects);
         } catch (HibernateException e) {
@@ -126,13 +142,25 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
+    public List<AñoFabricacion> findAllAñosByModelo(int idModelo) {
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + AñoFabricacion.class.getName() + " a where a.modelo="+idModelo);
+            objects = query.list();
+
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener los anios");//handleException(e);
+        } finally {
+            // HibernateFactory.close(session);
+        }
+        return objects;
+    }
+
     public boolean saveDomicilio(Domicilio domicilio){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-
         //Save employee
         session.save(domicilio);
-
         session.getTransaction().commit();
         //this.sessionFactory.close();
         return true;
@@ -148,21 +176,14 @@ public class GestorBaseDeDatos {
         return id;
     }
 
-    public Poliza findPolizaById(String id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Poliza poliza =  session.get(Poliza.class, id);
-        //this.sessionFactory.close();
-        return poliza;
-    }
-
-    public boolean findPoliza(String patente, String motor, String chasis){
+   public boolean findPoliza(String patente, String motor, String chasis){
         boolean check = false;
         List objects = null;
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("id from " + Poliza.class.getName() + " p where p.patente="+patente+" or p.motor="+ motor + " or p.chasis="+chasis);
         objects = query.list();
 
-        //        Query query1 = session.createQuery("SELECT p.patente FROM Poliza p");
+        //Query query1 = session.createQuery("SELECT p.patente FROM Poliza p");
 //        List<String[]> listaPatente = query.list();
 //        Query query = session.createQuery("SELECT p.chasisVehiculo FROM Poliza p");
 //        List<String[]> listaChasis = query.list();
@@ -183,42 +204,38 @@ public class GestorBaseDeDatos {
 //                check = true;
 //            }
 //        }
-
         return (objects.isEmpty());
+    }
+
+    public Poliza findPolizaById(String id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Poliza poliza =  session.get(Poliza.class, id);
+        //this.sessionFactory.close();
+        return poliza;
     }
 
     public boolean savePoliza(Poliza poliza){
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
-
         //Save employee
         session.save(poliza);
-
         session.getTransaction().commit();
-
         return true;
     }
 
     public boolean saveMedidasDeSeguridad(MedidasDeSeguridad medidasDeSeguridad){
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
-
         session.save(medidasDeSeguridad);
-
         session.getTransaction().commit();
-
         return true;
     }
 
     public void savePremio(Premio premio) {
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
-
         session.save(premio);
-
         session.getTransaction().commit();
-
-
     }
 
     public List<Provincia> findAllProvincia(){
@@ -238,8 +255,7 @@ public class GestorBaseDeDatos {
     public List<Localidad> findAllLocalidadByProvincia(int idProvincia){
         List objects = null;
         try {
-            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Localidad.class.getName()
-            +" l where l.provincia="+idProvincia);
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Localidad.class.getName()+" l where l.provincia="+idProvincia);
             objects = query.list();
         } catch (HibernateException e) {
             System.out.println("no se puedo obtener las localidades");//handleException(e);
@@ -248,6 +264,7 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
+
     public Modelo findModeloById(int idModelo) {
         Session session = this.sessionFactory.getCurrentSession();
         Modelo modelo =  session.get(Modelo.class, idModelo);

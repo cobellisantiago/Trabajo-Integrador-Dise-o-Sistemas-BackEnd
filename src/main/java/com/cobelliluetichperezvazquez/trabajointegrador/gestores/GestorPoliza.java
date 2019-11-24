@@ -30,10 +30,6 @@ public class GestorPoliza {
     @Autowired
     private GestorHijos gestorHijos;
 
-    public boolean encontrarPolizaVigente(String patente, String motor, String chasis) {
-       return (gestorBaseDeDatos.findPoliza(patente, motor, chasis));
-    }
-
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos) {
 
         //TODO CU17 3
@@ -66,7 +62,7 @@ public class GestorPoliza {
             //ver como asociar los hijos a la poliza en la tabla poliza_hijos
         }
 
-        if (this.encontrarPolizaVigente(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
+        if (encontrarPolizaVigente(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
             System.out.println("Ya existe una póliza vigente para los datos ingresados.");
             //Vuelve a completar datos
         }
@@ -119,6 +115,10 @@ public class GestorPoliza {
         }
 
         return  poliza;
+    }
+
+    public boolean encontrarPolizaVigente(String patente, String motor, String chasis) {
+        return (gestorBaseDeDatos.findPoliza(patente, motor, chasis));
     }
 
     //TODO opcion de que el actor, dsps de todo, seleccione otra cobertura y vuelva al paso 7

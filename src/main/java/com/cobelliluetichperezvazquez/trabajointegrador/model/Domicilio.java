@@ -13,17 +13,11 @@ public class Domicilio {
     @GeneratedValue
     @Id
     Integer idDomicilio;
-
     String calle;
-
     Integer numero;
-
     Integer piso;
-
-    char departamento;
-
+    String departamento;
     Integer codigoPostal;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_localidad")
     Localidad localidad;
@@ -32,7 +26,7 @@ public class Domicilio {
 
     }
 
-    public Domicilio(Integer idDomicilio, String calle, Integer numero, Integer piso, char departamento, Integer codigoPostal, Localidad localidad) {
+    public Domicilio(Integer idDomicilio, String calle, Integer numero, Integer piso, String departamento, Integer codigoPostal, Localidad localidad) {
         this.idDomicilio = idDomicilio;
         this.calle = calle;
         this.numero = numero;
@@ -74,11 +68,11 @@ public class Domicilio {
         this.piso = piso;
     }
 
-    public char getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(char departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 

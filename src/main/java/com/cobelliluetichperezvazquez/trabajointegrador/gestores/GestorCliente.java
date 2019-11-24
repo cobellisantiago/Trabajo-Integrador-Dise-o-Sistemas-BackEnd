@@ -45,8 +45,13 @@ public class GestorCliente {
         if(dtoCliente.getCUIL()==null) throw new NullPointerException("cuil cliente nulo");
         if(dtoCliente.getSexo()==null) throw new NullPointerException("sexo cliente nulo");
         if(dtoCliente.getFechaDeNacimiento()==null) throw new NullPointerException("fecha de nacimiento cliente nulo");
-        if(dtoCliente.getIdDomicilio()==null) throw new NullPointerException("iddomicilio cliente nulo");
-        //verificar si los campos calle, numero, pais, provincia y localidad del domicilio no son nulos
+        if(dtoCliente.getDomicilio().getIdDomicilio()==null) throw new NullPointerException("iddomicilio cliente nulo");
+        if(dtoCliente.getDomicilio().getCalle()==null) throw new NullPointerException("calle domicilio cliente nulo");
+        if(dtoCliente.getDomicilio().getNumero()==null) throw new NullPointerException("numero domicilio cliente nulo");
+        if(dtoCliente.getDomicilio().getIdPais()==null) throw new NullPointerException("idpais domicilio cliente nulo");
+        if(dtoCliente.getDomicilio().getIdProvincia()==null) throw new NullPointerException("idprovincia domicilio cliente nulo");
+        if(dtoCliente.getDomicilio().getIdLocalidad()==null) throw new NullPointerException("idlocalidad domicilio cliente nulo");
+        if(dtoCliente.getDomicilio().getCodigoPostal()==null) throw new NullPointerException("codigopostalcliente nulo");
         if(dtoCliente.getCondicionIVA()==null) throw new NullPointerException("cond iva cliente nulo");
         if(dtoCliente.getCorreoElectronico()==null) throw new NullPointerException("email cliente nulo");
         if(dtoCliente.getEstadoCivil()==null) throw new NullPointerException("estado civil cliente nulo");
@@ -76,8 +81,17 @@ public class GestorCliente {
         cliente.setCUIL(dtoCliente.getCUIL());
         cliente.setSexo(dtoCliente.getSexo());
         cliente.setFechaDeNacimiento(dtoCliente.getFechaDeNacimiento());
-        cliente.getDomicilio().setIdDomicilio(dtoCliente.getIdDomicilio());
-        //COMO CARGO TODOS LOS DATOS DEL DOMICILIO
+        cliente.getDomicilio().setIdDomicilio(dtoCliente.getDomicilio().getIdDomicilio());
+        cliente.getDomicilio().setCalle(dtoCliente.getDomicilio().getCalle());
+        cliente.getDomicilio().setNumero(dtoCliente.getDomicilio().getNumero());
+        cliente.getDomicilio().setPiso(dtoCliente.getDomicilio().getPiso());
+        cliente.getDomicilio().setDepartamento(dtoCliente.getDomicilio().getDepartamento());
+        cliente.getDomicilio().getLocalidad().setIdLocalidad(dtoCliente.getDomicilio().getIdLocalidad());
+        cliente.getDomicilio().getLocalidad().getProvincia().setIdProvincia(dtoCliente.getDomicilio().getIdProvincia());
+        cliente.getDomicilio().getLocalidad().getProvincia().getPais().setIdPais(dtoCliente.getDomicilio().getIdPais());
+        cliente.getDomicilio().setIdDomicilio(dtoCliente.getDomicilio().getIdDomicilio());
+        cliente.getDomicilio().setIdDomicilio(dtoCliente.getDomicilio().getIdDomicilio());
+        cliente.getDomicilio().setIdDomicilio(dtoCliente.getDomicilio().getIdDomicilio());
         cliente.setCondicionIVA(dtoCliente.getCondicionIVA());
         cliente.setCorreoElectronico(dtoCliente.getCorreoElectronico());
         cliente.setEstadoCivil(dtoCliente.getEstadoCivil());

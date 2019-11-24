@@ -4,7 +4,6 @@ public class DTOMarca {
 
     Integer idMarca;
     String nombre;
-    Float porcentajeRobo;
 
     public Integer getIdMarca() {
         return idMarca;
@@ -20,13 +19,5 @@ public class DTOMarca {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Float getPorcentajeRobo() {
-        return porcentajeRobo;
-    }
-
-    public void setPorcentajeRobo(Float porcentajeRobo) {
-        this.porcentajeRobo = porcentajeRobo;
     }
 }

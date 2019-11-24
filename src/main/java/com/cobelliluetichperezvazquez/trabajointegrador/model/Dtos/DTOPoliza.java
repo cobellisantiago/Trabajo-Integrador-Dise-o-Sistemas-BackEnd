@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.cobelliluetichperezvazquez.trabajointegrador.model.AñoFabricacion;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
@@ -14,9 +15,8 @@ public class DTOPoliza {
     Integer idProvincia;
     Integer idMarca;
     Integer idModelo;
-    Integer idAñoVehiculo;
+    DTOAñoFabricacion añoFabricacion;
     Integer idCobertura;
-
     String motorVehiculo;
     String chasisVehiculo;
     String patente;
@@ -148,12 +148,12 @@ public class DTOPoliza {
         this.montoTotalAbonar = montoTotalAbonar;
     }
 
-    public Integer getIdAñoVehiculo() {
-        return idAñoVehiculo;
+    public DTOAñoFabricacion getAñoFabricacion() {
+        return añoFabricacion;
     }
 
-    public void setAñoVehiculo(Integer idAñoVehiculo) {
-        this.idAñoVehiculo = idAñoVehiculo;
+    public void setAñoFabricacion(DTOAñoFabricacion añoFabricacion) {
+        this.añoFabricacion = añoFabricacion;
     }
 
     public Integer getKilometrosPorAño() {

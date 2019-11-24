@@ -9,23 +9,23 @@ public class Pais {
 
     @Id
     @GeneratedValue
-    int idPais;
+    Integer idPais;
     String nombre;
 
     public Pais() {
 
     }
 
-    public Pais(int idPais, String nombre) {
+    public Pais(Integer idPais, String nombre) {
         this.idPais = idPais;
         this.nombre = nombre;
     }
 
-    public int getIdPais() {
+    public Integer getIdPais() {
         return idPais;
     }
 
-    public void setIdPais(int idPais) {
+    public void setIdPais(Integer idPais) {
         this.idPais = idPais;
     }
 

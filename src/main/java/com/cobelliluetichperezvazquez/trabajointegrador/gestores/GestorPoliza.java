@@ -3,6 +3,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOCliente;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOHijo;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOMedidasDeSeguridad;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOPoliza;
@@ -35,22 +36,22 @@ public class GestorPoliza {
 
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos) {
 
-        //TODO CU17 3.
+        //TODO CU17 3
         Cliente cliente = gestorCliente.obtener(dtoPoliza.getIdCliente());
 
         //TODO !! Mostrar datos del cliente
 
-        //Validaciones de datos (falta todo mostrar en pantalla):
+        //Validaciones de datos (falta mostrar en pantalla):
 
         //TODO  manejar esto para que desde el front se sepa de este error
         if(dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
-        if( dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
-        if( dtoPoliza.getIdModelo() == null ) throw new NullPointerException("Id modelo null");
-        if( dtoPoliza.getIdMarca() == null ) throw new NullPointerException("Id marca null");
-        if( dtoPoliza.getIdAñoVehiculo() == null ) throw new NullPointerException("Id año null");
-        if( dtoPoliza.getMotorVehiculo() == null ) throw new NullPointerException("Motor vehiculo null");
-        if( dtoPoliza.getChasisVehiculo() == null ) throw new NullPointerException("Chasis vehiculo null");
-        if( dtoPoliza.getKilometrosPorAño() == -1 ) throw new NullPointerException("kilometro por año null");
+        if(dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
+        if(dtoPoliza.getIdModelo() == null) throw new NullPointerException("Id modelo null");
+        if(dtoPoliza.getIdMarca() == null) throw new NullPointerException("Id marca null");
+        if(dtoPoliza.getIdAñoVehiculo() == null) throw new NullPointerException("Id año null");
+        if(dtoPoliza.getMotorVehiculo() == null) throw new NullPointerException("Motor vehiculo null");
+        if(dtoPoliza.getChasisVehiculo() == null) throw new NullPointerException("Chasis vehiculo null");
+        if(dtoPoliza.getKilometrosPorAño() == -1) throw new NullPointerException("kilometro por año null");
 
         boolean i = true;
         int cont = 0;
@@ -62,8 +63,8 @@ public class GestorPoliza {
         if (!i) throw new NullPointerException("Ingresó un hijo con edad fuera de rango."); //Vuelve a compeltar datos
         else {
             List<Integer> idHijos = gestorHijos.crear(dtoHijos);
+            //ver como asociar los hijos a la poliza en la tabla poliza_hijos
         }
-
 
         if (this.encontrarPolizaVigente(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
             System.out.println("Ya existe una póliza vigente para los datos ingresados.");
@@ -72,7 +73,6 @@ public class GestorPoliza {
 
         //Se aceptan esos↑ datos y el actor elige un tipo de cobertura
         //TODO Agarra DTO cobertura?? god knows how
-
 
         Poliza poliza = new Poliza();
 
@@ -121,7 +121,7 @@ public class GestorPoliza {
         return  poliza;
     }
 
-        //TODO opcion de que el actor, dsps de todo, seleccione otra cobertura y vuelva al paso 7
+    //TODO opcion de que el actor, dsps de todo, seleccione otra cobertura y vuelva al paso 7
 
     private static boolean estaEnRangoEdad(Calendar fechaNacimiento) {
         boolean check = true;

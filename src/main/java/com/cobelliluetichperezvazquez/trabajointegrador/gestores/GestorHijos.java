@@ -17,6 +17,7 @@ public class GestorHijos {
 
     public List<Integer> crear(List<DTOHijo> dtoHijos) {
         List<Integer> ids = new ArrayList<>();
+        Integer id = null;
         for(DTOHijo dto : dtoHijos) {
             Hijo hijo = new Hijo();
             hijo.setIdHijo(0);
@@ -24,14 +25,13 @@ public class GestorHijos {
             hijo.setSexo(dto.getSexo());
             hijo.setFechaDeNacimiento(dto.getFechaDeNacimiento());
             try {
-                Integer id = gestorBaseDeDatos.saveHijo(hijo); // save hijo me devuelve el id del hijo
+                id = gestorBaseDeDatos.saveHijo(hijo); // save hijo me devuelve el id del hijo
                 ids.add(id);
             }
             catch (Exception e) {
-                throw new NullPointerException("El hijo no pudo ser guardado en la BDD"); //ver id
+                throw new NullPointerException("El hijo "+id+"no pudo ser guardado en la BDD"); //ver id
             }
         }
         return ids;
     }
-
 }

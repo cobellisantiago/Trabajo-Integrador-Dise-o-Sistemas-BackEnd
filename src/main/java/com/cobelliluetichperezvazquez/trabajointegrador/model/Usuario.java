@@ -9,16 +9,16 @@ public class Usuario {
 
     @Id
     @GeneratedValue
-    int idUsuario;
+    Integer idUsuario;
     String nombreUsuario;
     String contraseña;
 
 
-    public int getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 

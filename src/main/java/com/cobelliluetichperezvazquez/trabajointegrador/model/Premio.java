@@ -9,7 +9,7 @@ public class Premio {
 
     @Id
     @GeneratedValue
-    int idPremio;
+    Integer idPremio;
     Float prima;
     Float derechoDeEmision;
     Float totalPremio;
@@ -17,22 +17,22 @@ public class Premio {
     public Premio() {
     }
 
-    public Premio(int idPremio){
+    public Premio(Integer idPremio){
         this.idPremio = idPremio;
     }
 
-    public Premio(int idPremio, Float prima, Float derechoDeEmision, Float totalPremio) {
+    public Premio(Integer idPremio, Float prima, Float derechoDeEmision, Float totalPremio) {
         this.idPremio = idPremio;
         this.prima = prima;
         this.derechoDeEmision = derechoDeEmision;
         this.totalPremio = totalPremio;
     }
 
-    public int getIdPremio() {
+    public Integer getIdPremio() {
         return idPremio;
     }
 
-    public void setIdPremio(int idPremio) {
+    public void setIdPremio(Integer idPremio) {
         this.idPremio = idPremio;
     }
 

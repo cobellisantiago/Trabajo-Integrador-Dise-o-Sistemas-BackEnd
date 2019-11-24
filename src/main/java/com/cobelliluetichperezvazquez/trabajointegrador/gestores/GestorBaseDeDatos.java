@@ -56,6 +56,19 @@ public class GestorBaseDeDatos {
         return domicilio;
     }
 
+    public List<Cliente> findAllCliente() {
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Cliente.class.getName());
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener los clientes");//handleException(e);
+        } finally {
+            // HibernateFactory.close(session);
+        }
+        return objects;
+    }
+
     public Cliente findClienteById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Cliente cliente =  session.get(Cliente.class, id);
@@ -113,22 +126,6 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
-    public List<AñoFabricacion> findAllAñosByModelo(int idModelo) {
-        List objects = null;
-        try {
-            Query query = this.sessionFactory.getCurrentSession().createQuery(
-                    "from " + AñoFabricacion.class.getName() + " a where a.modelo="+idModelo);
-
-            objects = query.list();
-
-        } catch (HibernateException e) {
-            System.out.println("no se puedo obtener los anios");//handleException(e);
-        } finally {
-            // HibernateFactory.close(session);
-        }
-        return objects;
-    }
-
     public boolean saveDomicilio(Domicilio domicilio){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -146,7 +143,6 @@ public class GestorBaseDeDatos {
         session.beginTransaction();
         //Save employee
         Integer id = (Integer) session.save(hijo);
-
         session.getTransaction().commit();
         //this.sessionFactory.close();
         return id;
@@ -252,7 +248,6 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
-
     public Modelo findModeloById(int idModelo) {
         Session session = this.sessionFactory.getCurrentSession();
         Modelo modelo =  session.get(Modelo.class, idModelo);

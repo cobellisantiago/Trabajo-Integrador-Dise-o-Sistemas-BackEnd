@@ -9,23 +9,23 @@ public class Cobertura {
 
     @Id
     @GeneratedValue
-    int idCobertura;
+    Integer idCobertura;
     String nombre;
     String descripcion;
 
     public Cobertura() {}
 
-    public Cobertura(int idCobertura, String nombre, String descripcion) {
+    public Cobertura(Integer idCobertura, String nombre, String descripcion) {
         this.idCobertura = idCobertura;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
-    public int getIdCobertura() {
+    public Integer getIdCobertura() {
         return idCobertura;
     }
 
-    public void setIdCobertura(int idCobertura) {
+    public void setIdCobertura(Integer idCobertura) {
         this.idCobertura = idCobertura;
     }
 

@@ -6,17 +6,17 @@ import java.util.List;
 
 public class DTOModelo {
 
-    int idModelo;
+    Integer idModelo;
     String nombre;
     Float porcentajeRobo;
-    List<DTOAñoFabricacion> añosFabricacion;
-    int idMarca;
+    List<AñoFabricacion> añosFabricacion;
+    Integer idMarca;
 
-    public int getIdModelo() {
+    public Integer getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(int idModelo) {
+    public void setIdModelo(Integer idModelo) {
         this.idModelo = idModelo;
     }
 
@@ -36,19 +36,19 @@ public class DTOModelo {
         this.porcentajeRobo = porcentajeRobo;
     }
 
-    public List<DTOAñoFabricacion> getAñosFabricacion() {
+    public List<AñoFabricacion> getAñosFabricacion() {
         return añosFabricacion;
     }
 
-    public void setAñosFabricacion(List<DTOAñoFabricacion> añosFabricacion) {
+    public void setAñosFabricacion(List<AñoFabricacion> añosFabricacion) {
         this.añosFabricacion = añosFabricacion;
     }
 
-    public int getIdMarca() {
+    public Integer getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 

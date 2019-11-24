@@ -4,7 +4,6 @@ package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorBaseDeDatos;
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorCliente;
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorPoliza;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorModelo;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.*;
 import org.modelmapper.ModelMapper;
@@ -34,13 +33,10 @@ public class controllerBasic {
     private GestorCliente gestorCliente;
 
     @Autowired
-    private GestorModelo gestorModelo;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/domicilio/{id}")
-    public ResponseEntity<Object> getDomicilio(@PathVariable(name="id") int id){
+    public ResponseEntity<Object> getDomicilio(@RequestParam(value="id", defaultValue="0") int id){
 
         Domicilio dom = gestorBaseDeDatos.findDomicilioById(id);
         DTODomicilio dtoDomicilio = modelMapper.map(dom, DTODomicilio.class);
@@ -54,7 +50,7 @@ public class controllerBasic {
     }
 
     @GetMapping(path = "/cliente/{id}")
-    public ResponseEntity<Object> getCliente(@PathVariable(name="id") int id){
+    public ResponseEntity<Object> getCliente(@RequestParam(value="id", defaultValue="0") int id){
 
         Cliente cliente = gestorCliente.obtener(id); //gestorBaseDeDatos.findClienteById(id);
         DTOCliente dtoCliente = modelMapper.map(cliente, DTOCliente.class);
@@ -117,9 +113,6 @@ public class controllerBasic {
 
     }
 
-
-    // ------------- VEHICULOS -----------------
-    //
     @GetMapping(path = "/marca")
     public ResponseEntity<Object> getMarca(){
 
@@ -137,38 +130,23 @@ public class controllerBasic {
     }
 
     @GetMapping(path = "/marca/{id}/modelo")
-    public ResponseEntity<Object> getModelosByMarca(@PathVariable(name = "id") int id){
+    public ResponseEntity<Object> getModelosByMarca(@RequestParam(value = "id",defaultValue = "0") int id){
 
         List<Modelo> modelos = gestorBaseDeDatos.findAllModeloByMarca(id);
         Type listDTOModelo = new TypeToken<List<DTOModelo>>() {}.getType();
-        List<DTOCobertura> dtoModelos = modelMapper.map(modelos, listDTOModelo);
+        List<DTOCobertura> dtoCoberturas = modelMapper.map(modelos, listDTOModelo);
 
         //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
-        if(dtoModelos!=null) {
-            return new ResponseEntity<>(dtoModelos,HttpStatus.OK);
+        if(dtoCoberturas!=null) {
+            return new ResponseEntity<>(dtoCoberturas,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }
 
-    }
-
-    @GetMapping(path = "/modelo/{idModelo}/aniosFabricacion")
-    public ResponseEntity<Object> getAniosByModelo( @PathVariable(name = "idModelo") int idModelo){
-
-        List<AñoFabricacion> anios = gestorModelo.obtenerAniosFabricacion(idModelo); //gestorBaseDeDatos.findAllModeloByMarca(id);
-        Type listDTOAnios = new TypeToken<List<DTOAñoFabricacion>>() {}.getType();
-        List<DTOAñoFabricacion> dtoAnios = modelMapper.map(anios, listDTOAnios);
-
-        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
-        if(dtoAnios!=null) {
-            return new ResponseEntity<>(dtoAnios,HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
-        }
     }
 
     @GetMapping(path = "/poliza/{id}")
-    public ResponseEntity<Object> getPoliza(@PathVariable(name = "id") String id){
+    public ResponseEntity<Object> getPoliza(@RequestParam(value = "id",defaultValue = "0") String id){
 
        Poliza poliza = gestorBaseDeDatos.findPolizaById(id);
 

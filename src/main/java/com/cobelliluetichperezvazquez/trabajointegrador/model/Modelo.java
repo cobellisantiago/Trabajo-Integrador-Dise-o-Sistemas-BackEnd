@@ -11,8 +11,8 @@ public class Modelo {
     int idModelo;
     String nombre;
     Float porcentajeRobo;
-//    @OneToMany(fetch = FetchType.EAGER)
-//    List<AñoFabricacion> añosFabricacion;
+    @OneToMany(fetch = FetchType.LAZY)
+    List<AñoFabricacion> añosFabricacion;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_marca")
     Marca marca;
@@ -22,19 +22,19 @@ public class Modelo {
 
     }
 
-    public Modelo(int idModelo, String nombre, Float porcentajeRobo, Marca marca) {
+    public Modelo(Integer idModelo, String nombre, Float porcentajeRobo, List<AñoFabricacion> añoFabricacion, Marca marca) {
         this.idModelo = idModelo;
         this.nombre = nombre;
         this.porcentajeRobo = porcentajeRobo;
-//        this.añosFabricacion = añoFabricacion;
+        this.añosFabricacion = añoFabricacion;
         this.marca = marca;
     }
 
-    public int getIdModelo() {
+    public Integer getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(int idModelo) {
+    public void setIdModelo(Integer idModelo) {
         this.idModelo = idModelo;
     }
 
@@ -54,13 +54,13 @@ public class Modelo {
         this.porcentajeRobo = porcentajeRobo;
     }
 
-//    public List<AñoFabricacion> getAñoFabricacion() {
-//        return añosFabricacion;
-//    }
-//
-//    public void setAñoFabricacion(List<AñoFabricacion> añoFabricacion) {
-//        this.añosFabricacion = añoFabricacion;
-//    }
+    public List<AñoFabricacion> getAñoFabricacion() {
+        return añosFabricacion;
+    }
+
+    public void setAñoFabricacion(List<AñoFabricacion> añoFabricacion) {
+        this.añosFabricacion = añoFabricacion;
+    }
 
     public Marca getMarca() {
         return marca;

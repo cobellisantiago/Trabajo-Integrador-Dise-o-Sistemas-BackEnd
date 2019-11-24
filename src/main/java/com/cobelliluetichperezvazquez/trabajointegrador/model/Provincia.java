@@ -7,7 +7,7 @@ public class Provincia {
 
     @GeneratedValue
     @Id
-    int idProvincia;
+    Integer idProvincia;
     String nombre;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -18,17 +18,17 @@ public class Provincia {
 
     }
 
-    public Provincia(int idProvincia, String nombre, Pais pais) {
+    public Provincia(Integer idProvincia, String nombre, Pais pais) {
         this.idProvincia = idProvincia;
         this.nombre = nombre;
         this.pais = pais;
     }
 
-    public int getIdProvincia() {
+    public Integer getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(int idProvincia) {
+    public void setIdProvincia(Integer idProvincia) {
         this.idProvincia = idProvincia;
     }
 

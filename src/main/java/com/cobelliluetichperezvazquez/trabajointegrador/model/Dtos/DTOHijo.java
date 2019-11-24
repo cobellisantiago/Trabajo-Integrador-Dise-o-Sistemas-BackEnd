@@ -8,18 +8,9 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.Sexo;
 
 public class DTOHijo {
 
-    Integer id;
     Calendar fechaDeNacimiento;
     Sexo sexo;
     EstadoCivil estadoCivil;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Calendar getFechaDeNacimiento() {
         return fechaDeNacimiento;

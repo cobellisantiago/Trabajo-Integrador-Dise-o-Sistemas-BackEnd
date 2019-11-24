@@ -2,16 +2,16 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
 public class DTOProvincia {
 
-    int idProvincia;
+    Integer idProvincia;
     String nombre;
     Float porcentajeRobo;
-    int idPais;
+    Integer idPais;
 
-    public int getIdProvincia() {
+    public Integer getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(int idProvincia) {
+    public void setIdProvincia(Integer idProvincia) {
         this.idProvincia = idProvincia;
     }
 
@@ -31,11 +31,11 @@ public class DTOProvincia {
         this.porcentajeRobo = porcentajeRobo;
     }
 
-    public int getIdPais() {
+    public Integer getIdPais() {
         return idPais;
     }
 
-    public void setIdPais(int idPais) {
+    public void setIdPais(Integer idPais) {
         this.idPais = idPais;
     }
 

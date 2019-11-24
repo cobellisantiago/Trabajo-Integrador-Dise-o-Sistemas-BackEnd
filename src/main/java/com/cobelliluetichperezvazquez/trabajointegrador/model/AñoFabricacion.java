@@ -2,26 +2,25 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
 import javax.persistence.*;
 
-
+@Table()
 @Entity
 public class AñoFabricacion {
 
     @Id
     @GeneratedValue
     Integer id;
-    int año;
-    int porcentajeRobo;
+    Integer porcentajeRobo;
+    Integer año;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_modelo")
     Modelo modelo;
-
 
 
     public AñoFabricacion() {
 
     }
 
-    public AñoFabricacion( int año, int porcentajeRobo) {
+    public AñoFabricacion( Integer año, Integer porcentajeRobo) {
         this.año = año;
         this.porcentajeRobo = porcentajeRobo;
     }
@@ -34,19 +33,19 @@ public class AñoFabricacion {
         this.id = id;
     }
 
-    public int getAño() {
+    public Integer getAño() {
         return año;
     }
 
-    public void setAño(int año) {
+    public void setAño(Integer año) {
         this.año = año;
     }
 
-    public int getPorcentajeRobo() {
+    public Integer getPorcentajeRobo() {
         return porcentajeRobo;
     }
 
-    public void setPorcentajeRobo(int porcentajeRobo) {
+    public void setPorcentajeRobo(Integer porcentajeRobo) {
         this.porcentajeRobo = porcentajeRobo;
     }
 

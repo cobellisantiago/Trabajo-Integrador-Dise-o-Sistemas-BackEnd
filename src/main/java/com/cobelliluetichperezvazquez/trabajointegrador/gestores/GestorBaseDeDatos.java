@@ -75,7 +75,7 @@ public class GestorBaseDeDatos {
         String consulta=("from " + Cliente.class.getName()+" c where 1=1");
         try {
             if(apellido!=null) consulta = consulta+" and c.apellido="+apellido;
-            if(nombre!=null) consulta = consulta+" and c.nombre="+nombre;
+            if(nombre!=null) consulta = consulta+" and c.nombre='"+nombre+"'";
             if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento="+tipoDeDocumento;
             if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento="+numeroDeDocumento;
             System.out.println(consulta);

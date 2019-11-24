@@ -7,7 +7,7 @@ public class DTODomicilio {
     String calle;
     Integer numero;
     Integer piso;
-    char departamento;
+    String departamento;
     Integer codigoPostal;
     Integer idLocalidad;
     Integer idProvincia;
@@ -37,11 +37,11 @@ public class DTODomicilio {
         this.piso = piso;
     }
 
-    public char getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(char departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 
@@ -75,5 +75,13 @@ public class DTODomicilio {
 
     public void setIdPais(Integer idPais) {
         this.idPais = idPais;
+    }
+
+    public Integer getIdDomicilio() {
+        return idDomicilio;
+    }
+
+    public void setIdDomicilio(Integer idDomicilio) {
+        this.idDomicilio = idDomicilio;
     }
 }

@@ -1,6 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Table()
 @Entity
@@ -55,5 +56,11 @@ public class AñoFabricacion {
 
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
+    }
+
+    public boolean masDeDiez(Integer año) {
+        Calendar fecha = Calendar.getInstance();
+        fecha.add(Calendar.YEAR,-10);
+        return fecha.before(año);
     }
 }

@@ -4,7 +4,6 @@ public class DTOProvincia {
 
     Integer idProvincia;
     String nombre;
-    Float porcentajeRobo;
     Integer idPais;
 
     public Integer getIdProvincia() {
@@ -21,14 +20,6 @@ public class DTOProvincia {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Float getPorcentajeRobo() {
-        return porcentajeRobo;
-    }
-
-    public void setPorcentajeRobo(Float porcentajeRobo) {
-        this.porcentajeRobo = porcentajeRobo;
     }
 
     public Integer getIdPais() {

@@ -71,7 +71,6 @@ public class controllerBasic {
 
     @GetMapping(path = "/coberturas")
     public ResponseEntity<Object> getCoberturas(){
-
         List<Cobertura> coberturas = gestorBaseDeDatos.findAllCobertura();
         Type listType = new TypeToken<List<DTOCobertura>>() {}.getType();
         List<DTOCobertura> dtoCoberturas = modelMapper.map(coberturas, listType);

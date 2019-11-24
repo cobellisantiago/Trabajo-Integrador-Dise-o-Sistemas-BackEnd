@@ -3,9 +3,9 @@ package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 public class DTOAñoFabricacion {
 
     Integer id;
-    int año;
-    int porcentajeRobo;
-    int idModelo;
+    Integer año;
+    Integer sumaAsegurada;
+    Integer idModelo;
 
     public Integer getId() {
         return id;
@@ -15,19 +15,19 @@ public class DTOAñoFabricacion {
         this.id = id;
     }
 
-    public int getAño() {
+    public Integer getAño() {
         return año;
     }
 
-    public void setAño(int año) {
+    public void setAño(Integer año) {
         this.año = año;
     }
 
-    public int getPorcentajeRobo() {
-        return porcentajeRobo;
+    public Integer getSumaAsegurada() {
+        return sumaAsegurada;
     }
 
-    public void setPorcentajeRobo(int porcentajeRobo) {
-        this.porcentajeRobo = porcentajeRobo;
+    public void setSumaAsegurada(Integer sumaAsegurada) {
+        this.sumaAsegurada = sumaAsegurada;
     }
 }

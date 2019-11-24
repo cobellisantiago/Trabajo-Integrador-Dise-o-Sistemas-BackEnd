@@ -180,31 +180,9 @@ public class GestorBaseDeDatos {
         boolean check = false;
         List objects = null;
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("id from " + Poliza.class.getName() + " p where p.patente="+patente+" or p.motor="+ motor + " or p.chasis="+chasis);
+        Query query = session.createQuery("from " + Poliza.class.getName() + " p where p.patente='"+patente+"' or p.motor='"+motor+"' or p.chasis='"+chasis+"'");
         objects = query.list();
-
-        //Query query1 = session.createQuery("SELECT p.patente FROM Poliza p");
-//        List<String[]> listaPatente = query.list();
-//        Query query = session.createQuery("SELECT p.chasisVehiculo FROM Poliza p");
-//        List<String[]> listaChasis = query.list();
-//        Query query = session.createQuery("SELECT p.motorVehiculo FROM Poliza p");
-//        List<String[]> listaMotorVehiculo = query.list();
-
-//        for( String[] datos : listaPatente ){
-//            if(datos.equals(patente)){
-//                check = true;
-//            }
-//        }
-//        for( String[] datos : listaChasis ){
-//            if(datos.equals(chasis)){
-//                check = true;
-//            }
-//        }for( String[] datos : listaMotorVehiculo ){
-//            if(datos.equals(motor)){
-//                check = true;
-//            }
-//        }
-        return (objects.isEmpty());
+       return !objects.isEmpty();
     }
 
     public Poliza findPolizaById(String id) {

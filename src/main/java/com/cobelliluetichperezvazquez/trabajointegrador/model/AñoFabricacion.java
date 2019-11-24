@@ -9,7 +9,7 @@ public class AñoFabricacion {
     @Id
     @GeneratedValue
     Integer id;
-    Integer porcentajeRobo;
+    Integer sumaAsegurada;
     Integer año;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_modelo")
@@ -20,9 +20,9 @@ public class AñoFabricacion {
 
     }
 
-    public AñoFabricacion( Integer año, Integer porcentajeRobo) {
+    public AñoFabricacion( Integer año, Integer sumaAsegurada) {
         this.año = año;
-        this.porcentajeRobo = porcentajeRobo;
+        this.sumaAsegurada = sumaAsegurada;
     }
 
     public Integer getId() {
@@ -41,12 +41,12 @@ public class AñoFabricacion {
         this.año = año;
     }
 
-    public Integer getPorcentajeRobo() {
-        return porcentajeRobo;
+    public Integer getsumaAsegurada() {
+        return sumaAsegurada;
     }
 
-    public void setPorcentajeRobo(Integer porcentajeRobo) {
-        this.porcentajeRobo = porcentajeRobo;
+    public void setsumaAsegurada(Integer sumaAsegurada) {
+        this.sumaAsegurada = sumaAsegurada;
     }
 
     public Modelo getModelo() {

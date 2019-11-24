@@ -98,15 +98,13 @@ public class GestorCliente {
        return !fechaDeNacimiento.after(fecha);
    }
 
-   public List<Cliente> buscar(DTOCliente dtoCliente) {
+   public List<Cliente> buscar(Integer id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List<Cliente> clientes = new ArrayList<>();
-        if(dtoCliente.getIdCliente()!=null) { //solo habra un cliente con ese id
-            clientes.add(gestorBaseDeDatos.findClienteById(dtoCliente.getIdCliente()));
+        if(id!=null) { //solo habra un cliente con ese id
+            clientes.add(gestorBaseDeDatos.findClienteById(id));
         }
-        else { //ver como establecer varios criterios
-            if(dtoCliente.getApellido()!=null) {
-                //clientes.add(gestorBaseDeDatos.findClienteByApellido(dtoCliente.getIdCliente()));
-            }
+        else { //ver como establecer varios criterios //hibernate criteria
+            clientes.add((Cliente) gestorBaseDeDatos.findAllCliente(apellido,nombre,tipoDeDocumento,numeroDeDocumento));
         }
         return clientes;
    }

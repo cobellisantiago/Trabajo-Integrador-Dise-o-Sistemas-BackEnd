@@ -28,7 +28,7 @@ public class GestorHijos {
                 ids.add(id);
             }
             catch (Exception e) {
-                throw new NullPointerException("El hijo "++"no pudo ser guardado en la BDD"); //ver id
+                throw new NullPointerException("El hijo no pudo ser guardado en la BDD"); //ver id
             }
         }
         return ids;

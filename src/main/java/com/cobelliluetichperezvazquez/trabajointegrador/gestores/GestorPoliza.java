@@ -135,4 +135,11 @@ public class GestorPoliza {
         return check;
     }
 
+    public Poliza buscar(String numeroDePoliza) {
+        Poliza poliza = gestorBaseDeDatos.findPolizaById(numeroDePoliza);
+        return poliza;
+    }
+
+
+
 }

@@ -74,7 +74,7 @@ public class GestorBaseDeDatos {
         List objects = null;
         String consulta=("from " + Cliente.class.getName()+" c where 1=1");
         try {
-            if(apellido!=null) consulta = consulta+" and c.apellido="+apellido;
+            if(apellido!=null) consulta = consulta+" and c.apellido='"+apellido+"'";
             if(nombre!=null) consulta = consulta+" and c.nombre='"+nombre+"'";
             if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento="+tipoDeDocumento;
             if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento="+numeroDeDocumento;
@@ -169,7 +169,6 @@ public class GestorBaseDeDatos {
     public Integer saveHijo(Hijo hijo){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        //Save employee
         Integer id = (Integer) session.save(hijo);
         session.getTransaction().commit();
         //this.sessionFactory.close();
@@ -185,17 +184,15 @@ public class GestorBaseDeDatos {
        return !objects.isEmpty();
     }
 
-    public Poliza findPolizaById(String id) {
+    public Poliza findPolizaById(String numeroDePoliza) {
         Session session = this.sessionFactory.getCurrentSession();
-        Poliza poliza =  session.get(Poliza.class, id);
-        //this.sessionFactory.close();
+        Poliza poliza =  session.get(Poliza.class, numeroDePoliza);
         return poliza;
     }
 
     public boolean savePoliza(Poliza poliza){
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
-        //Save employee
         session.save(poliza);
         session.getTransaction().commit();
         return true;

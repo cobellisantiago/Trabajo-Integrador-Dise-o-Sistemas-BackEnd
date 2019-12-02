@@ -35,7 +35,7 @@ public class GestorCliente {
         return cliente;
     }
 
-    public Cliente crear(DTOCliente dtoCliente){
+    /*public Cliente crear(DTOCliente dtoCliente){
         Cliente cliente = new Cliente();
         if(dtoCliente.getIdCliente()==null) throw new NullPointerException("id cliente nulo");
         if(dtoCliente.getApellido()==null) throw new NullPointerException("apellido cliente nulo");
@@ -100,7 +100,7 @@ public class GestorCliente {
         cliente.setEstado(EstadoCliente.ACTIVO_AL_DIA);
         return cliente;
     }
-    //TODO validar CUIL
+
     private boolean CUILvalido(String numeroDeDocumento, String CUIL) {
         return (CUIL.length() == numeroDeDocumento.length() - 3 || CUIL.length() == numeroDeDocumento.length() - 5)
                 && (CUIL.contains(numeroDeDocumento));
@@ -110,14 +110,14 @@ public class GestorCliente {
        Calendar fecha = Calendar.getInstance();
        fecha.add(Calendar.YEAR,-18);
        return !fechaDeNacimiento.after(fecha);
-   }
+   }*/
 
    public List<Cliente> buscar(Integer id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List<Cliente> clientes = new ArrayList<>();
-        if(id!=null) { //solo habra un cliente con ese id
-            clientes = (List<Cliente>) gestorBaseDeDatos.findClienteById(id);
+        if(id!=null) {
+            clientes.add(gestorBaseDeDatos.findClienteById(id));
         }
-        else { //ver como establecer varios criterios //hibernate criteria
+        else {
             clientes = gestorBaseDeDatos.findAllCliente(apellido,nombre,tipoDeDocumento,numeroDeDocumento);
         }
         return clientes;

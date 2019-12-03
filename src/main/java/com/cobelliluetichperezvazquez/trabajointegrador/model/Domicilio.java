@@ -26,8 +26,8 @@ public class Domicilio {
 
     }
 
-    public Domicilio(Integer idDomicilio, String calle, Integer numero, Integer piso, String departamento, Integer codigoPostal, Localidad localidad) {
-        this.idDomicilio = idDomicilio;
+    public Domicilio( String calle, Integer numero, Integer piso, String departamento, Integer codigoPostal, Localidad localidad) {
+
         this.calle = calle;
         this.numero = numero;
         this.piso = piso;

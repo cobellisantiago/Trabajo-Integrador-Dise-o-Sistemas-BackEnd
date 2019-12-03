@@ -100,6 +100,7 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
+
     public Cliente findClienteById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Cliente cliente =  session.get(Cliente.class, id);

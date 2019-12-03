@@ -34,7 +34,8 @@ public class controllerBasic {
     private GestorModelo gestorModelo;
     @Autowired
     private GestorDomicilio gestorDomicilio;
-
+    @Autowired
+    private GestorPago gestorPago;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -172,7 +173,6 @@ public class controllerBasic {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }
-
     }
 
     @GetMapping(path = "/marca/{id}/modelo")
@@ -282,5 +282,14 @@ public class controllerBasic {
         }
     }
 
+    @PostMapping(path = "/pago")
+    public ResponseEntity<Object> savePago(@RequestBody DTOPago dtoPago) {
+        try {
+            gestorPago.generarPago(dtoPago);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
 

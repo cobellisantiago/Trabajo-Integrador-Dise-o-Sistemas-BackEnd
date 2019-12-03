@@ -16,20 +16,18 @@ public class GestorCuotas {
 
     public List<Cuota> buscarCuotasVigentes(String numeroDePoliza){
         List<Cuota> cuotas = gestorBaseDeDatos.findCuotas(numeroDePoliza);
-       /* for(Cuota c : cuotas) {
+        for(Cuota c : cuotas) {
             Calendar hoy = Calendar.getInstance();
-            if(c.getFechaDeVencimiento().equals(hoy) && c.getPoliza().getEstado()== EstadoPoliza.VIGENTE) {
+            if(c.getFechaDeVencimiento().equals(hoy)) {
                 c.setValorActual(c.getValorOriginal());
             }
-            else if(c.getFechaDeVencimiento().before(hoy) && c.getPoliza().getEstado()== EstadoPoliza.VIGENTE) {
+            else if(c.getFechaDeVencimiento().before(hoy)) {
                 c.setValorActual(c.getValorOriginal()*110/100);
             }
-            else if(c.getFechaDeVencimiento().after(hoy) && c.getPoliza().getEstado()== EstadoPoliza.VIGENTE) {
+            else if(c.getFechaDeVencimiento().after(hoy)) {
                 c.setValorActual(c.getValorOriginal()*90/100);
             }
-        }*/
+        }
         return cuotas;
     }
-
-
 }

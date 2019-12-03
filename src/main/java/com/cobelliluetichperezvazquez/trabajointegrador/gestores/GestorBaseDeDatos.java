@@ -1,6 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCliente;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -69,13 +70,17 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
-
+    public AñoFabricacion findAñoFabricacionById(int idAnio){
+        Session session = this.sessionFactory.getCurrentSession();
+        AñoFabricacion anio =  session.get(AñoFabricacion.class, idAnio);
+        return anio;
+    }
     public List<Cliente> findAllCliente(String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List objects = null;
-        String consulta=("from " + Cliente.class.getName()+" c where 1=1");
+        String consulta=("from "+Cliente.class.getName()+" c where 1=1 and (c.estado=0 or c.estado=1)");
         try {
-            if(apellido!=null) consulta = consulta+" and c.apellido='"+apellido+"'";
-            if(nombre!=null) consulta = consulta+" and c.nombre='"+nombre+"'";
+            if(apellido!=null) consulta = consulta+" and c.apellido like'"+apellido+"%'";
+            if(nombre!=null) consulta = consulta+" and c.nombre like'"+nombre+"%'";
             if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento="+tipoDeDocumento;
             if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento="+numeroDeDocumento;
             System.out.println(consulta);
@@ -92,8 +97,7 @@ public class GestorBaseDeDatos {
     public List<Cuota> findCuotas(String numeroDePoliza) {
         List objects = null;
         try {
-            Query query = this.sessionFactory.getCurrentSession().
-                    createQuery("from " + Cuota.class.getName() + " c where c.poliza='"+numeroDePoliza+"' and c.pago="+null);
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Cuota.class.getName() + " c where c.poliza='"+numeroDePoliza+"' and c.pago="+null);
             objects = query.list();
         } catch (HibernateException e) {
             System.out.println("no se puedo obtener las cuotas");

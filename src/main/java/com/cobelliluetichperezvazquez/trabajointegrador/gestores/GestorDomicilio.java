@@ -1,6 +1,9 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Domicilio;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTODomicilio;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.Localidad;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.Pais;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.Provincia;
 import org.hibernate.HibernateException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,39 @@ public class GestorDomicilio {
             throw new NullPointerException();
         }
         return domicilio;
+    }
+
+    public Localidad obtenerLocalidad(Integer id){
+        Localidad localidad = null;
+        try {
+           localidad = gestorBaseDeDatos.findLocalidadById(id);
+        }
+        catch (Exception e){
+            throw new NullPointerException();
+        }
+        return localidad;
+    }
+
+    public Provincia obtenerProvincia(Integer id){
+        Provincia provincia = null;
+        try {
+            provincia = gestorBaseDeDatos.findProvinciaById(id);
+        }
+        catch (Exception e){
+            throw new NullPointerException();
+        }
+        return provincia;
+    }
+
+    public Pais obtenerPais(Integer id){
+        Pais pais = null;
+        try {
+            pais = gestorBaseDeDatos.findPaisById(id);
+        }
+        catch (Exception e){
+            throw new NullPointerException();
+        }
+        return pais;
     }
 
     public void guardar(DTODomicilio dtoDomicilio) {

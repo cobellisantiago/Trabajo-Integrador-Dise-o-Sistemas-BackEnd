@@ -13,6 +13,14 @@ public class DTODomicilio {
     Integer idProvincia;
     Integer idPais;
 
+    public Integer getIdDomicilio() {
+        return idDomicilio;
+    }
+
+    public void setIdDomicilio(Integer idDomicilio) {
+        this.idDomicilio = idDomicilio;
+    }
+
     public String getCalle() {
         return calle;
     }
@@ -77,11 +85,4 @@ public class DTODomicilio {
         this.idPais = idPais;
     }
 
-    public Integer getIdDomicilio() {
-        return idDomicilio;
-    }
-
-    public void setIdDomicilio(Integer idDomicilio) {
-        this.idDomicilio = idDomicilio;
-    }
 }

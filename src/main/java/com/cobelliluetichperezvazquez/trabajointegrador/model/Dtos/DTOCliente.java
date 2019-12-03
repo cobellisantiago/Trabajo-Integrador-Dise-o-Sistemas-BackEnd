@@ -21,14 +21,15 @@ public class DTOCliente {
     EstadoCivil estadoCivil;
     String profesion;
     Integer añoDeRegistro;
-    DTODomicilio domicilio;
+    Integer idDomicilio;
 
-    public void setDomicilio(DTODomicilio domicilio) {
-        this.domicilio = domicilio;
+
+    public void setIdDomicilio(Integer domicilio) {
+        this.idDomicilio = domicilio;
     }
 
-    public DTODomicilio getDomicilio() {
-        return domicilio;
+    public Integer getIdDomicilio() {
+        return idDomicilio;
     }
 
     public Integer getIdCliente() {

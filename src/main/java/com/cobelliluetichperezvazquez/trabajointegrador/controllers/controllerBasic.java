@@ -1,10 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
 //Los controllers manejan las vistas (HTML)
 
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorBaseDeDatos;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorCliente;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorPoliza;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorModelo;
+import com.cobelliluetichperezvazquez.trabajointegrador.gestores.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
@@ -38,7 +35,38 @@ public class controllerBasic {
     private GestorModelo gestorModelo;
 
     @Autowired
+    private GestorDomicilio gestorDomicilio;
+
+    @Autowired
     private ModelMapper modelMapper;
+
+    @GetMapping(path = "/domicilio/provincia/{id}")
+    public ResponseEntity<Object> getProvincia(@PathVariable(name="id") int id){
+
+        Provincia provincia = gestorDomicilio.obtenerProvincia(id);
+        DTOProvincia dtoProvincia = modelMapper.map(provincia, DTOProvincia.class);
+
+        if(dtoProvincia!=null) {
+            return new ResponseEntity<>(dtoProvincia,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
+
+    @GetMapping(path = "/domicilio/pais/{id}")
+    public ResponseEntity<Object> getPais(@PathVariable(name="id") int id){
+
+        Pais pais = gestorDomicilio.obtenerPais(id);
+        DTOPais dtoPais = modelMapper.map(pais, DTOPais.class);
+
+        if(dtoPais!=null) {
+            return new ResponseEntity<>(dtoPais,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
 
     @GetMapping(path = "/domicilio/{id}")
     public ResponseEntity<Object> getDomicilio(@PathVariable(name="id") int id){
@@ -48,6 +76,20 @@ public class controllerBasic {
 
         if(dtoDomicilio!=null) {
             return new ResponseEntity<>(dtoDomicilio,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
+
+    @GetMapping(path = "/domicilio/localidad/{id}")
+    public ResponseEntity<Object> getLocaliad(@PathVariable(name="id") int id){
+
+        Localidad localidad = gestorDomicilio.obtenerLocalidad(id);
+        DTOLocalidad dtoLocalidad = modelMapper.map(localidad, DTOLocalidad.class);
+
+        if(dtoLocalidad!=null) {
+            return new ResponseEntity<>(dtoLocalidad,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }
@@ -209,12 +251,25 @@ public class controllerBasic {
     @GetMapping(path = "/cliente")
     @ResponseBody
     public ResponseEntity<Object> getCliente(@RequestParam(required = false) Integer id, @RequestParam(required = false) String apellido, @RequestParam(required = false) String nombre, @RequestParam(required = false) TipoDeDocumento tipoDeDocumento, @RequestParam(required = false) String numeroDeDocumento) {
+
+        System.out.println();
         List<Cliente> clientes = gestorCliente.buscar(id, apellido, nombre, tipoDeDocumento, numeroDeDocumento);
         Type listDTOCliente = new TypeToken<List<DTOCliente>>() {}.getType();
         List<DTOCliente> dtoClientes = modelMapper.map(clientes, listDTOCliente);
         if(dtoClientes!=null) {
             return new ResponseEntity<>(dtoClientes,HttpStatus.OK);
         } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(path = "/cliente/tiposDocumento")
+    @ResponseBody
+    public ResponseEntity<Object> getTiposDocumento(){
+        List<String> tipos = gestorCliente.obtenerTiposDeDocumento();
+        if(!tipos.isEmpty()){
+            return new ResponseEntity<>(tipos, HttpStatus.OK);
+        }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -35,7 +35,7 @@ public class GestorCliente {
         return cliente;
     }
 
-    public Cliente crear(DTOCliente dtoCliente){
+    /*public Cliente crear(DTOCliente dtoCliente){
         Cliente cliente = new Cliente();
         if(dtoCliente.getIdCliente()==null) throw new NullPointerException("id cliente nulo");
         if(dtoCliente.getApellido()==null) throw new NullPointerException("apellido cliente nulo");
@@ -99,7 +99,7 @@ public class GestorCliente {
         cliente.setAñoDeRegistro(dtoCliente.getAñoDeRegistro());
         cliente.setEstado(EstadoCliente.ACTIVO_AL_DIA);
         return cliente;
-    }
+    }*/
     //TODO validar CUIL
     private boolean CUILvalido(String numeroDeDocumento, String CUIL) {
         return (CUIL.length() == numeroDeDocumento.length() - 3 || CUIL.length() == numeroDeDocumento.length() - 5)
@@ -115,11 +115,19 @@ public class GestorCliente {
    public List<Cliente> buscar(Integer id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List<Cliente> clientes = new ArrayList<>();
         if(id!=null) { //solo habra un cliente con ese id
-            clientes = (List<Cliente>) gestorBaseDeDatos.findClienteById(id);
+            clientes.add(gestorBaseDeDatos.findClienteById(id));
         }
         else { //ver como establecer varios criterios //hibernate criteria
             clientes = gestorBaseDeDatos.findAllCliente(apellido,nombre,tipoDeDocumento,numeroDeDocumento);
         }
         return clientes;
+   }
+
+   public List<String> obtenerTiposDeDocumento(){
+        List<String> tipos = new ArrayList<>();
+       for ( TipoDeDocumento tipo: TipoDeDocumento.values()) {
+           tipos.add(tipo.toString());
+       }
+       return tipos;
    }
 }

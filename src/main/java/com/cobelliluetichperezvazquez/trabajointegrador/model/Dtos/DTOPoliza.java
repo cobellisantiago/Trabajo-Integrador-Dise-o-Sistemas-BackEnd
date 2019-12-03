@@ -15,7 +15,7 @@ public class DTOPoliza {
     Integer idProvincia;
     Integer idMarca;
     Integer idModelo;
-    DTOAñoFabricacion añoFabricacion;
+    Integer idAñoFabricacion;
     Integer idCobertura;
     String motorVehiculo;
     String chasisVehiculo;
@@ -148,12 +148,12 @@ public class DTOPoliza {
         this.montoTotalAbonar = montoTotalAbonar;
     }
 
-    public DTOAñoFabricacion getAñoFabricacion() {
-        return añoFabricacion;
+    public Integer getIdAñoFabricacion() {
+        return idAñoFabricacion;
     }
 
-    public void setAñoFabricacion(DTOAñoFabricacion añoFabricacion) {
-        this.añoFabricacion = añoFabricacion;
+    public void setIdAñoFabricacion(Integer añoFabricacion) {
+        this.idAñoFabricacion = añoFabricacion;
     }
 
     public Integer getKilometrosPorAño() {

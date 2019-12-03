@@ -74,10 +74,10 @@ public class GestorBaseDeDatos {
         List objects = null;
         String consulta=("from " + Cliente.class.getName()+" c where 1=1");
         try {
-            if(apellido!=null) consulta = consulta+" and c.apellido="+apellido;
+            if(apellido!=null) consulta = consulta+" and c.apellido='"+apellido+"'";
             if(nombre!=null) consulta = consulta+" and c.nombre='"+nombre+"'";
-            if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento="+tipoDeDocumento;
-            if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento="+numeroDeDocumento;
+            if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento='"+tipoDeDocumento+"'";
+            if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento='"+numeroDeDocumento+"'";
             System.out.println(consulta);
             Query query = this.sessionFactory.getCurrentSession().createQuery(consulta);
             objects = query.list();
@@ -88,12 +88,14 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
+
     public Cliente findClienteById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Cliente cliente =  session.get(Cliente.class, id);
         //this.sessionFactory.close();
         return cliente;
     }
+
 
     public List<Cobertura> findAllCobertura() {
         List objects = null;

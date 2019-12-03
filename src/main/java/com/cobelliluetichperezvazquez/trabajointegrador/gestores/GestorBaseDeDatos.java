@@ -158,6 +158,12 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
+    public AñoFabricacion findAñoFabricacionById(int idAnio){
+        Session session = this.sessionFactory.getCurrentSession();
+        AñoFabricacion anio =  session.get(AñoFabricacion.class, idAnio);
+        return anio;
+    }
+
     public boolean saveDomicilio(Domicilio domicilio){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -171,7 +177,6 @@ public class GestorBaseDeDatos {
     public Integer saveHijo(Hijo hijo){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        //Save employee
         Integer id = (Integer) session.save(hijo);
         session.getTransaction().commit();
         //this.sessionFactory.close();
@@ -187,17 +192,15 @@ public class GestorBaseDeDatos {
        return !objects.isEmpty();
     }
 
-    public Poliza findPolizaById(String id) {
+    public Poliza findPolizaById(String numeroDePoliza) {
         Session session = this.sessionFactory.getCurrentSession();
-        Poliza poliza =  session.get(Poliza.class, id);
-        //this.sessionFactory.close();
+        Poliza poliza =  session.get(Poliza.class, numeroDePoliza);
         return poliza;
     }
 
     public boolean savePoliza(Poliza poliza){
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
-        //Save employee
         session.save(poliza);
         session.getTransaction().commit();
         return true;

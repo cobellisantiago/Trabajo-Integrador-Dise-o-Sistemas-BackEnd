@@ -20,4 +20,8 @@ public class GestorModelo {
         return gestorBaseDeDatos.findAllAñosByModelo(idModelo);
     }
 
+    public AñoFabricacion obtenerAnioFabricacion(int idAnio){
+        return gestorBaseDeDatos.findAñoFabricacionById(idAnio);
+    }
+
 }

@@ -30,6 +30,7 @@ public class GestorPoliza {
     @Autowired
     private GestorHijos gestorHijos;
 
+
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos) {
 
         //TODO CU17 3
@@ -44,7 +45,7 @@ public class GestorPoliza {
         if(dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
         if(dtoPoliza.getIdModelo() == null) throw new NullPointerException("Id modelo null");
         if(dtoPoliza.getIdMarca() == null) throw new NullPointerException("Id marca null");
-        if(dtoPoliza.getAñoFabricacion().getId() == null) throw new NullPointerException("Id año null");
+        if(dtoPoliza.getIdAñoFabricacion() == null) throw new NullPointerException("Id año null");
         if(dtoPoliza.getMotorVehiculo() == null) throw new NullPointerException("Motor vehiculo null");
         if(dtoPoliza.getChasisVehiculo() == null) throw new NullPointerException("Chasis vehiculo null");
         if(dtoPoliza.getKilometrosPorAño() == -1) throw new NullPointerException("kilometro por año null");
@@ -65,10 +66,10 @@ public class GestorPoliza {
         if (gestorBaseDeDatos.findPoliza(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
             throw new NullPointerException("Ya existe una póliza vigente para los datos ingresados.");
         }
-
+        AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacion(dtoPoliza.getIdAñoFabricacion());
         Calendar fecha = Calendar.getInstance();
         fecha.add(Calendar.YEAR,-10);
-        if(fecha.before(dtoPoliza.getAñoFabricacion().getAño()) && dtoPoliza.getIdCobertura()==0) {
+        if(fecha.before(anioFabricacion.getAño()) && dtoPoliza.getIdCobertura()==0) {
             throw new NullPointerException("la cobertura no es valida");
         }
 
@@ -96,7 +97,7 @@ public class GestorPoliza {
             poliza.setKilometrosPorAño(dtoPoliza.getKilometrosPorAño());
             poliza.setFormaDePago(dtoPoliza.getFormaDePago());
             //TODO Deberia buscar la clase en la base de datos
-            poliza.setAñoVehiculo(dtoPoliza.getAñoFabricacion().getId());
+            poliza.setAñoVehiculo(gestorModelo.obtenerAnioFabricacion(dtoPoliza.getIdAñoFabricacion()).getAño());
             poliza.setEstado(EstadoPoliza.GENERADA);
             poliza.setCliente(cliente);
             Modelo modelo = gestorModelo.encontrarModelo(dtoPoliza.getIdModelo());
@@ -134,5 +135,12 @@ public class GestorPoliza {
         if(fechaNacimiento.before(fechaMayor) || fechaNacimiento.after(fechaMenor)) check = false;
         return check;
     }
+
+    public Poliza buscar(String numeroDePoliza) {
+        Poliza poliza = gestorBaseDeDatos.findPolizaById(numeroDePoliza);
+        return poliza;
+    }
+
+
 
 }

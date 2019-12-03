@@ -209,20 +209,6 @@ public class controllerBasic {
         }
     }
 
-    @GetMapping(path = "/poliza/{id}")
-    public ResponseEntity<Object> getPoliza(@PathVariable(name = "id") String id){
-
-        Poliza poliza = gestorBaseDeDatos.findPolizaById(id);
-        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
-
-        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
-        if(dtoPoliza!=null) {
-            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
-        }
-    }
-
     @PostMapping(path = "/poliza/new")
     public ResponseEntity<Object> savePoliza(@RequestBody DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos){
         try {
@@ -254,7 +240,7 @@ public class controllerBasic {
 
         System.out.println();
         List<Cliente> clientes = gestorCliente.buscar(id, apellido, nombre, tipoDeDocumento, numeroDeDocumento);
-        Type listDTOCliente = new TypeToken<List<DTOCliente>>() {}.getType();
+        Type listDTOCliente = new TypeToken<List<DTOCliente>>(){}.getType();
         List<DTOCliente> dtoClientes = modelMapper.map(clientes, listDTOCliente);
         if(dtoClientes!=null) {
             return new ResponseEntity<>(dtoClientes,HttpStatus.OK);
@@ -273,5 +259,30 @@ public class controllerBasic {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(path = "/poliza")
+    @ResponseBody
+    public ResponseEntity<Object> getPoliza(String numeroDePoliza) {
+        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
+        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
+        if(dtoPoliza!=null) {
+            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(path = "/cuotas")
+    @ResponseBody
+    public ResponseEntity<Object> getCuotas(String numeroDePoliza) {
+        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
+        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
+        if(dtoPoliza!=null) {
+            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
 

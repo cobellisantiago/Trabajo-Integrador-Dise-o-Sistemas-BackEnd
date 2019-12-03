@@ -12,6 +12,7 @@ public class Cobertura {
     Integer idCobertura;
     String nombre;
     String descripcion;
+    Float porcentajeDePago;
 
     public Cobertura() {}
 

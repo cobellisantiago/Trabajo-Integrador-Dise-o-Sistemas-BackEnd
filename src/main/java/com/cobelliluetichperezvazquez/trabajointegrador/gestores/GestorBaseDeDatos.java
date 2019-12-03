@@ -88,6 +88,18 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
+
+    public List<Cuota> findCuotas(String numeroDePoliza) {
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().
+                    createQuery("from " + Cuota.class.getName() + " c where c.poliza='"+numeroDePoliza+"' and c.pago="+null);
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener las cuotas");
+        }
+        return objects;
+    }
     public Cliente findClienteById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Cliente cliente =  session.get(Cliente.class, id);

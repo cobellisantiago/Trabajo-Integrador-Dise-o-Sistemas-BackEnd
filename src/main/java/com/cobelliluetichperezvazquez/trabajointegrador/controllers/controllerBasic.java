@@ -1,10 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
 //Los controllers manejan las vistas (HTML)
 
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorBaseDeDatos;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorCliente;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorPoliza;
-import com.cobelliluetichperezvazquez.trabajointegrador.gestores.GestorModelo;
+import com.cobelliluetichperezvazquez.trabajointegrador.gestores.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
@@ -27,16 +24,14 @@ public class controllerBasic {
 
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
-
     @Autowired
     private GestorPoliza gestorPoliza;
-
+    @Autowired
+    private GestorCuotas gestorCuotas;
     @Autowired
     private GestorCliente gestorCliente;
-
     @Autowired
     private GestorModelo gestorModelo;
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -116,7 +111,6 @@ public class controllerBasic {
         }
 
     }
-
 
     // ------------- VEHICULOS -----------------
     //
@@ -220,10 +214,11 @@ public class controllerBasic {
     @GetMapping(path = "/cuotas")
     @ResponseBody
     public ResponseEntity<Object> getCuotas(String numeroDePoliza) {
-        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
-        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
-        if(dtoPoliza!=null) {
-            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+        List<Cuota> cuotas = gestorCuotas.buscarCuotasVigentes(numeroDePoliza);
+        Type listDTOCuotas = new TypeToken<List<DTOCuota>>(){}.getType();
+        List<DTOCuota> dtoCuotas = modelMapper.map(cuotas, listDTOCuotas);
+        if(dtoCuotas!=null) {
+            return new ResponseEntity<>(dtoCuotas,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

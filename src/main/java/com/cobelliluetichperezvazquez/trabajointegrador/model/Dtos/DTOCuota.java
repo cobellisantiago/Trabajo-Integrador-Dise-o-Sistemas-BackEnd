@@ -6,6 +6,7 @@ public class DTOCuota {
     Calendar ultimoDiaDePago;
     Integer valorActual;
     Integer valorOriginal;
+    Float porcentajeDePago;
 
     public Calendar getUltimoDiaDePago() {
         return ultimoDiaDePago;
@@ -29,5 +30,13 @@ public class DTOCuota {
 
     public void setValorOriginal(Integer valorOriginal) {
         this.valorOriginal = valorOriginal;
+    }
+
+    public Float getPorcentajeDePago() {
+        return porcentajeDePago;
+    }
+
+    public void setPorcentajeDePago(Float porcentajeDePago) {
+        this.porcentajeDePago = porcentajeDePago;
     }
 }

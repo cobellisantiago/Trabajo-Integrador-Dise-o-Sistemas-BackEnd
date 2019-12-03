@@ -82,5 +82,11 @@ public class Cuota {
     }
 
 
+    public Poliza getPoliza() {
+        return poliza;
+    }
 
+    public void setPoliza(Poliza poliza) {
+        this.poliza = poliza;
+    }
 }

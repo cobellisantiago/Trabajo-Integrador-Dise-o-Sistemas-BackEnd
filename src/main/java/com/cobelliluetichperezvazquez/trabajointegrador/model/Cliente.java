@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class Cliente {
 
     @Id
-    @GeneratedValue
     String idCliente;
     TipoDeDocumento tipoDeDocumento;
     String numeroDeDocumento;

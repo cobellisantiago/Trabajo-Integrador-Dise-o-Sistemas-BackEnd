@@ -57,10 +57,10 @@ public class Poliza {
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    /*@OneToMany(fetch = FetchType.LAZY)
-    List<Cuota> cuotas;*/
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Cuota> cuotas;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Transient
     List<Hijo> hijos;
 
     @ManyToOne(fetch = FetchType.LAZY)

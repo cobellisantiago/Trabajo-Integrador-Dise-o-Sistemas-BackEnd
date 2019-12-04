@@ -1,8 +1,6 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
@@ -13,6 +11,9 @@ public class Pago {
     Integer idPago;
     Float monto;
     Calendar fechaDeRealizacion;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "numeroRecibo")
+    Recibo recibo;
 
 
     public Pago() {

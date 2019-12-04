@@ -6,9 +6,7 @@ import java.util.Date;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCivil;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.Sexo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Hijo {
@@ -19,6 +17,12 @@ public class Hijo {
     Calendar fechaDeNacimiento;
     EstadoCivil estadoCivil;
     Sexo sexo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "numeroDePoliza")
+    Poliza poliza;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "numeroSolicitudDePoliza")
+    SolicitudDePoliza solicitudDePoliza;
 
     public Hijo() {
 
@@ -63,4 +67,19 @@ public class Hijo {
     }
 
 
+    public Poliza getPoliza() {
+        return poliza;
+    }
+
+    public void setPoliza(Poliza poliza) {
+        this.poliza = poliza;
+    }
+
+    public SolicitudDePoliza getSolicitudDePoliza() {
+        return solicitudDePoliza;
+    }
+
+    public void setSolicitudDePoliza(SolicitudDePoliza solicitudDePoliza) {
+        this.solicitudDePoliza = solicitudDePoliza;
+    }
 }

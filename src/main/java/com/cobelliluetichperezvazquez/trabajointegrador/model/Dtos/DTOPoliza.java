@@ -6,6 +6,8 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public class DTOPoliza {
 
     String numeroDePoliza;
@@ -20,7 +22,7 @@ public class DTOPoliza {
     String patente;
     Calendar fechaInicioVigencia;
     Calendar fechaFinVigencia;
-    Float sumaAsegurada;
+    Integer sumaAsegurada;
     Integer idPremio;
     Float importesporDescuentos;
     Float montoTotalAbonar;
@@ -30,6 +32,7 @@ public class DTOPoliza {
     EstadoPoliza estado;
     String numeroDeSolicitud;
     String idCliente;
+    Integer idMedidasDeSeguridad;
 
     public String getIdCliente() {
         return idCliente;
@@ -111,11 +114,11 @@ public class DTOPoliza {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
-    public Float getSumaAsegurada() {
+    public Integer getSumaAsegurada() {
         return sumaAsegurada;
     }
 
-    public void setSumaAsegurada(Float sumaAsegurada) {
+    public void setSumaAsegurada(Integer sumaAsegurada) {
         this.sumaAsegurada = sumaAsegurada;
     }
 
@@ -205,5 +208,13 @@ public class DTOPoliza {
 
     public void setNumeroSiniestrosUltimoAño(NumeroDeSiniestros numeroSiniestrosUltimoAño) {
         this.numeroSiniestrosUltimoAño = numeroSiniestrosUltimoAño;
+    }
+
+    public Integer getIdMedidasDeSeguridad() {
+        return idMedidasDeSeguridad;
+    }
+
+    public void setIdMedidasDeSeguridad(Integer idMedidasDeSeguridad) {
+        this.idMedidasDeSeguridad = idMedidasDeSeguridad;
     }
 }

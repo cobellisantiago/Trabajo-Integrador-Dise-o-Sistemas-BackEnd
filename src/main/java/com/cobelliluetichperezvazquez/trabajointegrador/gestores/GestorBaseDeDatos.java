@@ -62,7 +62,11 @@ public class GestorBaseDeDatos {
         return poliza;
     }
 
-
+    public MedidasDeSeguridad findMedidaById(Integer idMedidaDeSeguridad){
+        Session session = this.sessionFactory.getCurrentSession();
+        MedidasDeSeguridad medida =  session.get(MedidasDeSeguridad.class, idMedidaDeSeguridad);
+        return medida;
+    }
 
     public Provincia findProvinciaById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -187,12 +191,12 @@ public class GestorBaseDeDatos {
         return true;
     }
 
-    public Integer saveHijo(Hijo hijo){
+    public boolean saveHijo(Hijo hijo){
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Integer id = (Integer) session.save(hijo);
+        session.save(hijo);
         session.getTransaction().commit();
-        return id;
+        return true;
     }
 
 

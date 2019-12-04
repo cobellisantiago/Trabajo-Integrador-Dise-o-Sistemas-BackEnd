@@ -1,6 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOCliente;
@@ -32,7 +33,7 @@ public class GestorPoliza {
     private GestorHijos gestorHijos;
 
 
-    public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos) {
+    public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, List<DTOHijo> dtoHijos) {
         //TODO  manejar esto para que desde el front se sepa de este error
 
         //6.A
@@ -86,7 +87,18 @@ public class GestorPoliza {
         Modelo modelo = gestorModelo.encontrarModelo(dtoPoliza.getIdModelo());
         poliza.setModelo(modelo);
         poliza.setAñoVehiculo(anioFabricacion.getAño()); //ya se habia buscado en la cobertura
-
+        poliza.setSumaAsegurada(anioFabricacion.getsumaAsegurada());
+        poliza.setMotorVehiculo(dtoPoliza.getMotorVehiculo());
+        poliza.setChasisVehiculo(dtoPoliza.getChasisVehiculo());
+        poliza.setPatente(dtoPoliza.getPatente());
+        poliza.setKilometrosPorAño(dtoPoliza.getKilometrosPorAño());
+        MedidasDeSeguridad medidasDeSeguridad = gestorMedidasDeSeguridad.encontrarMedidaDeSeguridad(dtoPoliza.getIdMedidasDeSeguridad());
+        poliza.setMedidasDeSeguridad(medidasDeSeguridad);
+        poliza.setNumeroDeSiniestros(dtoPoliza.getNumeroSiniestrosUltimoAño());
+        String numeroDePoliza = generarNumeroDePoliza();
+        poliza.setNumeroDePoliza(numeroDePoliza);
+        List<Hijo> hijos = gestorHijos.crearHijos(dtoHijos, poliza);
+        poliza.setHijos(hijos);
 
         Cobertura cobertura = gestorCobertura.encontrarCobertura(dtoPoliza.getIdCobertura());
 
@@ -95,11 +107,8 @@ public class GestorPoliza {
         poliza.setFechaInicioVigencia(dtoPoliza.getFechaInicioVigencia());
         poliza.setFechaFinVigencia(dtoPoliza.getFechaFinVigencia());
         poliza.setFechaDeEmision(Calendar.getInstance());
-        poliza.setMotorVehiculo(dtoPoliza.getMotorVehiculo());
-        poliza.setChasisVehiculo(dtoPoliza.getChasisVehiculo());
-        poliza.setSumaAsegurada(dtoPoliza.getSumaAsegurada());
-        poliza.setPatente(dtoPoliza.getPatente());
-        poliza.setKilometrosPorAño(dtoPoliza.getKilometrosPorAño());
+
+
         poliza.setFormaDePago(dtoPoliza.getFormaDePago());
 
         poliza.setAñoVehiculo(gestorModelo.obtenerAnioFabricacion(dtoPoliza.getIdAñoFabricacion()).getAño());
@@ -107,12 +116,8 @@ public class GestorPoliza {
 
 
         Premio premio = gestorPremio.crearPremio(dtoPoliza.getIdPremio()); //Ver cómo crear
-        MedidasDeSeguridad medidasDeSeguridad = gestorMedidasDeSeguridad.crearMedidasDeSeguridad(1, dtoMedidasDeSeguridad.isAlarma(), dtoMedidasDeSeguridad.isSeGuardaEnGarage(), dtoMedidasDeSeguridad.isRastreo(), dtoMedidasDeSeguridad.isTuercasAntirrobo());
 
         //falta ver como generar el nro ↓
-        poliza.setMedidasDeSeguridad(medidasDeSeguridad);
-        poliza.setModelo(modelo);
-        poliza.setPremio(premio);
 
         //TODO esto se calcula desde aca....
         //poliza.setDescuentos(dtoPoliza.getImportesporDescuentos());
@@ -147,5 +152,18 @@ public class GestorPoliza {
             throw new NullPointerException();
         }
         return poliza;
+    }
+
+    private String generarNumeroDePoliza () {
+        String numeroDePoliza = new String();
+        do {
+            int sucursal = (int) (Math.random());
+            if (sucursal == 0) numeroDePoliza = "4631-";
+            else numeroDePoliza = "3689-";
+
+            int solicitudPoliza = (int) (Math.random()*9999999);
+            numeroDePoliza += solicitudPoliza+"-00";
+        } while(buscar(numeroDePoliza)!=null);
+        return numeroDePoliza;
     }
 }

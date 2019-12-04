@@ -14,4 +14,8 @@ public class GestorMedidasDeSeguridad {
         gestorBaseDeDatos.saveMedidasDeSeguridad(medidasDeSeguridad);
         return medidasDeSeguridad;
     }
+
+    public MedidasDeSeguridad encontrarMedidaDeSeguridad(Integer idMedidaDeSeguridad) {
+        return gestorBaseDeDatos.findMedidaById(idMedidaDeSeguridad);
+    }
 }

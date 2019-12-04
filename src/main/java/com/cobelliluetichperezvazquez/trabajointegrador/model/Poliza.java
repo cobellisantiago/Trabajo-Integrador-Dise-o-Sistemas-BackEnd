@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 
 import javax.persistence.*;
 
@@ -18,12 +19,13 @@ public class Poliza {
     Calendar fechaDeEmision;
     String motorVehiculo;
     String chasisVehiculo;
-    Float sumaAsegurada;
+    Integer sumaAsegurada;
     String patente;
     Integer kilometrosPorAño;
     FormaDePago formaDePago;
     Integer añoVehiculo;
     EstadoPoliza estado;
+    NumeroDeSiniestros numeroDeSiniestros;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_FactoresCaracteristicosOriginarios")
@@ -71,8 +73,8 @@ public class Poliza {
 
     }
 
-    public Poliza(String numeroDePoliza, Calendar fechaInicioVigencia, Calendar fechaFinVigencia, Calendar fechaDeEmision,
-                  String motorVehiculo, String chasisVehiculo, Float sumaAsegurada, String patente, Integer kilometrosPorAño,
+    /*public Poliza(String numeroDePoliza, Calendar fechaInicioVigencia, Calendar fechaFinVigencia, Calendar fechaDeEmision,
+                  String motorVehiculo, String chasisVehiculo, Integer sumaAsegurada, String patente, Integer kilometrosPorAño,
                   FormaDePago formaDePago, Integer añoVehiculo, EstadoPoliza estado, Cliente cliente, Modelo modelo,
                   Premio premio, Descuentos descuentos, MedidasDeSeguridad medidasDeSeguridad, Cobertura cobertura,
                   List<Hijo> hijos, Localidad domicilioDeRiesgo) {
@@ -96,7 +98,7 @@ public class Poliza {
         this.medidasDeSeguridad = medidasDeSeguridad;
         this.cobertura = cobertura;
         this.hijos = hijos;
-    }
+    }*/
 
 
     public FactoresCaracteristicosOriginarios getFactoresCaracteristicosOriginarios() {
@@ -115,89 +117,17 @@ public class Poliza {
         this.solicitudDePoliza = solicitudDePoliza;
     }
 
-//    public Integer getIdCliente() {
-//        return idCliente;
-//    }
-
-//    public void setIdCliente(Integer idCliente) {
-//        this.idCliente = idCliente;
-//    }
-
-//    public Integer getIdCobertura() {
-//        return idCobertura;
-//    }
-
-//    public void setIdCobertura(Integer idCobertura) {
-//        this.idCobertura = idCobertura;
-//    }
-
-//    public Integer getIdLocalidad() {
-//        return idLocalidad;
-//    }
-
-//    public void setIdLocalidad(Integer idLocalidad) {
-//        this.idLocalidad = idLocalidad;
-//    }
-
-//    public Integer getIdModelo() {
-//        return idModelo;
-//    }
-
-//    public void setIdModelo(Integer idModelo) {
-//        this.idModelo = idModelo;
-//    }
-
-   /* public Integer getIdPremio() {
-        return idPremio;
-    }
-
-    public void setIdPremio(Integer idPremio) {
-        this.idPremio = idPremio;
-    }
-
-    public Integer getIdDescuentos() {
-        return idDescuentos;
-    }
-
-    public void setIdDescuentos(Integer idDescuentos) {
-        this.idDescuentos = idDescuentos;
-    }*/
-
-   /* public List<Cuota> getCuotas() {
+   public List<Cuota> getCuotas() {
         return cuotas;
-    }
+   }
 
-    public void setCuotas(List<Cuota> cuotas) {
-        this.cuotas = cuotas;
-    }
-*/
-  /*  public Integer getIdFactoresCaracteristicosOriginarios() {
-        return idFactoresCaracteristicosOriginarios;
-    }
+   public void setCuotas(List<Cuota> cuotas) {
+       this.cuotas = cuotas;
+   }
 
-    public void setIdFactoresCaracteristicosOriginarios(Integer idFactoresCaracteristicosOriginarios) {
-        this.idFactoresCaracteristicosOriginarios = idFactoresCaracteristicosOriginarios;
-    }
-
-    public Integer getIdMedidasDeSeguridad() {
-        return idMedidasDeSeguridad;
-    }
-
-    public void setIdMedidasDeSeguridad(Integer idMedidasDeSeguridad) {
-        this.idMedidasDeSeguridad = idMedidasDeSeguridad;
-    }*/
-
-    /*public String getNumeroSolicitudDePoliza() {
-        return numeroSolicitudDePoliza;
-    }
-
-    public void setNumeroSolicitudDePoliza(String numeroSolicitudDePoliza) {
-        this.numeroSolicitudDePoliza = numeroSolicitudDePoliza;
-    }*/
-
-    public String getNumeroDePoliza() {
+   public String getNumeroDePoliza() {
         return numeroDePoliza;
-    }
+   }
 
     public void setNumeroDePoliza(String numeroDePoliza) {
         this.numeroDePoliza = numeroDePoliza;
@@ -243,11 +173,11 @@ public class Poliza {
         this.chasisVehiculo = chasisVehiculo;
     }
 
-    public Float getSumaAsegurada() {
+    public Integer getSumaAsegurada() {
         return sumaAsegurada;
     }
 
-    public void setSumaAsegurada(Float sumaAsegurada) {
+    public void setSumaAsegurada(Integer sumaAsegurada) {
         this.sumaAsegurada = sumaAsegurada;
     }
 
@@ -355,5 +285,11 @@ public class Poliza {
         this.domicilioDeRiesgo = domicilioDeRiesgo;
     }
 
+    public NumeroDeSiniestros getNumeroDeSiniestros() {
+        return numeroDeSiniestros;
+    }
 
+    public void setNumeroDeSiniestros(NumeroDeSiniestros numeroDeSiniestros) {
+        this.numeroDeSiniestros = numeroDeSiniestros;
+    }
 }

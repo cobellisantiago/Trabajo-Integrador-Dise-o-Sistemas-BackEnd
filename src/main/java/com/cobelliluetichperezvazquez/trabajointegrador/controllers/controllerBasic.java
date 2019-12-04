@@ -225,9 +225,9 @@ public class controllerBasic {
     }
 
     @PostMapping(path = "/poliza/new")
-    public ResponseEntity<Object> savePoliza(@RequestBody DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos){
+    public ResponseEntity<Object> savePoliza(@RequestBody DTOPoliza dtoPoliza, List<DTOHijo> dtoHijos){
         try {
-            gestorPoliza.darDeAltaPoliza(dtoPoliza, dtoMedidasDeSeguridad, dtoHijos);
+            gestorPoliza.darDeAltaPoliza(dtoPoliza, dtoHijos);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (Exception e) {

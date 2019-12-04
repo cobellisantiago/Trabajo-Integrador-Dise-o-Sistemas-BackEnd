@@ -38,4 +38,12 @@ public class DTOMedidasDeSeguridad {
     public void setRastreo(boolean rastreo) {
         this.rastreo = rastreo;
     }
+
+    public Integer getIdMedidasDeSeguridad() {
+        return idMedidasDeSeguridad;
+    }
+
+    public void setIdMedidasDeSeguridad(Integer idMedidasDeSeguridad) {
+        this.idMedidasDeSeguridad = idMedidasDeSeguridad;
+    }
 }

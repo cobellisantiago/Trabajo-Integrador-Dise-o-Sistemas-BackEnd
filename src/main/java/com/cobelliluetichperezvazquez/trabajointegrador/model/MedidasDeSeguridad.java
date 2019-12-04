@@ -69,4 +69,11 @@ public class MedidasDeSeguridad {
     }
 
 
+    public Integer getIdMedidasDeSeguridad() {
+        return idMedidasDeSeguridad;
+    }
+
+    public void setIdMedidasDeSeguridad(Integer idMedidasDeSeguridad) {
+        this.idMedidasDeSeguridad = idMedidasDeSeguridad;
+    }
 }

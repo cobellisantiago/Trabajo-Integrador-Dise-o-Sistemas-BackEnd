@@ -8,6 +8,7 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOHijo;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOMedidasDeSeguridad;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.DTOPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,16 +31,11 @@ public class GestorPoliza {
     @Autowired
     private GestorHijos gestorHijos;
 
+
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, DTOMedidasDeSeguridad dtoMedidasDeSeguridad, List<DTOHijo> dtoHijos) {
-
-        //TODO CU17 3
-        Cliente cliente = gestorCliente.obtener(dtoPoliza.getIdCliente());
-
-        //TODO !! Mostrar datos del cliente
-
-        //Validaciones de datos (falta mostrar en pantalla):
-
         //TODO  manejar esto para que desde el front se sepa de este error
+
+        //6.A
         if(dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
         if(dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
         if(dtoPoliza.getIdModelo() == null) throw new NullPointerException("Id modelo null");
@@ -49,6 +45,7 @@ public class GestorPoliza {
         if(dtoPoliza.getChasisVehiculo() == null) throw new NullPointerException("Chasis vehiculo null");
         if(dtoPoliza.getKilometrosPorAño() == -1) throw new NullPointerException("kilometro por año null");
 
+        //6.B
         boolean i = true;
         int cont = 0;
         while (i && dtoHijos.get(cont) != null) {
@@ -57,23 +54,21 @@ public class GestorPoliza {
             cont++;
         }
         if (!i) throw new NullPointerException("Ingresó un hijo con edad fuera de rango."); //Vuelve a compeltar datos
-        else {
-            List<Integer> idHijos = gestorHijos.crear(dtoHijos);
-            //ver como asociar los hijos a la poliza en la tabla poliza_hijos
-        }
 
+        //6.C
         if (gestorBaseDeDatos.findPoliza(dtoPoliza.getPatente(), dtoPoliza.getMotorVehiculo(), dtoPoliza.getChasisVehiculo())) {
             throw new NullPointerException("Ya existe una póliza vigente para los datos ingresados.");
         }
 
+        //Mostrar los tipos de cobertura correctos
         AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacion(dtoPoliza.getIdAñoFabricacion());
         Calendar fecha = Calendar.getInstance();
         fecha.add(Calendar.YEAR,-10);
         if(fecha.before(anioFabricacion.getAño()) && dtoPoliza.getIdCobertura()==0) {
             throw new NullPointerException("la cobertura no es valida");
         }
-        //TODO Agarra DTO cobertura?? god knows how
 
+        //9.A
         Calendar fechaAyer = Calendar.getInstance();
         Calendar fechaAMasUnMes = Calendar.getInstance();
         fechaAMasUnMes.add(Calendar.MONTH, +1);
@@ -81,40 +76,49 @@ public class GestorPoliza {
         Poliza poliza = new Poliza();
         if (dtoPoliza.getFechaInicioVigencia().before(fechaAyer) || dtoPoliza.getFechaInicioVigencia().after(fechaAMasUnMes)) {
             System.out.println("Por favor, seleccione otra fecha de inicio.");
-            //Vuelve a completar datos
-        } else{
-            Cobertura cobertura = gestorCobertura.encontrarCobertura(dtoPoliza.getIdCobertura());
-            //TODO crear nro de póliza
-            poliza.setCobertura(cobertura);
-            poliza.setFechaInicioVigencia(dtoPoliza.getFechaInicioVigencia());
-            poliza.setFechaFinVigencia(dtoPoliza.getFechaFinVigencia());
-            poliza.setFechaDeEmision(Calendar.getInstance());
-            poliza.setMotorVehiculo(dtoPoliza.getMotorVehiculo());
-            poliza.setChasisVehiculo(dtoPoliza.getChasisVehiculo());
-            poliza.setSumaAsegurada(dtoPoliza.getSumaAsegurada());
-            poliza.setPatente(dtoPoliza.getPatente());
-            poliza.setKilometrosPorAño(dtoPoliza.getKilometrosPorAño());
-            poliza.setFormaDePago(dtoPoliza.getFormaDePago());
-            //TODO Deberia buscar la clase en la base de datos
-            poliza.setAñoVehiculo(dtoPoliza.getIdAñoFabricacion());
-            poliza.setEstado(EstadoPoliza.GENERADA);
-            poliza.setCliente(cliente);
-            Modelo modelo = gestorModelo.encontrarModelo(dtoPoliza.getIdModelo());
-            Localidad domicilioRiesgo = gestorLocalidad.encontrarLocalidad(dtoPoliza.getIdLocalidad());
-            Premio premio = gestorPremio.crearPremio(dtoPoliza.getIdPremio()); //Ver cómo crear
-            MedidasDeSeguridad medidasDeSeguridad = gestorMedidasDeSeguridad.crearMedidasDeSeguridad(1, dtoMedidasDeSeguridad.isAlarma(), dtoMedidasDeSeguridad.isSeGuardaEnGarage(), dtoMedidasDeSeguridad.isRastreo(), dtoMedidasDeSeguridad.isTuercasAntirrobo());
-
-            //falta ver como generar el nro ↓
-            poliza.setMedidasDeSeguridad(medidasDeSeguridad);
-            poliza.setModelo(modelo);
-            poliza.setPremio(premio);
-            poliza.setDomicilioDeRiesgo(domicilioRiesgo);
-
-            //TODO esto se calcula desde aca....
-            //poliza.setDescuentos(dtoPoliza.getImportesporDescuentos());
-
-           // poliza.setHijos(dtoHijos); //hay que encontrar los hijos de cada dto y asociarle esas intancias
         }
+
+        //Una vez que se hicieron las validaciones, empiezo a buscar instancias o crearlas
+        Cliente cliente = gestorCliente.obtener(dtoPoliza.getIdCliente());
+        poliza.setCliente(cliente);
+        Localidad localidad = gestorLocalidad.encontrarLocalidad(dtoPoliza.getIdLocalidad());
+        poliza.setDomicilioDeRiesgo(localidad);
+        Modelo modelo = gestorModelo.encontrarModelo(dtoPoliza.getIdModelo());
+        poliza.setModelo(modelo);
+        poliza.setAñoVehiculo(anioFabricacion.getAño()); //ya se habia buscado en la cobertura
+
+
+        Cobertura cobertura = gestorCobertura.encontrarCobertura(dtoPoliza.getIdCobertura());
+
+
+        poliza.setCobertura(cobertura);
+        poliza.setFechaInicioVigencia(dtoPoliza.getFechaInicioVigencia());
+        poliza.setFechaFinVigencia(dtoPoliza.getFechaFinVigencia());
+        poliza.setFechaDeEmision(Calendar.getInstance());
+        poliza.setMotorVehiculo(dtoPoliza.getMotorVehiculo());
+        poliza.setChasisVehiculo(dtoPoliza.getChasisVehiculo());
+        poliza.setSumaAsegurada(dtoPoliza.getSumaAsegurada());
+        poliza.setPatente(dtoPoliza.getPatente());
+        poliza.setKilometrosPorAño(dtoPoliza.getKilometrosPorAño());
+        poliza.setFormaDePago(dtoPoliza.getFormaDePago());
+
+        poliza.setAñoVehiculo(gestorModelo.obtenerAnioFabricacion(dtoPoliza.getIdAñoFabricacion()).getAño());
+        poliza.setEstado(EstadoPoliza.GENERADA);
+
+
+        Premio premio = gestorPremio.crearPremio(dtoPoliza.getIdPremio()); //Ver cómo crear
+        MedidasDeSeguridad medidasDeSeguridad = gestorMedidasDeSeguridad.crearMedidasDeSeguridad(1, dtoMedidasDeSeguridad.isAlarma(), dtoMedidasDeSeguridad.isSeGuardaEnGarage(), dtoMedidasDeSeguridad.isRastreo(), dtoMedidasDeSeguridad.isTuercasAntirrobo());
+
+        //falta ver como generar el nro ↓
+        poliza.setMedidasDeSeguridad(medidasDeSeguridad);
+        poliza.setModelo(modelo);
+        poliza.setPremio(premio);
+
+        //TODO esto se calcula desde aca....
+        //poliza.setDescuentos(dtoPoliza.getImportesporDescuentos());
+
+        // poliza.setHijos(dtoHijos); //hay que encontrar los hijos de cada dto y asociarle esas intancias
+
 
         return  poliza;
     }
@@ -136,8 +140,12 @@ public class GestorPoliza {
     }
 
     public Poliza buscar(String numeroDePoliza) {
-        Poliza poliza = gestorBaseDeDatos.findPolizaById(numeroDePoliza);
+        Poliza poliza = null;
+        try {
+            poliza = gestorBaseDeDatos.findPolizaById(numeroDePoliza);
+        } catch (Exception ex) {
+            throw new NullPointerException();
+        }
         return poliza;
     }
-
 }

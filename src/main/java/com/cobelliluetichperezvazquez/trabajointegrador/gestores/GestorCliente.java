@@ -23,13 +23,11 @@ public class GestorCliente {
 	@Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
 
-    //TODO Cliente - Obtener cliente segun un grupo de paremetros donde algunos son nulos
-
-    public Cliente obtener(String id){
+    public Cliente obtener(String idCliente){
         Cliente cliente = null;
         try {
-            cliente = gestorBaseDeDatos.findClienteById(id);
-        } catch (Exception ex){
+            cliente = gestorBaseDeDatos.findClienteById(idCliente);
+        } catch (Exception ex) {
             throw new NullPointerException();
         }
         return cliente;
@@ -99,8 +97,8 @@ public class GestorCliente {
         cliente.setAñoDeRegistro(dtoCliente.getAñoDeRegistro());
         cliente.setEstado(EstadoCliente.ACTIVO_AL_DIA);
         return cliente;
-    }*/
-    //TODO validar CUIL
+    }
+
     private boolean CUILvalido(String numeroDeDocumento, String CUIL) {
         return (CUIL.length() == numeroDeDocumento.length() - 3 || CUIL.length() == numeroDeDocumento.length() - 5)
                 && (CUIL.contains(numeroDeDocumento));
@@ -110,14 +108,14 @@ public class GestorCliente {
        Calendar fecha = Calendar.getInstance();
        fecha.add(Calendar.YEAR,-18);
        return !fechaDeNacimiento.after(fecha);
-   }
+   }*/
 
    public List<Cliente> buscar(String id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List<Cliente> clientes = new ArrayList<>();
         if(id!=null) { //solo habra un cliente con ese id
             clientes.add(gestorBaseDeDatos.findClienteById(id));
         }
-        else { //ver como establecer varios criterios //hibernate criteria
+        else {
             clientes = gestorBaseDeDatos.findAllCliente(apellido,nombre,tipoDeDocumento,numeroDeDocumento);
         }
         return clientes;

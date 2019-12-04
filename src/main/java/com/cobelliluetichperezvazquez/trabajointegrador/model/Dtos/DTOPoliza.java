@@ -4,9 +4,11 @@ import java.util.Calendar;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 
 public class DTOPoliza {
 
+    String numeroDePoliza;
     Integer idLocalidad;
     Integer idProvincia;
     Integer idMarca;
@@ -18,19 +20,16 @@ public class DTOPoliza {
     String patente;
     Calendar fechaInicioVigencia;
     Calendar fechaFinVigencia;
-
-    float sumaAsegurada;
+    Float sumaAsegurada;
     Integer idPremio;
-    float importesporDescuentos;
-    float montoTotalAbonar;
+    Float importesporDescuentos;
+    Float montoTotalAbonar;
     Integer kilometrosPorAño;
-    //NumeroDeSiniestros numeroSiniestrosUltimoAño;
+    NumeroDeSiniestros numeroSiniestrosUltimoAño;
     FormaDePago formaDePago;
-    String numeroDePoliza;
     EstadoPoliza estado;
     String numeroDeSolicitud;
     String idCliente;
-
 
     public String getIdCliente() {
         return idCliente;
@@ -112,11 +111,11 @@ public class DTOPoliza {
         this.fechaFinVigencia = fechaFinVigencia;
     }
 
-    public float getSumaAsegurada() {
+    public Float getSumaAsegurada() {
         return sumaAsegurada;
     }
 
-    public void setSumaAsegurada(float sumaAsegurada) {
+    public void setSumaAsegurada(Float sumaAsegurada) {
         this.sumaAsegurada = sumaAsegurada;
     }
 
@@ -128,19 +127,19 @@ public class DTOPoliza {
         this.idPremio = idPremio;
     }
 
-    public float getImportesporDescuentos() {
+    public Float getImportesporDescuentos() {
         return importesporDescuentos;
     }
 
-    public void setImportesporDescuentos(float importesporDescuentos) {
+    public void setImportesporDescuentos(Float importesporDescuentos) {
         this.importesporDescuentos = importesporDescuentos;
     }
 
-    public float getMontoTotalAbonar() {
+    public Float getMontoTotalAbonar() {
         return montoTotalAbonar;
     }
 
-    public void setMontoTotalAbonar(float montoTotalAbonar) {
+    public void setMontoTotalAbonar(Float montoTotalAbonar) {
         this.montoTotalAbonar = montoTotalAbonar;
     }
 
@@ -198,5 +197,13 @@ public class DTOPoliza {
 
     public void setNumeroDeSolicitud(String numeroDeSolicitud) {
         this.numeroDeSolicitud = numeroDeSolicitud;
+    }
+
+    public NumeroDeSiniestros getNumeroSiniestrosUltimoAño() {
+        return numeroSiniestrosUltimoAño;
+    }
+
+    public void setNumeroSiniestrosUltimoAño(NumeroDeSiniestros numeroSiniestrosUltimoAño) {
+        this.numeroSiniestrosUltimoAño = numeroSiniestrosUltimoAño;
     }
 }

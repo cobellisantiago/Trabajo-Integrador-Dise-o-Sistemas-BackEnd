@@ -15,7 +15,6 @@ public class Pago {
     @JoinColumn(name = "numeroRecibo")
     Recibo recibo;
 
-
     public Pago() {
 
     }

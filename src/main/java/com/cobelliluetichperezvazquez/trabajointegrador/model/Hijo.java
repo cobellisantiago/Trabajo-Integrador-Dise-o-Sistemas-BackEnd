@@ -66,7 +66,6 @@ public class Hijo {
         this.sexo = sexo;
     }
 
-
     public Poliza getPoliza() {
         return poliza;
     }

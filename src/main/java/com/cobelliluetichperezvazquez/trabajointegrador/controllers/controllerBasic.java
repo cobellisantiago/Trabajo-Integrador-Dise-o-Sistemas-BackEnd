@@ -37,6 +37,9 @@ public class controllerBasic {
     @Autowired
     private GestorPago gestorPago;
     @Autowired
+    private GestorMarca gestorMarca;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/domicilio/provincia/{id}")
@@ -160,8 +163,8 @@ public class controllerBasic {
 
     // ------------- VEHICULOS -----------------
     //
-    @GetMapping(path = "/marca")
-    public ResponseEntity<Object> getMarca(){
+    @GetMapping(path = "/marcas")
+    public ResponseEntity<Object> getMarcas(){
 
         List<Marca> marcas = gestorBaseDeDatos.findAllMarca();
         Type listDTOMarca = new TypeToken<List<DTOMarca>>() {}.getType();
@@ -173,6 +176,21 @@ public class controllerBasic {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }
+    }
+
+    @GetMapping(path = "/marca")
+    public ResponseEntity<Object> getMarca(@RequestParam Integer id){
+
+        Marca marcas = gestorMarca.obtenerMarca(id);
+       DTOMarca dtoMarca = modelMapper.map(marcas, DTOMarca.class);
+
+        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
+        if(dtoMarca!=null) {
+            return new ResponseEntity<>(dtoMarca,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
     }
 
     @GetMapping(path = "/marca/{id}/modelo")
@@ -215,27 +233,11 @@ public class controllerBasic {
         catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-       /* Poliza poliza = modelMapper.map(dtoPoliza, Poliza.class);
-        System.out.println(poliza.getNumeroDePoliza());
-        gestorBaseDeDatos.savePoliza(poliza);
-        Poliza poliza = gestorBaseDeDatos.findPolizaById(dtoPoliza.getNumeroDePoliza());
-        //Type listDTOModelo = new TypeToken<List<DTOModelo>>() {}.getType();
-        System.out.println(poliza);
-        dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
-
-        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
-        if(dtoPoliza!=null) {
-            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
-        }*/
     }
 
     @GetMapping(path = "/cliente")
     @ResponseBody
     public ResponseEntity<Object> getCliente(@RequestParam(required = false) String id, @RequestParam(required = false) String apellido, @RequestParam(required = false) String nombre, @RequestParam(required = false) TipoDeDocumento tipoDeDocumento, @RequestParam(required = false) String numeroDeDocumento) {
-
-        System.out.println();
         List<Cliente> clientes = gestorCliente.buscar(id, apellido, nombre, tipoDeDocumento, numeroDeDocumento);
         Type listDTOCliente = new TypeToken<List<DTOCliente>>(){}.getType();
         List<DTOCliente> dtoClientes = modelMapper.map(clientes, listDTOCliente);

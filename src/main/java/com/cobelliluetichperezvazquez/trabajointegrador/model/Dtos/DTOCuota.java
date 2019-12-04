@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 public class DTOCuota {
     Calendar ultimoDiaDePago;
+    Calendar fechaDeVencimiento;
     Integer valorActual;
     Integer valorOriginal;
 
@@ -32,4 +33,11 @@ public class DTOCuota {
         this.valorOriginal = valorOriginal;
     }
 
+    public Calendar getFechaDeVencimiento() {
+        return fechaDeVencimiento;
+    }
+
+    public void setFechaDeVencimiento(Calendar fechaDeVencimiento) {
+        this.fechaDeVencimiento = fechaDeVencimiento;
+    }
 }

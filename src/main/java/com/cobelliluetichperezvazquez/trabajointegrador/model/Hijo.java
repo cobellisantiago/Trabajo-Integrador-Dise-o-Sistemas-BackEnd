@@ -21,7 +21,7 @@ public class Hijo {
     @JoinColumn(name = "numeroDePoliza")
     Poliza poliza;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "numeroDeSolicitudDePoliza")
+    @JoinColumn(name = "numeroSolicitudDePoliza")
     SolicitudDePoliza solicitudDePoliza;
 
     public Hijo() {

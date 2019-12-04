@@ -20,7 +20,7 @@ public class SolicitudDePoliza {
     Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_medidad_seguridad")
+    @JoinColumn(name = "id_medidas_seguridad")
     MedidasDeSeguridad medidasDeSeguridad;
 
     @ManyToOne(fetch = FetchType.LAZY)

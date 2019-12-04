@@ -9,7 +9,7 @@ public class FactoresCaracteristicosOriginarios {
 
     @Id
     @GeneratedValue
-    int idFactoresCaracteristiscosOriginarios;
+    int idFactoresCaracteristicosOriginarios;
 
     Float porcentajeCobertura;
 

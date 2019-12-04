@@ -8,7 +8,7 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.Sexo;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 
 public class DTOCliente {
-    Integer idCliente;
+    String idCliente;
     String apellido;
     String nombre;
     TipoDeDocumento tipoDeDocumento;
@@ -32,11 +32,11 @@ public class DTOCliente {
         return idDomicilio;
     }
 
-    public Integer getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

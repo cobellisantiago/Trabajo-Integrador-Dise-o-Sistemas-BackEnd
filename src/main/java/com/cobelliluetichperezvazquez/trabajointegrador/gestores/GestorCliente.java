@@ -25,7 +25,7 @@ public class GestorCliente {
 
     //TODO Cliente - Obtener cliente segun un grupo de paremetros donde algunos son nulos
 
-    public Cliente obtener(Integer id){
+    public Cliente obtener(String id){
         Cliente cliente = null;
         try {
             cliente = gestorBaseDeDatos.findClienteById(id);
@@ -112,7 +112,7 @@ public class GestorCliente {
        return !fechaDeNacimiento.after(fecha);
    }
 
-   public List<Cliente> buscar(Integer id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
+   public List<Cliente> buscar(String id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List<Cliente> clientes = new ArrayList<>();
         if(id!=null) { //solo habra un cliente con ese id
             clientes.add(gestorBaseDeDatos.findClienteById(id));

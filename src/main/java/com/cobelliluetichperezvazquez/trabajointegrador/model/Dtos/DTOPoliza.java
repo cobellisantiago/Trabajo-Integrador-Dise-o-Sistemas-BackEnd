@@ -1,13 +1,9 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
-import com.cobelliluetichperezvazquez.trabajointegrador.model.AñoFabricacion;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
-import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 
 public class DTOPoliza {
 
@@ -33,14 +29,14 @@ public class DTOPoliza {
     String numeroDePoliza;
     EstadoPoliza estado;
     String numeroDeSolicitud;
-    Integer idCliente;
+    String idCliente;
 
 
-    public Integer getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

@@ -7,6 +7,7 @@ public class DTOCuota {
     Integer valorActual;
     Integer valorOriginal;
 
+
     public Calendar getUltimoDiaDePago() {
         return ultimoDiaDePago;
     }
@@ -30,4 +31,5 @@ public class DTOCuota {
     public void setValorOriginal(Integer valorOriginal) {
         this.valorOriginal = valorOriginal;
     }
+
 }

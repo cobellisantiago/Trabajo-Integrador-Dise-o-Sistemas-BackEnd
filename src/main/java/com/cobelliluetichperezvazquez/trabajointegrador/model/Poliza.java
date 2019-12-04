@@ -57,8 +57,8 @@ public class Poliza {
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    List<Cuota> cuotas;
+    /*@OneToMany(fetch = FetchType.LAZY)
+    List<Cuota> cuotas;*/
 
     @Transient
     List<Hijo> hijos;
@@ -163,14 +163,14 @@ public class Poliza {
         this.idDescuentos = idDescuentos;
     }*/
 
-    public List<Cuota> getCuotas() {
+   /* public List<Cuota> getCuotas() {
         return cuotas;
     }
 
     public void setCuotas(List<Cuota> cuotas) {
         this.cuotas = cuotas;
     }
-
+*/
   /*  public Integer getIdFactoresCaracteristicosOriginarios() {
         return idFactoresCaracteristicosOriginarios;
     }

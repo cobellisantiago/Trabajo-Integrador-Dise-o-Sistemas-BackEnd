@@ -5,6 +5,7 @@ public class DTOCobertura {
     Integer idCobertura;
     String nombre;
     String descripcion;
+    Float porcentajeDePago;
 
     public Integer getIdCobertura() {
         return idCobertura;
@@ -28,5 +29,13 @@ public class DTOCobertura {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Float getPorcentajeDePago() {
+        return porcentajeDePago;
+    }
+
+    public void setPorcentajeDePago(Float porcentajeDePago) {
+        this.porcentajeDePago = porcentajeDePago;
     }
 }

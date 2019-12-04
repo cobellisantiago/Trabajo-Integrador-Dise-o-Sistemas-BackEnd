@@ -24,19 +24,18 @@ public class controllerBasic {
 
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
-
     @Autowired
     private GestorPoliza gestorPoliza;
-
+    @Autowired
+    private GestorCuotas gestorCuotas;
     @Autowired
     private GestorCliente gestorCliente;
-
     @Autowired
     private GestorModelo gestorModelo;
-
     @Autowired
     private GestorDomicilio gestorDomicilio;
-
+    @Autowired
+    private GestorPago gestorPago;
     @Autowired
     private GestorMarca gestorMarca;
 
@@ -100,7 +99,7 @@ public class controllerBasic {
     }
 
     @GetMapping(path = "/cliente/{id}")
-    public ResponseEntity<Object> getCliente(@PathVariable(name="id") int id){
+    public ResponseEntity<Object> getCliente(@PathVariable(name="id") String id){
 
         Cliente cliente = gestorCliente.obtener(id); //gestorBaseDeDatos.findClienteById(id);
         DTOCliente dtoCliente = modelMapper.map(cliente, DTOCliente.class);
@@ -162,7 +161,6 @@ public class controllerBasic {
 
     }
 
-
     // ------------- VEHICULOS -----------------
     //
     @GetMapping(path = "/marcas")
@@ -178,7 +176,6 @@ public class controllerBasic {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }
-
     }
 
     @GetMapping(path = "/marca")
@@ -254,7 +251,7 @@ public class controllerBasic {
 
     @GetMapping(path = "/cliente")
     @ResponseBody
-    public ResponseEntity<Object> getCliente(@RequestParam(required = false) Integer id, @RequestParam(required = false) String apellido, @RequestParam(required = false) String nombre, @RequestParam(required = false) TipoDeDocumento tipoDeDocumento, @RequestParam(required = false) String numeroDeDocumento) {
+    public ResponseEntity<Object> getCliente(@RequestParam(required = false) String id, @RequestParam(required = false) String apellido, @RequestParam(required = false) String nombre, @RequestParam(required = false) TipoDeDocumento tipoDeDocumento, @RequestParam(required = false) String numeroDeDocumento) {
 
         System.out.println();
         List<Cliente> clientes = gestorCliente.buscar(id, apellido, nombre, tipoDeDocumento, numeroDeDocumento);
@@ -293,14 +290,24 @@ public class controllerBasic {
     @GetMapping(path = "/cuotas")
     @ResponseBody
     public ResponseEntity<Object> getCuotas(String numeroDePoliza) {
-        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
-        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
-        if(dtoPoliza!=null) {
-            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+        List<Cuota> cuotas = gestorCuotas.buscarCuotasVigentes(numeroDePoliza);
+        Type listDTOCuotas = new TypeToken<List<DTOCuota>>(){}.getType();
+        List<DTOCuota> dtoCuotas = modelMapper.map(cuotas, listDTOCuotas);
+        if(dtoCuotas!=null) {
+            return new ResponseEntity<>(dtoCuotas,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
+    @PostMapping(path = "/pago")
+    public ResponseEntity<Object> savePago(@RequestBody DTOPago dtoPago) {
+        try {
+            gestorPago.generarPago(dtoPago);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
 

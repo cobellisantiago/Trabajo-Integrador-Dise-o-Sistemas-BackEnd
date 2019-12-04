@@ -46,6 +46,11 @@ public class Cobertura {
         this.descripcion = descripcion;
     }
 
+    public Float getPorcentajeDePago() {
+        return porcentajeDePago;
+    }
 
-
+    public void setPorcentajeDePago(Float porcentajeDePago) {
+        this.porcentajeDePago = porcentajeDePago;
+    }
 }

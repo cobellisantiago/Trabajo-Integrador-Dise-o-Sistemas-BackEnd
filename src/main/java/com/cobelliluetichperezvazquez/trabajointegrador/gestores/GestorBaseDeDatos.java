@@ -70,11 +70,13 @@ public class GestorBaseDeDatos {
         }
         return objects;
     }
+
     public AñoFabricacion findAñoFabricacionById(int idAnio){
         Session session = this.sessionFactory.getCurrentSession();
         AñoFabricacion anio =  session.get(AñoFabricacion.class, idAnio);
         return anio;
     }
+
     public List<Cliente> findAllCliente(String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List objects = null;
         String consulta=("from "+Cliente.class.getName()+" c where 1=1 and (c.estado=0 or c.estado=1)");
@@ -143,6 +145,13 @@ public class GestorBaseDeDatos {
             // HibernateFactory.close(session);
         }
         return objects;
+    }
+
+    public Marca findMarcaById(int idMarca) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Marca marca =  session.get(Marca.class, idMarca);
+        //this.sessionFactory.close();
+        return marca;
     }
 
     public List<Modelo> findAllModeloByMarca(int idMarca) {

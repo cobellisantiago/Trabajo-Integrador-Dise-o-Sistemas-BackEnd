@@ -37,6 +37,8 @@ public class controllerBasic {
     @Autowired
     private GestorPago gestorPago;
     @Autowired
+    private GestorMarca gestorMarca;
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/domicilio/provincia/{id}")
@@ -160,16 +162,28 @@ public class controllerBasic {
 
     // ------------- VEHICULOS -----------------
     //
-    @GetMapping(path = "/marca")
-    public ResponseEntity<Object> getMarca(){
-
+    @GetMapping(path = "/marcas")
+    public ResponseEntity<Object> getMarcas() {
         List<Marca> marcas = gestorBaseDeDatos.findAllMarca();
-        Type listDTOMarca = new TypeToken<List<DTOMarca>>() {}.getType();
+        Type listDTOMarca = new TypeToken<List<DTOMarca>>() {
+        }.getType();
         List<DTOMarca> dtoMarcas = modelMapper.map(marcas, listDTOMarca);
-
         //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
-        if(dtoMarcas!=null) {
-            return new ResponseEntity<>(dtoMarcas,HttpStatus.OK);
+        if (dtoMarcas != null) {
+            return new ResponseEntity<>(dtoMarcas, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+    }
+
+
+        @GetMapping(path = "/marca")
+    public ResponseEntity<Object> getMarca(@RequestParam Integer id){
+        Marca marca = gestorMarca.obtenerMarca(id);
+        DTOMarca dtoMarca = modelMapper.map(marca, DTOMarca.class);
+        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
+        if(dtoMarca!=null) {
+            return new ResponseEntity<>(dtoMarca,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }
@@ -264,6 +278,19 @@ public class controllerBasic {
         DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
         if(dtoPoliza!=null) {
             return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(path = "/poliza/cuotas")
+    @ResponseBody
+    public ResponseEntity<Object> getCalculoCuotas(@RequestParam Integer idCobertura, @RequestParam Integer idAnioModelo, @RequestParam String formaDePago){
+        List<Cuota> cuotas = gestorCuotas.calcularCuotas(idCobertura,idAnioModelo,formaDePago);
+        Type listDTOCuotas = new TypeToken<List<DTOCuota>>(){}.getType();
+        List<DTOCuota> dtoCuotas = modelMapper.map(cuotas, listDTOCuotas);
+        if(dtoCuotas!=null) {
+            return new ResponseEntity<>(dtoCuotas,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

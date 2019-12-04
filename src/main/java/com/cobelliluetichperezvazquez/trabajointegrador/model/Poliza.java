@@ -60,7 +60,7 @@ public class Poliza {
     @OneToMany(fetch = FetchType.LAZY)
     List<Cuota> cuotas;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Transient
     List<Hijo> hijos;
 
     @ManyToOne(fetch = FetchType.LAZY)

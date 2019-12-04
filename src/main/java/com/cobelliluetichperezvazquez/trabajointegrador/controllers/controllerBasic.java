@@ -38,6 +38,9 @@ public class controllerBasic {
     private GestorDomicilio gestorDomicilio;
 
     @Autowired
+    private GestorMarca gestorMarca;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/domicilio/provincia/{id}")
@@ -162,8 +165,8 @@ public class controllerBasic {
 
     // ------------- VEHICULOS -----------------
     //
-    @GetMapping(path = "/marca")
-    public ResponseEntity<Object> getMarca(){
+    @GetMapping(path = "/marcas")
+    public ResponseEntity<Object> getMarcas(){
 
         List<Marca> marcas = gestorBaseDeDatos.findAllMarca();
         Type listDTOMarca = new TypeToken<List<DTOMarca>>() {}.getType();
@@ -172,6 +175,21 @@ public class controllerBasic {
         //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
         if(dtoMarcas!=null) {
             return new ResponseEntity<>(dtoMarcas,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
+        }
+
+    }
+
+    @GetMapping(path = "/marca")
+    public ResponseEntity<Object> getMarca(@RequestParam Integer id){
+
+        Marca marcas = gestorMarca.obtenerMarca(id);
+       DTOMarca dtoMarca = modelMapper.map(marcas, DTOMarca.class);
+
+        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
+        if(dtoMarca!=null) {
+            return new ResponseEntity<>(dtoMarca,HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
         }

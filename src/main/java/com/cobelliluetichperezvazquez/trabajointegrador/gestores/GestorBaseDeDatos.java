@@ -254,4 +254,11 @@ public class GestorBaseDeDatos {
         //this.sessionFactory.close();
         return modelo;
     }
+
+    public Marca findMarcaById(int idMarca) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Marca marca =  session.get(Marca.class, idMarca);
+        //this.sessionFactory.close();
+        return marca;
+    }
 }

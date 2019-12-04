@@ -27,7 +27,7 @@ public class SolicitudDePoliza {
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Transient
     List<Hijo> hijos;
 
     @ManyToOne(fetch = FetchType.LAZY)

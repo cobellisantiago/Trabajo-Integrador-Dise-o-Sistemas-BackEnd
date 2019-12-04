@@ -9,7 +9,7 @@ public class GestorLocalidad {
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
 
-    public Localidad encontrarLocalidad(int idLocalidad) {
+    public Localidad encontrarLocalidad(Integer idLocalidad) {
         return gestorBaseDeDatos.findLocalidadById(idLocalidad);
     }
 }

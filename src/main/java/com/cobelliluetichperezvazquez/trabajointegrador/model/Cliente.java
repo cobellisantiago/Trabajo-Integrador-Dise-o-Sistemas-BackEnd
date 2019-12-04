@@ -11,7 +11,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue
-    Integer idCliente;
+    String idCliente;
     TipoDeDocumento tipoDeDocumento;
     String numeroDeDocumento;
     String apellido;
@@ -33,7 +33,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento, String apellido,
+    public Cliente(String idCliente, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento, String apellido,
                    String nombre, NumeroDeSiniestros numeroSiniestrosUltimoAño, CondicionIVA condicionIVA, String profesion,
                    Integer añoDeRegistro, Sexo sexo, Calendar fechaDeNacimiento, String CUIL, String correoElectronico,
                    EstadoCivil estadoCivil, EstadoCliente estado, Domicilio domicilio) {
@@ -55,11 +55,11 @@ public class Cliente {
         this.domicilio = domicilio;
     }
 
-    public Integer getIdCliente() {
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

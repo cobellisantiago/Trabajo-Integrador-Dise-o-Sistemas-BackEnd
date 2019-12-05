@@ -3,7 +3,9 @@ package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.AñoFabricacion;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Cobertura;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Cuota;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.Poliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -42,7 +44,6 @@ public class GestorCuotas {
         List<Cuota> cuotas = new ArrayList<>();
         Cobertura coberturaSeleccionada = gestorCobertura.encontrarCobertura(idCobertura);
         AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacion(idAnioModelo);
-
         Float montoPoliza = anioFabricacion.getsumaAsegurada() * coberturaSeleccionada.getPorcentajeDePago();
         if(formaDePago.equals("mensual")){
             for(int i=1;i<=6;i++){
@@ -53,7 +54,28 @@ public class GestorCuotas {
             Cuota cuota = new Cuota(1,null,montoPoliza,montoPoliza,null,null);
             cuotas.add(cuota);
         }
-
         return cuotas;
+    }
+
+    public Cuota crearCuota(Integer numeroCuota, Poliza poliza) {
+        Cuota cuota = new Cuota();
+        Calendar fechaDeVencimiento = poliza.getFechaInicioVigencia();
+        fechaDeVencimiento.add(Calendar.DAY_OF_YEAR,-1);
+        fechaDeVencimiento.add(Calendar.MONTH,numeroCuota-1);
+        Cobertura coberturaSeleccionada = poliza.getCobertura();
+        Float montoPoliza = poliza.getSumaAsegurada() * coberturaSeleccionada.getPorcentajeDePago();
+        cuota.setNumeroCuota(numeroCuota);
+        cuota.setFechaDeVencimiento(fechaDeVencimiento);
+        if(poliza.getFormaDePago().equals(FormaDePago.MENSUAL)) {
+            cuota.setValorActual(montoPoliza/6);
+            cuota.setValorOriginal(montoPoliza/6);
+        }
+        else {
+            cuota.setValorActual(montoPoliza);
+            cuota.setValorOriginal(montoPoliza);
+        }
+        cuota.setPago(null);
+        cuota.setPoliza(poliza);
+        return cuota;
     }
 }

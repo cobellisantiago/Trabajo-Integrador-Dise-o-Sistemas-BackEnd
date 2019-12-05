@@ -12,11 +12,8 @@ public class Cuota {
     @GeneratedValue
     Integer idCuota;
     Integer numeroCuota;
-
     Calendar fechaDeVencimiento;
-
     Float valorActual;
-
     Float valorOriginal;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -88,5 +85,13 @@ public class Cuota {
 
     public void setPoliza(Poliza poliza) {
         this.poliza = poliza;
+    }
+
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
     }
 }

@@ -12,10 +12,8 @@ public class DTOPoliza {
 
     String numeroDePoliza;
     Integer idLocalidad;
-    Integer idProvincia;
-    Integer idMarca;
     Integer idModelo;
-    Integer idAñoFabricacion;
+    Integer anioFabricacion;
     Integer idCobertura;
     String motorVehiculo;
     String chasisVehiculo;
@@ -50,28 +48,12 @@ public class DTOPoliza {
         this.idLocalidad = idLocalidad;
     }
 
-    public Integer getIdProvincia() {
-        return idProvincia;
-    }
-
-    public void setIdProvincia(Integer idProvincia) {
-        this.idProvincia = idProvincia;
-    }
-
-    public Integer getIdMarca() {
-        return idMarca;
-    }
-
-    public void setIdMarca(Integer idMarca) {
-        this.idMarca = idMarca;
-    }
-
     public Integer getIdModelo() {
         return idModelo;
     }
 
-    public void setIdModelo(Integer idModelo) {
-        this.idModelo = idModelo;
+    public void setIdModelo(Integer modelo) {
+        this.idModelo = modelo;
     }
 
     public String getMotorVehiculo() {
@@ -146,12 +128,12 @@ public class DTOPoliza {
         this.montoTotalAbonar = montoTotalAbonar;
     }
 
-    public Integer getIdAñoFabricacion() {
-        return idAñoFabricacion;
+    public Integer getAnioFabricacion() {
+        return anioFabricacion;
     }
 
-    public void setIdAñoFabricacion(Integer añoFabricacion) {
-        this.idAñoFabricacion = añoFabricacion;
+    public void setAnioFabricacion(Integer anioFabricacion) {
+        this.anioFabricacion = anioFabricacion;
     }
 
     public Integer getKilometrosPorAño() {

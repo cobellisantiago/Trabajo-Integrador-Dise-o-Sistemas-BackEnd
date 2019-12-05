@@ -15,8 +15,8 @@ public class GestorHijos {
 
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
-    @Autowired
-    private GestorPoliza gestorPoliza;
+//    @Autowired
+//    private GestorPoliza gestorPoliza;
 
     public List<Hijo> crearHijos(List<DTOHijo> dtoHijos, Poliza poliza) {
         List<Hijo> hijos = new ArrayList<>();

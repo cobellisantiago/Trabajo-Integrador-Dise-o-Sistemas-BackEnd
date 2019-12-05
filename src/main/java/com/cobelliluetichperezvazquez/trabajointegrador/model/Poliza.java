@@ -23,51 +23,51 @@ public class Poliza {
     String patente;
     Integer kilometrosPorAño;
     FormaDePago formaDePago;
-    Integer añoVehiculo;
+    Integer anioFabricacion;
     EstadoPoliza estado;
     NumeroDeSiniestros numeroDeSiniestros;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_FactoresCaracteristicosOriginarios")
     FactoresCaracteristicosOriginarios factoresCaracteristicosOriginarios;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_solicitudPoliza")
     SolicitudDePoliza solicitudDePoliza;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente")
     Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_modelo")
     Modelo modelo;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_premio")
     Premio premio;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_descuento")
     Descuentos descuentos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_medidas_seguridad")
     MedidasDeSeguridad medidasDeSeguridad;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cobertura")
     Cobertura cobertura;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     List<Cuota> cuotas;
 
     @Transient
     List<Hijo> hijos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_domicilio_riesgo")
-    Localidad domicilioDeRiesgo;
+    Localidad idLocalidad;
 
     public Poliza() {
 
@@ -205,12 +205,12 @@ public class Poliza {
         this.formaDePago = formaDePago;
     }
 
-    public Integer getAñoVehiculo() {
-        return añoVehiculo;
+    public Integer getAnioFabricacion() {
+        return anioFabricacion;
     }
 
-    public void setAñoVehiculo(Integer añoVehiculo) {
-        this.añoVehiculo = añoVehiculo;
+    public void setAnioFabricacion(Integer anioFabricacion) {
+        this.anioFabricacion = anioFabricacion;
     }
 
     public EstadoPoliza getEstado() {
@@ -277,12 +277,12 @@ public class Poliza {
         this.hijos = hijos;
     }
 
-    public Localidad getDomicilioDeRiesgo() {
-        return domicilioDeRiesgo;
+    public Localidad getIdLocalidad() {
+        return idLocalidad;
     }
 
-    public void setDomicilioDeRiesgo(Localidad domicilioDeRiesgo) {
-        this.domicilioDeRiesgo = domicilioDeRiesgo;
+    public void setIdLocalidad(Localidad idLocalidad) {
+        this.idLocalidad = idLocalidad;
     }
 
     public NumeroDeSiniestros getNumeroDeSiniestros() {

@@ -9,9 +9,5 @@ public class GestorPremio {
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
 
-    public Premio crearPremio(int idPremio) {
-       Premio premio =  new Premio(idPremio);
-       gestorBaseDeDatos.savePremio(premio);
-       return premio;
-    }
+
 }

@@ -131,6 +131,17 @@ public class GestorBaseDeDatos {
         return objects;
     }
 
+    public List<Poliza> findAllPolizaByCliente(String idCliente) {
+        List objects = null;
+        try {
+            Query query = this.sessionFactory.getCurrentSession().createQuery("from " + Poliza.class.getName() + " p where p.cliente='"+idCliente+"'");
+            objects = query.list();
+        } catch (HibernateException e) {
+            System.out.println("no se puedo obtener las polizas");
+        }
+        return objects;
+    }
+
     public List<Cobertura> findAllCobertura() {
         List objects = null;
         try {

@@ -176,19 +176,6 @@ public class controllerBasic {
         }
     }
 
-
-        @GetMapping(path = "/marca")
-    public ResponseEntity<Object> getMarca(@RequestParam Integer id){
-        Marca marca = gestorMarca.obtenerMarca(id);
-        DTOMarca dtoMarca = modelMapper.map(marca, DTOMarca.class);
-        //List<DTOCobertura> dtoCoberturas = modelMapper.map //map(coberturas, List.class);
-        if(dtoMarca!=null) {
-            return new ResponseEntity<>(dtoMarca,HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);//RecordNotFoundException("No employee record exist for given id");
-        }
-    }
-
     @GetMapping(path = "/marca/{id}/modelo")
     public ResponseEntity<Object> getModelosByMarca(@PathVariable(name = "id") int id){
 
@@ -243,6 +230,27 @@ public class controllerBasic {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping(path = "/marca")
+    public ResponseEntity<Object> getMarca(@RequestParam Integer id){
+        Marca marca = gestorMarca.obtenerMarca(id);
+        DTOMarca dtoMarca = modelMapper.map(marca, DTOMarca.class);
+        if(dtoMarca!=null) {
+            return new ResponseEntity<>(dtoMarca,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping(path = "/poliza")
+    public ResponseEntity<Object> getPoliza(@RequestParam String numeroDePoliza) {
+        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
+        System.out.println(poliza.getNumeroDePoliza());
+        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
+        if(dtoPoliza!=null) {
+            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @GetMapping(path = "/cliente/tiposDocumento")
     @ResponseBody
@@ -251,18 +259,6 @@ public class controllerBasic {
         if(!tipos.isEmpty()){
             return new ResponseEntity<>(tipos, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping(path = "/poliza")
-    @ResponseBody
-    public ResponseEntity<Object> getPoliza(String numeroDePoliza) {
-        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
-        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
-        if(dtoPoliza!=null) {
-            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
-        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

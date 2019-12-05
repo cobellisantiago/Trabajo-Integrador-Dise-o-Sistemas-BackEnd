@@ -1,15 +1,25 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class DTOCuota {
-    Calendar ultimoDiaDePago;
-    Calendar fechaDeVencimiento;
+    Integer numeroCuota;
+    Date ultimoDiaDePago;
+    Date fechaDeVencimiento;
     Integer valorActual;
     Integer valorOriginal;
 
 
-    public Calendar getUltimoDiaDePago() {
+    public Integer getNumeroCuota() {
+        return numeroCuota;
+    }
+
+    public void setNumeroCuota(Integer numeroCuota) {
+        this.numeroCuota = numeroCuota;
+    }
+
+    public Date getUltimoDiaDePago() {
         return ultimoDiaDePago;
     }
 
@@ -21,7 +31,7 @@ public class DTOCuota {
         return valorOriginal;
     }
 
-    public void setUltimoDiaDePago(Calendar ultimoDiaDePago) {
+    public void setUltimoDiaDePago(Date ultimoDiaDePago) {
         this.ultimoDiaDePago = ultimoDiaDePago;
     }
 
@@ -33,11 +43,11 @@ public class DTOCuota {
         this.valorOriginal = valorOriginal;
     }
 
-    public Calendar getFechaDeVencimiento() {
+    public Date getFechaDeVencimiento() {
         return fechaDeVencimiento;
     }
 
-    public void setFechaDeVencimiento(Calendar fechaDeVencimiento) {
+    public void setFechaDeVencimiento(Date fechaDeVencimiento) {
         this.fechaDeVencimiento = fechaDeVencimiento;
     }
 }

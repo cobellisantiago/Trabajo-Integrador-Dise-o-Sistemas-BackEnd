@@ -51,6 +51,7 @@ public class GestorCuotas {
             }
         }else{
             Cuota cuota = new Cuota(1,null,montoPoliza,montoPoliza,null,null);
+            cuotas.add(cuota);
         }
 
         return cuotas;

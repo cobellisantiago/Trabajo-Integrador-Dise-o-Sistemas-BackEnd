@@ -4,7 +4,7 @@ public class DTOMedidasDeSeguridad {
     Integer idMedidasDeSeguridad;
     boolean seGuardaEnGarage;
     boolean alarma;
-    boolean tuercasAntirrobo;
+    boolean tuercasAntirobo;
     boolean rastreo;
 
     public boolean isSeGuardaEnGarage() {
@@ -23,12 +23,12 @@ public class DTOMedidasDeSeguridad {
         this.alarma = alarma;
     }
 
-    public boolean isTuercasAntirrobo() {
-        return tuercasAntirrobo;
+    public boolean isTuercasAntirobo() {
+        return tuercasAntirobo;
     }
 
-    public void setTuercasAntirrobo(boolean tuercasAntirrobo) {
-        this.tuercasAntirrobo = tuercasAntirrobo;
+    public void setTuercasAntirobo(boolean tuercasAntirobo) {
+        this.tuercasAntirobo = tuercasAntirobo;
     }
 
     public boolean isRastreo() {

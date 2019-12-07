@@ -39,6 +39,8 @@ public class controllerBasic {
     @Autowired
     private GestorMarca gestorMarca;
     @Autowired
+    private GestorMedidasDeSeguridad gestorMedidasDeSeguridad;
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping(path = "/domicilio/provincia/{id}")
@@ -207,13 +209,33 @@ public class controllerBasic {
         }
     }
 
+    @GetMapping(path = "/medidas")
+    public ResponseEntity<Object> getMedidasDeSeguridad(@RequestParam  Boolean garage,
+                                                        @RequestParam  Boolean tracking,
+                                                        @RequestParam  Boolean tuercas,
+                                                        @RequestParam  Boolean alarma){
+
+           MedidasDeSeguridad medidasDeSeguridad = gestorMedidasDeSeguridad.encontrarMedidaDeSeguridad(garage,tracking,tuercas,alarma);
+           DTOMedidasDeSeguridad dtoMedidasDeSeguridad = modelMapper.map(medidasDeSeguridad, DTOMedidasDeSeguridad.class);
+           if(dtoMedidasDeSeguridad!=null){
+               return new ResponseEntity<>(dtoMedidasDeSeguridad,HttpStatus.OK);
+           }else{
+               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+           }
+    }
+
     @PostMapping(path = "/poliza/new")
-    public ResponseEntity<Object> savePoliza(@RequestBody DTOPoliza dtoPoliza, List<DTOHijo> dtoHijos){
+    public ResponseEntity<Object> savePoliza(@RequestBody DTOAltaPoliza dtoAltaPoliza){
+        System.out.println(dtoAltaPoliza);
         try {
-            gestorPoliza.darDeAltaPoliza(dtoPoliza, dtoHijos);
+            DTOPoliza dtoPoliza = dtoAltaPoliza.getDtoPoliza();
+            List<DTOHijo> dtoHijos = dtoAltaPoliza.getDtoHijos();
+            gestorPoliza.darDeAltaPoliza(dtoPoliza,dtoHijos);
+
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (Exception e) {
+            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

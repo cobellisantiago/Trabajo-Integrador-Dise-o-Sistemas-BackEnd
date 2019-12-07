@@ -18,4 +18,9 @@ public class GestorMedidasDeSeguridad {
     public MedidasDeSeguridad encontrarMedidaDeSeguridad(Integer idMedidaDeSeguridad) {
         return gestorBaseDeDatos.findMedidaById(idMedidaDeSeguridad);
     }
+
+    public MedidasDeSeguridad encontrarMedidaDeSeguridad(Boolean garage, Boolean tracking, Boolean tuercas, Boolean alarma) {
+
+        return gestorBaseDeDatos.findMedida(garage?1:0, tracking?1:0, tuercas?1:0,alarma?1:0);
+    }
 }

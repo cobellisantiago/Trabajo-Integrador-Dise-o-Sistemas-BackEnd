@@ -1,4 +1,7 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class GestorPoliza {
+
     @Autowired
     private GestorBaseDeDatos gestorBaseDeDatos;
     @Autowired
@@ -26,8 +30,8 @@ public class GestorPoliza {
     private GestorCobertura gestorCobertura;
     @Autowired
     private GestorModelo gestorModelo;
-    @Autowired
-    private GestorPremio gestorPremio;
+//    @Autowired
+//    private GestorPremio gestorPremio;
     @Autowired
     private GestorMedidasDeSeguridad gestorMedidasDeSeguridad;
     @Autowired
@@ -53,11 +57,17 @@ public class GestorPoliza {
         //6.B
         boolean i = true;
         int cont = 0;
-        while (i && dtoHijos.get(cont) != null) {
-            if (estaEnRangoEdad(dtoHijos.get(cont).getFechaDeNacimiento()))
-                i = false;
-            cont++;
+        for(DTOHijo dtoHijo: dtoHijos ){
+            if (estaEnRangoEdad(dtoHijo.getFechaDeNacimiento())){
+                i= false;
+                break;
+            }
         }
+//        while (i && dtoHijos.get(cont) != null) {
+//            if (estaEnRangoEdad(dtoHijos.get(cont).getFechaDeNacimiento()))
+//                i = false;
+//            cont++;
+//        }
         if (!i) throw new NullPointerException("Ingresó un hijo con edad fuera de rango."); //Vuelve a compeltar datos
 
         //6.C
@@ -66,12 +76,13 @@ public class GestorPoliza {
         }
 
         //Mostrar los tipos de cobertura correctos
-        AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacion(dtoPoliza.getAnioFabricacion());
+        AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacionSegunModelo(dtoPoliza.getIdModelo(),dtoPoliza.getAnioFabricacion());
         Calendar fecha = Calendar.getInstance();
-        fecha.add(Calendar.YEAR,-10);
-        if(fecha.before(anioFabricacion.getAño()) && dtoPoliza.getIdCobertura()==0) {
+        fecha.add(Calendar.YEAR,-9);
+        if(fecha.after(anioFabricacion.getAño()) && dtoPoliza.getIdCobertura()==0){
             throw new NullPointerException("la cobertura no es valida");
         }
+
 
         //9.A
         Calendar fechaAyer = Calendar.getInstance();
@@ -111,7 +122,7 @@ public class GestorPoliza {
         poliza.setFechaInicioVigencia(dtoPoliza.getFechaInicioVigencia());
         poliza.setFechaFinVigencia(dtoPoliza.getFechaFinVigencia());
         poliza.setFechaDeEmision(Calendar.getInstance());
-        poliza.setFormaDePago(dtoPoliza.getFormaDePago());
+        poliza.setFormaDePago((dtoPoliza.getFormaDePago()=="menusal")?FormaDePago.MENSUAL:FormaDePago.SEMESTRAL);
         if(poliza.getFormaDePago().equals(FormaDePago.MENSUAL)) {
             for(int j=1; j<7; j++) {
                 Cuota cuota = gestorCuotas.crearCuota(j, poliza);
@@ -153,8 +164,8 @@ public class GestorPoliza {
         boolean check = true;
         Calendar fechaMenor = Calendar.getInstance();
         Calendar fechaMayor = Calendar.getInstance();
-        fechaMenor.add(Calendar.YEAR, -18);
-        fechaMayor.add(Calendar.YEAR, -30);
+        fechaMayor.add(Calendar.YEAR, -18);
+        fechaMenor.add(Calendar.YEAR, -30);
         if(fechaNacimiento.before(fechaMayor) || fechaNacimiento.after(fechaMenor)) check = false;
         return check;
     }

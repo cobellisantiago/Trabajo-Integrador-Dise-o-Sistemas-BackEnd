@@ -6,12 +6,12 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 public class DTOPoliza {
 
-    String numeroDePoliza;
+
     Integer idLocalidad;
+    String numeroDePoliza;
     Integer idModelo;
     Integer anioFabricacion;
     Integer idCobertura;
@@ -26,7 +26,7 @@ public class DTOPoliza {
     Float montoTotalAbonar;
     Integer kilometrosPorAño;
     NumeroDeSiniestros numeroSiniestrosUltimoAño;
-    FormaDePago formaDePago;
+    String formaDePago;
     EstadoPoliza estado;
     String numeroDeSolicitud;
     String idCliente;
@@ -152,11 +152,11 @@ public class DTOPoliza {
         this.idCobertura = idCobertura;
     }
 
-    public FormaDePago getFormaDePago() {
+    public String getFormaDePago() {
         return formaDePago;
     }
 
-    public void setFormaDePago(FormaDePago formaDePago) {
+    public void setFormaDePago(String formaDePago) {
         this.formaDePago = formaDePago;
     }
 

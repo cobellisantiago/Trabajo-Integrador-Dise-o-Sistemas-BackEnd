@@ -33,7 +33,7 @@ public class GestorBaseDeDatos {
         boolean check = false;
         List objects = null;
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from " + Poliza.class.getName() + " p where p.patente='"+patente+"' or p.motor='"+motor+"' or p.chasis='"+chasis+"'");
+        Query query = session.createQuery("from " + Poliza.class.getName() + " p where p.patente='"+patente+"' or p.motorVehiculo='"+motor+"' or p.chasisVehiculo='"+chasis+"'");
         objects = query.list();
         return !objects.isEmpty();
     }
@@ -66,6 +66,23 @@ public class GestorBaseDeDatos {
         Session session = this.sessionFactory.getCurrentSession();
         MedidasDeSeguridad medida =  session.get(MedidasDeSeguridad.class, idMedidaDeSeguridad);
         return medida;
+    }
+
+    public MedidasDeSeguridad findMedida(int garage, int tracking, int tuercas, int alarma){
+        MedidasDeSeguridad medidasDeSeguridad = null;
+        List objects;
+        try{
+            Query query = this.sessionFactory.getCurrentSession().
+                    createQuery("from "+ MedidasDeSeguridad.class.getName() + " m where m.seGuardaEnGarage='"+garage+"' " +
+                            "and m.alarma='"+alarma+"' and m.rastreo='"+tracking+"' and m.tuercasAntirobo='"+tuercas+"'");
+            objects = query.list();
+            medidasDeSeguridad = (MedidasDeSeguridad) objects.get(0);
+
+        }catch( HibernateException e){
+            System.out.println("No se pudo obtener medidas de seguridad");
+        }
+
+        return medidasDeSeguridad;
     }
 
     public Provincia findProvinciaById(int id) {
@@ -199,6 +216,22 @@ public class GestorBaseDeDatos {
             System.out.println("no se puedo obtener los anios");//handleException(e);
         }
         return objects;
+    }
+
+    public AñoFabricacion findAnioByModelo (Integer idModelo, Integer anio){
+        AñoFabricacion anioFabricacion = null;
+        List objects;
+        try{
+            Query query = this.sessionFactory.getCurrentSession().
+                    createQuery("from "+ AñoFabricacion.class.getName() + " a where a.modelo='"+idModelo+"' and a.año='"+anio+"'");
+            objects = query.list();
+            anioFabricacion = (AñoFabricacion) objects.get(0);
+
+        }catch( HibernateException e){
+            System.out.println("No se pudo obtener el anio para dicho modelo");
+        }
+
+        return anioFabricacion;
     }
 
     public boolean saveDomicilio(Domicilio domicilio){

@@ -25,4 +25,8 @@ public class GestorModelo {
         return gestorBaseDeDatos.findAñoFabricacionById(idAnio);
     }
 
+    public AñoFabricacion obtenerAnioFabricacionSegunModelo(Integer idModelo, Integer anio){
+        return gestorBaseDeDatos.findAnioByModelo(idModelo,anio);
+    }
+
 }

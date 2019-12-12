@@ -30,7 +30,7 @@ public class GestorPoliza {
     private GestorCobertura gestorCobertura;
     @Autowired
     private GestorModelo gestorModelo;
-//    @Autowired
+    //    @Autowired
 //    private GestorPremio gestorPremio;
     @Autowired
     private GestorMedidasDeSeguridad gestorMedidasDeSeguridad;
@@ -45,21 +45,21 @@ public class GestorPoliza {
         //TODO  manejar esto para que desde el front se sepa de este error
 
         //6.A
-        if(dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
+        if (dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
         //if(dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
-        if(dtoPoliza.getIdModelo() == null) throw new NullPointerException("Id modelo null");
+        if (dtoPoliza.getIdModelo() == null) throw new NullPointerException("Id modelo null");
         //if(dtoPoliza.getIdMarca() == null) throw new NullPointerException("Id marca null");
-        if(dtoPoliza.getAnioFabricacion() == null) throw new NullPointerException("Id año null");
-        if(dtoPoliza.getMotorVehiculo() == null) throw new NullPointerException("Motor vehiculo null");
-        if(dtoPoliza.getChasisVehiculo() == null) throw new NullPointerException("Chasis vehiculo null");
-        if(dtoPoliza.getKilometrosPorAño() == -1) throw new NullPointerException("kilometro por año null");
+        if (dtoPoliza.getAnioFabricacion() == null) throw new NullPointerException("Id año null");
+        if (dtoPoliza.getMotorVehiculo() == null) throw new NullPointerException("Motor vehiculo null");
+        if (dtoPoliza.getChasisVehiculo() == null) throw new NullPointerException("Chasis vehiculo null");
+        if (dtoPoliza.getKilometrosPorAño() == -1) throw new NullPointerException("kilometro por año null");
 
         //6.B
         boolean i = true;
         int cont = 0;
-        for(DTOHijo dtoHijo: dtoHijos ){
-            if (estaEnRangoEdad(dtoHijo.getFechaDeNacimiento())){
-                i= false;
+        for (DTOHijo dtoHijo : dtoHijos) {
+            if (estaEnRangoEdad(dtoHijo.getFechaDeNacimiento())) {
+                i = false;
                 break;
             }
         }
@@ -76,10 +76,10 @@ public class GestorPoliza {
         }
 
         //Mostrar los tipos de cobertura correctos
-        AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacionSegunModelo(dtoPoliza.getIdModelo(),dtoPoliza.getAnioFabricacion());
+        AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacionSegunModelo(dtoPoliza.getIdModelo(), dtoPoliza.getAnioFabricacion());
         Calendar fecha = Calendar.getInstance();
-        fecha.add(Calendar.YEAR,-9);
-        if(fecha.after(anioFabricacion.getAño()) && dtoPoliza.getIdCobertura()==0){
+        fecha.add(Calendar.YEAR, -9);
+        if (fecha.after(anioFabricacion.getAño()) && dtoPoliza.getIdCobertura() == 0) {
             throw new NullPointerException("la cobertura no es valida");
         }
 
@@ -122,13 +122,12 @@ public class GestorPoliza {
         poliza.setFechaInicioVigencia(dtoPoliza.getFechaInicioVigencia());
         poliza.setFechaFinVigencia(dtoPoliza.getFechaFinVigencia());
         poliza.setFechaDeEmision(Calendar.getInstance());
-        poliza.setFormaDePago((dtoPoliza.getFormaDePago()=="menusal")?FormaDePago.MENSUAL:FormaDePago.SEMESTRAL);
-        if(poliza.getFormaDePago().equals(FormaDePago.MENSUAL)) {
-            for(int j=1; j<7; j++) {
+        poliza.setFormaDePago((dtoPoliza.getFormaDePago() == "menusal") ? FormaDePago.MENSUAL : FormaDePago.SEMESTRAL);
+        if (poliza.getFormaDePago().equals(FormaDePago.MENSUAL)) {
+            for (int j = 1; j < 7; j++) {
                 Cuota cuota = gestorCuotas.crearCuota(j, poliza);
             }
-        }
-        else {
+        } else {
             Cuota cuota = gestorCuotas.crearCuota(1, poliza);
         }
         poliza.setEstado(EstadoPoliza.GENERADA);
@@ -136,22 +135,23 @@ public class GestorPoliza {
 
         boolean algunaVigente = false;
         boolean poseeCuotaImpaga = false;
-        if (polizas!=null) { //si el cliente ya tenia asociada polizas
-            for(Poliza p : polizas) {
-                if(p.getEstado().equals(EstadoPoliza.GENERADA))
+        if (polizas != null) { //si el cliente ya tenia asociada polizas
+            for (Poliza p : polizas) {
+                if (p.getEstado().equals(EstadoPoliza.GENERADA))
                     algunaVigente = true;
                 List<Cuota> cuotas = gestorCuotas.buscarCuotasVigentes(p.getNumeroDePoliza());
-                for(Cuota c : cuotas) {
-                    if(c.getPago()==null)
-                        poseeCuotaImpaga=true;
+                for (Cuota c : cuotas) {
+                    if (c.getPago() == null)
+                        poseeCuotaImpaga = true;
                 }
             }
         }
-        if(polizas==null || !algunaVigente || poseeCuotaImpaga ||
-          !cliente.getNumeroSiniestrosUltimoAño().equals(NumeroDeSiniestros.NINGUNO)) {
+        if (polizas == null || !algunaVigente || poseeCuotaImpaga ||
+                !cliente.getNumeroSiniestrosUltimoAño().equals(NumeroDeSiniestros.NINGUNO)) {
             cliente.setEstado(EstadoCliente.NORMAL_AL_DIA);
         }
-        return  poliza;
+        gestorBaseDeDatos.savePoliza(poliza);
+        return poliza;
     }
 
     public boolean encontrarPolizaVigente(String patente, String motor, String chasis) {
@@ -166,7 +166,7 @@ public class GestorPoliza {
         Calendar fechaMayor = Calendar.getInstance();
         fechaMayor.add(Calendar.YEAR, -18);
         fechaMenor.add(Calendar.YEAR, -30);
-        if(fechaNacimiento.before(fechaMayor) || fechaNacimiento.after(fechaMenor)) check = false;
+        if (fechaNacimiento.before(fechaMayor) || fechaNacimiento.after(fechaMenor)) check = false;
         return check;
     }
 
@@ -174,16 +174,25 @@ public class GestorPoliza {
         return gestorBaseDeDatos.findPolizaById(numeroDePoliza);
     }
 
-    private String generarNumeroDePoliza () {
+    private String generarNumeroDePoliza() {
         String numeroDePoliza = new String();
         do {
             int sucursal = (int) (Math.random());
             if (sucursal == 0) numeroDePoliza = "4631-";
             else numeroDePoliza = "3689-";
 
-            int solicitudPoliza = (int) (Math.random()*9999999);
-            numeroDePoliza += solicitudPoliza+"-00";
-        } while(buscar(numeroDePoliza)!=null);
+            int solicitudPoliza = (int) (Math.random() * 9999999);
+            numeroDePoliza += solicitudPoliza + "-00";
+        } while (buscar(numeroDePoliza) != null);
         return numeroDePoliza;
+    }
+
+    public List<Poliza> obtenerPoliza(String nombreCliente, String apellidoCliente,
+                                      String numeroPoliza, EstadoPoliza estado,
+                                      Calendar vigenciaDesde, Calendar vigenciaHasta,
+                                      Integer idMarca, Integer idModelo, String patente) {
+
+        return gestorBaseDeDatos.findPolizaVigente(nombreCliente, apellidoCliente, numeroPoliza,
+                estado, vigenciaDesde, vigenciaHasta, idMarca, idModelo, patente);
     }
 }

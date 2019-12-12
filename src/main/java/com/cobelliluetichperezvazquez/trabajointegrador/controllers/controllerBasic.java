@@ -4,6 +4,7 @@ package com.cobelliluetichperezvazquez.trabajointegrador.controllers;
 import com.cobelliluetichperezvazquez.trabajointegrador.gestores.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Dtos.*;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -178,6 +180,17 @@ public class controllerBasic {
         }
     }
 
+    @GetMapping(path = "/modelo")
+    public ResponseEntity<Object> getModelo(@RequestParam Integer id){
+        Modelo modelo = gestorModelo.encontrarModelo(id);
+        DTOModelo dtoModelo = modelMapper.map(modelo,DTOModelo.class);
+        if(dtoModelo!=null) {
+            return new ResponseEntity<>(dtoModelo,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(path = "/marca/{id}/modelo")
     public ResponseEntity<Object> getModelosByMarca(@PathVariable(name = "id") int id){
 
@@ -224,6 +237,25 @@ public class controllerBasic {
            }
     }
 
+    @GetMapping(path = "/poliza")
+    public ResponseEntity<Object> obtenerPoliza (@RequestParam String numeroPoliza){
+
+        Poliza poliza = gestorPoliza.buscar(numeroPoliza);
+        DTOPoliza dtoPolizas = modelMapper.map(poliza,DTOPoliza.class);
+
+        if(dtoPolizas!=null){
+            return new ResponseEntity<>(dtoPolizas,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(path = "/poliza/vigente")
+    public ResponseEntity<Object> verificarPoliza(@RequestParam (required = false) String numeroMotor, @RequestParam (required = false) String numeroChasis, @RequestParam (required = false) String patente){
+        Boolean resultado = this.gestorPoliza.encontrarPolizaVigente(patente,numeroMotor,numeroChasis);
+        return new ResponseEntity<>(resultado,HttpStatus.OK);
+    }
+
     @PostMapping(path = "/poliza/new")
     public ResponseEntity<Object> savePoliza(@RequestBody DTOAltaPoliza dtoAltaPoliza){
         System.out.println(dtoAltaPoliza);
@@ -262,17 +294,17 @@ public class controllerBasic {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping(path = "/poliza")
-    public ResponseEntity<Object> getPoliza(@RequestParam String numeroDePoliza) {
-        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
-        System.out.println(poliza.getNumeroDePoliza());
-        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
-        if(dtoPoliza!=null) {
-            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping(path = "/poliza")
+//    public ResponseEntity<Object> getPoliza(@RequestParam String numeroDePoliza) {
+//        Poliza poliza = gestorPoliza.buscar(numeroDePoliza);
+//        System.out.println(poliza.getNumeroDePoliza());
+//        DTOPoliza dtoPoliza = modelMapper.map(poliza, DTOPoliza.class);
+//        if(dtoPoliza!=null) {
+//            return new ResponseEntity<>(dtoPoliza,HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     @GetMapping(path = "/cliente/tiposDocumento")
     @ResponseBody

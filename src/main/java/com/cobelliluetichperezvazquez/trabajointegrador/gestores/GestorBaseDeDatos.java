@@ -2,6 +2,7 @@ package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 
 import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoCliente;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.TipoDeDocumento;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +38,32 @@ public class GestorBaseDeDatos {
         Query query = session.createQuery("from " + Poliza.class.getName() + " p where p.patente='"+patente+"' or p.motorVehiculo='"+motor+"' or p.chasisVehiculo='"+chasis+"'");
         objects = query.list();
         return !objects.isEmpty();
+    }
+
+    public List<Poliza> findPolizaVigente(String nombreCliente, String apellidoCliente,
+                                          String numeroPoliza, EstadoPoliza estado,
+                                          Calendar vigenciaDesde, Calendar vigenciaHasta,
+                                          Integer idMarca, Integer idModelo, String patente ){
+        List objects = null;
+        try{
+            String consulta = "from " + Poliza.class.getName() + " p where 1=1 ";
+            if(nombreCliente!=null) consulta += " and p.cliente.nombre='"+nombreCliente+"'";
+            if(apellidoCliente!=null) consulta += " and p.cliente.apellido='"+apellidoCliente+"'";
+            if(numeroPoliza!=null) consulta += " and p.numeroDePoliza='"+numeroPoliza+"'";
+            if(estado!=null) consulta += " and p.estado='"+estado+"'";
+            if(vigenciaDesde!=null) consulta += " and p.fechaInicioVigencia='"+vigenciaDesde+"'";
+            if(vigenciaHasta!=null) consulta += " and p.fechaFinVigencia='"+vigenciaHasta+"'";
+            if(idMarca!=null) consulta += " and p.modelo.marca.idMarca='"+idMarca+"'";
+            if(idModelo!=null) consulta += " and p.modelo.idModelo='"+idModelo+"'";
+            if(patente!=null) consulta += " and p.patente='"+patente+"'";
+
+            Query query = this.sessionFactory.getCurrentSession().
+                    createQuery(consulta);
+            objects = query.list();
+        }catch( HibernateException e){
+            System.out.println("No se pudo obtener las polizas");
+        }
+        return objects;
     }
 
     public Cliente findClienteById(String id) {
@@ -256,7 +284,7 @@ public class GestorBaseDeDatos {
        Session session = this.sessionFactory.getCurrentSession();
        session.getTransaction();
        session.save(poliza);
-       session.getTransaction().commit();
+       //session.getTransaction().commit();
        return true;
    }
 

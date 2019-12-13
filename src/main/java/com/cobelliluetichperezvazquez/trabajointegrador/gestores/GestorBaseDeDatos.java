@@ -331,4 +331,20 @@ public class GestorBaseDeDatos {
        Marca marca =  session.get(Marca.class, idMarca);
        return marca;
    }
+
+    public Pago savePago(Pago pago) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction();
+        session.save(pago);
+        session.getTransaction().commit();
+        return pago;
+    }
+
+    public Cuota updateCuota(Cuota cuota) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction();
+        session.saveOrUpdate(cuota);
+        session.getTransaction().commit();
+        return cuota;
+    }
 }

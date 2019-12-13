@@ -262,9 +262,9 @@ public class controllerBasic {
         try {
             DTOPoliza dtoPoliza = dtoAltaPoliza.getDtoPoliza();
             List<DTOHijo> dtoHijos = dtoAltaPoliza.getDtoHijos();
-            gestorPoliza.darDeAltaPoliza(dtoPoliza,dtoHijos);
-
-            return new ResponseEntity<>(HttpStatus.OK);
+            Poliza poliza = gestorPoliza.darDeAltaPoliza(dtoPoliza,dtoHijos);
+            DTOPoliza dtoPolizal =  modelMapper.map(poliza,DTOPoliza.class);
+            return new ResponseEntity<>(dtoPolizal,HttpStatus.OK);
         }
         catch (Exception e) {
             System.out.println(e);
@@ -356,11 +356,11 @@ public class controllerBasic {
         }
     }
 
-    @PostMapping(path = "/pago")
+    @PostMapping(path = "/pago/registrar")
     public ResponseEntity<Object> savePago(@RequestBody DTOPago dtoPago) {
         try {
-            gestorPago.generarPago(dtoPago);
-            return new ResponseEntity<>(HttpStatus.OK);
+            Pago pago = gestorPago.generarPago(dtoPago);
+            return new ResponseEntity<>(pago.getIdPago(),HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

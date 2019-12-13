@@ -1,9 +1,6 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 
-import com.cobelliluetichperezvazquez.trabajointegrador.model.AñoFabricacion;
-import com.cobelliluetichperezvazquez.trabajointegrador.model.Cobertura;
-import com.cobelliluetichperezvazquez.trabajointegrador.model.Cuota;
-import com.cobelliluetichperezvazquez.trabajointegrador.model.Poliza;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.*;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.EstadoPoliza;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +74,15 @@ public class GestorCuotas {
         cuota.setPago(null);
         cuota.setPoliza(poliza);
         return cuota;
+    }
+
+    public void registrarPago(String numeroDePoliza, Pago pago, List<Integer> cuotasId) {
+        List<Cuota> cuotas = new ArrayList<>();
+        gestorBaseDeDatos.findCuotas(numeroDePoliza).forEach( cuota -> {if(cuotasId.contains(cuota.getIdCuota()))cuotas.add(cuota);});
+        for (Cuota cuota: cuotas) {
+            cuota.setPago(pago);
+            gestorBaseDeDatos.updateCuota(cuota);
+        }
+
     }
 }

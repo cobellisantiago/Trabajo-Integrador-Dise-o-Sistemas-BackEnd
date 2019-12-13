@@ -4,12 +4,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DTOCuota {
+    Integer id;
     Integer numeroCuota;
     Date ultimoDiaDePago;
     Date fechaDeVencimiento;
     Integer valorActual;
     Integer valorOriginal;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getNumeroCuota() {
         return numeroCuota;

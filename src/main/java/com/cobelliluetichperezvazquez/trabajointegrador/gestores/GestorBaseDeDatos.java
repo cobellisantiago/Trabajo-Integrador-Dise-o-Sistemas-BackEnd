@@ -347,4 +347,25 @@ public class GestorBaseDeDatos {
         session.getTransaction().commit();
         return cuota;
     }
+    
+     public void savePremio(Premio premio) {
+       Session session = this.sessionFactory.getCurrentSession();
+       session.getTransaction();
+       session.save(premio);
+       session.getTransaction().commit();
+   }
+
+    public void saveDescuentos(Descuentos descuentos) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction();
+        session.save(descuentos);
+        session.getTransaction().commit();
+    }
+
+    public void saveCuota(Cuota cuota) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.getTransaction();
+        session.save(cuota);
+        session.getTransaction().commit();
+    }
 }

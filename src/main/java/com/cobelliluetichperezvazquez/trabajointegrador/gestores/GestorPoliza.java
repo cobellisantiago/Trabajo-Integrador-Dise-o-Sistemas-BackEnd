@@ -116,6 +116,10 @@ public class GestorPoliza {
         poliza.setHijos(hijos);
 
         //ver calculo de premios y demas
+        Premio premio = gestorPremio.generarPremio(anioFabricacion.getsumaAsegurada());
+        poliza.setPremio(premio);
+        Descuentos descuentos = gestorPremio.generarDescuentos(anioFabricacion.getsumaAsegurada(), poliza.getFormaDePago());
+        poliza.setDescuentos(descuentos);
 
         Cobertura cobertura = gestorCobertura.encontrarCobertura(dtoPoliza.getIdCobertura());
         poliza.setCobertura(cobertura);

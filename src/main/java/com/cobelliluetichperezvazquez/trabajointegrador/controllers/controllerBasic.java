@@ -317,6 +317,19 @@ public class controllerBasic {
         }
     }
 
+    @GetMapping(path = "/pago/cuotas")
+    @ResponseBody
+    public ResponseEntity<Object> getCalculoCuotas(@RequestParam String numeroDePoliza){
+        List<Cuota> cuotas = gestorCuotas.buscarCuotasVigentes(numeroDePoliza);
+        Type listDTOCuotas = new TypeToken<List<DTOCuota>>(){}.getType();
+        List<DTOCuota> dtoCuotas = modelMapper.map(cuotas, listDTOCuotas);
+        if(dtoCuotas!=null) {
+            return new ResponseEntity<>(dtoCuotas,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(path = "/poliza/cuotas")
     @ResponseBody
     public ResponseEntity<Object> getCalculoCuotas(@RequestParam Integer idCobertura, @RequestParam Integer idAnioModelo, @RequestParam String formaDePago){

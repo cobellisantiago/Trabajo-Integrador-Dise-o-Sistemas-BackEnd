@@ -17,6 +17,7 @@ import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.NumeroDeSiniestros;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -40,6 +41,8 @@ public class GestorPoliza {
     private GestorHijos gestorHijos;
     @Autowired
     private GestorCuotas gestorCuotas;
+    @AutoConfigureOrder
+    private GestorPremio gestorPremio;
 
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, List<DTOHijo> dtoHijos) {
         //TODO  manejar esto para que desde el front se sepa de este error

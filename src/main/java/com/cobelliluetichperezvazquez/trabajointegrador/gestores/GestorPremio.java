@@ -1,6 +1,8 @@
 package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 
+import com.cobelliluetichperezvazquez.trabajointegrador.model.Descuentos;
 import com.cobelliluetichperezvazquez.trabajointegrador.model.Premio;
+import com.cobelliluetichperezvazquez.trabajointegrador.model.enums.FormaDePago;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

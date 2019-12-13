@@ -362,7 +362,8 @@ public class controllerBasic {
             Pago pago = gestorPago.generarPago(dtoPago);
             return new ResponseEntity<>(pago.getIdPago(),HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

@@ -29,6 +29,7 @@ private  GestorCuotas gestorCuotas;
             Pago pago = new Pago();
             Pago pagoNuevo;
             pago.setFechaDeRealizacion(Calendar.getInstance());
+            pago.setMonto((float)100);
             pagoNuevo = gestorBaseDeDatos.savePago(pago);
 
             gestorCuotas.registrarPago(dtoPago.getNumeroDePoliza(),pagoNuevo,dtoPago.getCuotasId());

@@ -296,12 +296,12 @@ public class GestorBaseDeDatos {
        return true;
    }
 
-   public void savePremio(Premio premio) {
-       Session session = this.sessionFactory.getCurrentSession();
-       session.getTransaction();
-       session.save(premio);
-       session.getTransaction().commit();
-   }
+//   public void savePremio(Premio premio) {
+//       Session session = this.sessionFactory.getCurrentSession();
+//       session.getTransaction();
+//       session.save(premio);
+//       session.getTransaction().commit();
+//   }
 
    public List<Provincia> findAllProvincia(){
        System.out.println("Voy a buscar provincias");
@@ -333,16 +333,19 @@ public class GestorBaseDeDatos {
    }
 
     public Pago savePago(Pago pago) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.getTransaction();
-        session.save(pago);
-        session.getTransaction().commit();
+
+            Session session = this.sessionFactory.openSession();
+            //session.getTransaction();
+            session.getTransaction().begin();
+            session.save(pago);
+            session.getTransaction().commit();
         return pago;
     }
 
     public Cuota updateCuota(Cuota cuota) {
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
+
         session.saveOrUpdate(cuota);
         session.getTransaction().commit();
         return cuota;

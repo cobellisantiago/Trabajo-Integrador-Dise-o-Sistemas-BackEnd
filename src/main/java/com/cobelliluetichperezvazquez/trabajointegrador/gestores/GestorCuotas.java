@@ -73,6 +73,7 @@ public class GestorCuotas {
         }
         cuota.setPago(null);
         cuota.setPoliza(poliza);
+        gestorBaseDeDatos.saveCuota(cuota);
         return cuota;
     }
 
@@ -83,6 +84,5 @@ public class GestorCuotas {
             cuota.setPago(pago);
             gestorBaseDeDatos.updateCuota(cuota);
         }
-
     }
 }

@@ -32,8 +32,8 @@ public class GestorPoliza {
     private GestorCobertura gestorCobertura;
     @Autowired
     private GestorModelo gestorModelo;
-    //    @Autowired
-//    private GestorPremio gestorPremio;
+    //@Autowired
+    //private GestorPremio gestorPremio;
     @Autowired
     private GestorMedidasDeSeguridad gestorMedidasDeSeguridad;
     @Autowired
@@ -46,13 +46,9 @@ public class GestorPoliza {
     private GestorPremio gestorPremio;
 
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, List<DTOHijo> dtoHijos) {
-        //TODO  manejar esto para que desde el front se sepa de este error
-
         //6.A
         if (dtoPoliza.getIdLocalidad() == null) throw new NullPointerException("Id localidad null");
-        //if(dtoPoliza.getIdProvincia() == null) throw new NullPointerException("Id provincia null");
         if (dtoPoliza.getIdModelo() == null) throw new NullPointerException("Id modelo null");
-        //if(dtoPoliza.getIdMarca() == null) throw new NullPointerException("Id marca null");
         if (dtoPoliza.getAnioFabricacion() == null) throw new NullPointerException("Id año null");
         if (dtoPoliza.getMotorVehiculo() == null) throw new NullPointerException("Motor vehiculo null");
         if (dtoPoliza.getChasisVehiculo() == null) throw new NullPointerException("Chasis vehiculo null");
@@ -60,18 +56,12 @@ public class GestorPoliza {
 
         //6.B
         boolean i = true;
-        int cont = 0;
         for (DTOHijo dtoHijo : dtoHijos) {
             if (estaEnRangoEdad(dtoHijo.getFechaDeNacimiento())) {
                 i = false;
                 break;
             }
         }
-//        while (i && dtoHijos.get(cont) != null) {
-//            if (estaEnRangoEdad(dtoHijos.get(cont).getFechaDeNacimiento()))
-//                i = false;
-//            cont++;
-//        }
         if (!i) throw new NullPointerException("Ingresó un hijo con edad fuera de rango."); //Vuelve a compeltar datos
 
         //6.C
@@ -87,18 +77,17 @@ public class GestorPoliza {
             throw new NullPointerException("la cobertura no es valida");
         }
 
-
         //9.A
         Calendar fechaAyer = Calendar.getInstance();
         Calendar fechaAMasUnMes = Calendar.getInstance();
         fechaAMasUnMes.add(Calendar.MONTH, +1);
         fechaAyer.add(Calendar.DATE, -1);
-        Poliza poliza = new Poliza();
         if (dtoPoliza.getFechaInicioVigencia().before(fechaAyer) || dtoPoliza.getFechaInicioVigencia().after(fechaAMasUnMes)) {
             System.out.println("Por favor, seleccione otra fecha de inicio.");
         }
 
         //Una vez que se hicieron las validaciones, empiezo a buscar instancias o crearlas
+        Poliza poliza = new Poliza();
         Cliente cliente = gestorCliente.obtener(dtoPoliza.getIdCliente());
         poliza.setCliente(cliente);
         Localidad localidad = gestorLocalidad.encontrarLocalidad(dtoPoliza.getIdLocalidad());
@@ -119,7 +108,6 @@ public class GestorPoliza {
         List<Hijo> hijos = gestorHijos.crearHijos(dtoHijos, poliza);
         poliza.setHijos(hijos);
 
-        //ver calculo de premios y demas
         Premio premio = gestorPremio.generarPremio(anioFabricacion.getsumaAsegurada());
         poliza.setPremio(premio);
         Descuentos descuentos = gestorPremio.generarDescuentos(anioFabricacion.getsumaAsegurada(), poliza.getFormaDePago());
@@ -167,8 +155,6 @@ public class GestorPoliza {
     public boolean encontrarPolizaVigente(String patente, String motor, String chasis) {
         return (gestorBaseDeDatos.findPoliza(patente, motor, chasis));
     }
-
-    //TODO opcion de que el actor, dsps de todo, seleccione otra cobertura y vuelva al paso 7
 
     private static boolean estaEnRangoEdad(Calendar fechaNacimiento) {
         boolean check = true;

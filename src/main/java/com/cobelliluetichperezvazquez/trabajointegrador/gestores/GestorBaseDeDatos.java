@@ -154,8 +154,8 @@ public class GestorBaseDeDatos {
         try {
             if(apellido!=null) consulta = consulta+" and c.apellido like'"+apellido+"%'";
             if(nombre!=null) consulta = consulta+" and c.nombre like'"+nombre+"%'";
-            if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento="+tipoDeDocumento;
-            if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento="+numeroDeDocumento;
+            if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento='"+tipoDeDocumento.ordinal()+"'";
+            if(numeroDeDocumento!=null) consulta = consulta+" and c.numeroDeDocumento='"+numeroDeDocumento+"'";
             System.out.println(consulta);
             Query query = this.sessionFactory.getCurrentSession().createQuery(consulta);
             objects = query.list();

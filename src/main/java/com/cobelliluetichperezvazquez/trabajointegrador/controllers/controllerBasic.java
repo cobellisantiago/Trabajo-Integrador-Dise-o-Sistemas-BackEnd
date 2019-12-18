@@ -274,8 +274,10 @@ public class controllerBasic {
 
     @GetMapping(path = "/cliente")
     @ResponseBody
-    public ResponseEntity<Object> getCliente(@RequestParam(required = false) String id, @RequestParam(required = false) String apellido, @RequestParam(required = false) String nombre, @RequestParam(required = false) TipoDeDocumento tipoDeDocumento, @RequestParam(required = false) String numeroDeDocumento) {
-        List<Cliente> clientes = gestorCliente.buscar(id, apellido, nombre, tipoDeDocumento, numeroDeDocumento);
+    public ResponseEntity<Object> getCliente(@RequestParam(required = false) String id, @RequestParam(required = false) String apellido, @RequestParam(required = false) String nombre, @RequestParam(required = false) String tipoDeDocumento, @RequestParam(required = false) String numeroDeDocumento) {
+        TipoDeDocumento tipoDocumento;
+        tipoDocumento = (tipoDeDocumento != null)? TipoDeDocumento.valueOf(tipoDeDocumento) :  null;
+        List<Cliente> clientes = gestorCliente.buscar(id, apellido, nombre,tipoDocumento, numeroDeDocumento);
         Type listDTOCliente = new TypeToken<List<DTOCliente>>(){}.getType();
         List<DTOCliente> dtoClientes = modelMapper.map(clientes, listDTOCliente);
         if(dtoClientes!=null) {

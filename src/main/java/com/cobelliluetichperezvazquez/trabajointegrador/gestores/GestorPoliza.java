@@ -2,6 +2,7 @@ package com.cobelliluetichperezvazquez.trabajointegrador.gestores;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -142,11 +143,12 @@ public class GestorPoliza {
 
         boolean algunaVigente = false;
         boolean poseeCuotaImpaga = false;
+        List<Cuota> cuotas=new ArrayList<>();
         if (polizas != null) { //si el cliente ya tenia asociada polizas
             for (Poliza p : polizas) {
                 if (p.getEstado().equals(EstadoPoliza.GENERADA))
                     algunaVigente = true;
-                List<Cuota> cuotas = gestorCuotas.buscarCuotasVigentes(p.getNumeroDePoliza());
+                cuotas = gestorCuotas.buscarCuotasVigentes(p.getNumeroDePoliza());
                 for (Cuota c : cuotas) {
                     if (c.getPago() == null)
                         poseeCuotaImpaga = true;
@@ -158,6 +160,7 @@ public class GestorPoliza {
             cliente.setEstado(EstadoCliente.NORMAL_AL_DIA);
         }
         gestorBaseDeDatos.savePoliza(poliza);
+        gestorCuotas.guardarCuotas(cuotas);
         return poliza;
     }
 

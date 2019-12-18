@@ -23,7 +23,7 @@ public Premio generarPremio(Integer sumaAsegurada){
             gestorBaseDeDatos.savePremio(premio);
         }
         catch (Exception e) {
-            throw new NullPointerException("El hijo no pudo ser guardado en la BDD");
+            throw new NullPointerException("El premio no pudo ser guardado en la BDD");
         }
         return premio;
     }
@@ -40,7 +40,7 @@ public Premio generarPremio(Integer sumaAsegurada){
             gestorBaseDeDatos.saveDescuentos(descuentos);
         }
         catch (Exception e) {
-            throw new NullPointerException("El hijo no pudo ser guardado en la BDD");
+            throw new NullPointerException("Error guardando descuentos en la base de datos");
         }
         return descuentos;
     }

@@ -112,12 +112,7 @@ public class GestorCliente {
 
    public List<Cliente> buscar(String id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List<Cliente> clientes = new ArrayList<>();
-        if(id!=null) { //solo habra un cliente con ese id
-            clientes.add(gestorBaseDeDatos.findClienteById(id));
-        }
-        else {
-            clientes = gestorBaseDeDatos.findAllCliente(apellido,nombre,tipoDeDocumento,numeroDeDocumento);
-        }
+        clientes = gestorBaseDeDatos.findAllCliente(id,apellido,nombre,tipoDeDocumento,numeroDeDocumento);
         return clientes;
    }
 

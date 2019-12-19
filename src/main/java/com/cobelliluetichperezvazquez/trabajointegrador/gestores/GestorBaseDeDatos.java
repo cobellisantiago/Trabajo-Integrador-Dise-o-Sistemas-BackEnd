@@ -148,10 +148,11 @@ public class GestorBaseDeDatos {
         return anio;
     }
 
-    public List<Cliente> findAllCliente(String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
+    public List<Cliente> findAllCliente(String id, String apellido, String nombre, TipoDeDocumento tipoDeDocumento, String numeroDeDocumento) {
         List objects = null;
         String consulta=("from "+Cliente.class.getName()+" c where 1=1 and (c.estado=0 or c.estado=1)");
         try {
+            if(id!=null) consulta = consulta+" and c.idCliente='"+id+"'";
             if(apellido!=null) consulta = consulta+" and c.apellido like'"+apellido+"%'";
             if(nombre!=null) consulta = consulta+" and c.nombre like'"+nombre+"%'";
             if(tipoDeDocumento!=null) consulta = consulta+" and c.tipoDeDocumento='"+tipoDeDocumento.ordinal()+"'";

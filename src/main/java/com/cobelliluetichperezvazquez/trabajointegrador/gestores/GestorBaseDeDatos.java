@@ -272,9 +272,9 @@ public class GestorBaseDeDatos {
 
     public boolean saveHijo(Hijo hijo){
         Session session = this.sessionFactory.getCurrentSession();
-        session.beginTransaction();
+        session.getTransaction();
         session.save(hijo);
-        session.getTransaction().commit();
+        //session.getTransaction().commit();
         return true;
     }
 
@@ -344,10 +344,11 @@ public class GestorBaseDeDatos {
 
     public Cuota updateCuota(Cuota cuota) {
         Session session = this.sessionFactory.getCurrentSession();
+        //session.getTransaction();
         session.getTransaction();
-
-        session.saveOrUpdate(cuota);
-        session.getTransaction().commit();
+        //session.saveOrUpdate(cuota);
+        session.update(cuota);
+       // session.getTransaction().commit();
         return cuota;
     }
     
@@ -355,20 +356,20 @@ public class GestorBaseDeDatos {
        Session session = this.sessionFactory.getCurrentSession();
        session.getTransaction();
        session.save(premio);
-       session.getTransaction().commit();
+//     session.getTransaction().commit();
    }
 
     public void saveDescuentos(Descuentos descuentos) {
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
         session.save(descuentos);
-        session.getTransaction().commit();
+//        session.getTransaction().commit();
     }
 
     public void saveCuota(Cuota cuota) {
         Session session = this.sessionFactory.getCurrentSession();
         session.getTransaction();
         session.save(cuota);
-        session.getTransaction().commit();
+//        session.getTransaction().commit();
     }
 }

@@ -13,34 +13,35 @@ public class GestorPremio {
 
 public Premio generarPremio(Integer sumaAsegurada){
         Premio premio = new Premio();
-        double totalPremio = (sumaAsegurada*0.05);
+    try {
+        double totalPremio = (sumaAsegurada*0.07);
         double prima = (sumaAsegurada*0.01);
         double derechoEmision = (double) (Math.random()*100);
         premio.setTotalPremio((float) totalPremio);
         premio.setPrima((float) prima);
         premio.setDerechoDeEmision((float) derechoEmision);
-        try {
-            gestorBaseDeDatos.savePremio(premio);
+        gestorBaseDeDatos.savePremio(premio);
         }
         catch (Exception e) {
-            throw new NullPointerException("El premio no pudo ser guardado en la BDD");
+            throw new NullPointerException("El premio no pudo ser guardado en la BDD: "+e);
         }
         return premio;
     }
 
     public Descuentos generarDescuentos(Integer sumaAsegurada, FormaDePago formaDePago){
         Descuentos descuentos = new Descuentos();
-        double descuentoPorUnidad = (sumaAsegurada*0.1);
-        double descuentoPorPagoSemestral = 0;
-        if(formaDePago.equals(formaDePago.SEMESTRAL))
-            descuentoPorPagoSemestral = sumaAsegurada*0.2;
-        descuentos.setDescuentoPorPagoSemestral((float) descuentoPorPagoSemestral);
-        descuentos.setDescuentoPorUnidad((float) descuentoPorUnidad);
         try {
+            double descuentoPorUnidad = (sumaAsegurada*0.01);
+            double descuentoPorPagoSemestral = 0;
+            if(formaDePago.equals(formaDePago.SEMESTRAL))
+                descuentoPorPagoSemestral = sumaAsegurada*0.02;
+            descuentos.setDescuentoPorPagoSemestral((float) descuentoPorPagoSemestral);
+            descuentos.setDescuentoPorUnidad((float) descuentoPorUnidad);
+
             gestorBaseDeDatos.saveDescuentos(descuentos);
         }
         catch (Exception e) {
-            throw new NullPointerException("Error guardando descuentos en la base de datos");
+            throw new NullPointerException("Error guardando descuentos en la base de datos: "+e);
         }
         return descuentos;
     }

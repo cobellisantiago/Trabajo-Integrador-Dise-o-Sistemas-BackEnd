@@ -32,8 +32,8 @@ public class GestorPoliza {
     private GestorCobertura gestorCobertura;
     @Autowired
     private GestorModelo gestorModelo;
-    //@Autowired
-    //private GestorPremio gestorPremio;
+    @Autowired
+    private GestorPremio gestorPremio;
     @Autowired
     private GestorMedidasDeSeguridad gestorMedidasDeSeguridad;
     @Autowired
@@ -42,8 +42,7 @@ public class GestorPoliza {
     private GestorHijos gestorHijos;
     @Autowired
     private GestorCuotas gestorCuotas;
-    @AutoConfigureOrder
-    private GestorPremio gestorPremio;
+
 
     public Poliza darDeAltaPoliza(DTOPoliza dtoPoliza, List<DTOHijo> dtoHijos) {
         //6.A
@@ -105,8 +104,8 @@ public class GestorPoliza {
         poliza.setNumeroDeSiniestros(dtoPoliza.getNumeroSiniestrosUltimoAño());
         String numeroDePoliza = generarNumeroDePoliza();
         poliza.setNumeroDePoliza(numeroDePoliza);
-        List<Hijo> hijos = gestorHijos.crearHijos(dtoHijos, poliza);
-        poliza.setHijos(hijos);
+        poliza.setFormaDePago((dtoPoliza.getFormaDePago().equals("mensual")) ? FormaDePago.MENSUAL : FormaDePago.SEMESTRAL);
+
 
         Premio premio = gestorPremio.generarPremio(anioFabricacion.getsumaAsegurada());
         poliza.setPremio(premio);
@@ -118,13 +117,15 @@ public class GestorPoliza {
         poliza.setFechaInicioVigencia(dtoPoliza.getFechaInicioVigencia());
         poliza.setFechaFinVigencia(dtoPoliza.getFechaFinVigencia());
         poliza.setFechaDeEmision(Calendar.getInstance());
-        poliza.setFormaDePago((dtoPoliza.getFormaDePago() == "menusal") ? FormaDePago.MENSUAL : FormaDePago.SEMESTRAL);
+        List<Cuota> cuotasNuevas = new ArrayList<>();
         if (poliza.getFormaDePago().equals(FormaDePago.MENSUAL)) {
             for (int j = 1; j < 7; j++) {
                 Cuota cuota = gestorCuotas.crearCuota(j, poliza);
+                cuotasNuevas.add(cuota);
             }
         } else {
             Cuota cuota = gestorCuotas.crearCuota(1, poliza);
+            cuotasNuevas.add(cuota);
         }
         poliza.setEstado(EstadoPoliza.GENERADA);
         List<Poliza> polizas = gestorBaseDeDatos.findAllPolizaByCliente(cliente.getIdCliente());
@@ -148,7 +149,9 @@ public class GestorPoliza {
             cliente.setEstado(EstadoCliente.NORMAL_AL_DIA);
         }
         gestorBaseDeDatos.savePoliza(poliza);
-        gestorCuotas.guardarCuotas(cuotas);
+        gestorCuotas.guardarCuotas(cuotasNuevas);
+        List<Hijo> hijos = gestorHijos.crearHijos(dtoHijos, poliza);
+        poliza.setHijos(hijos);
         return poliza;
     }
 

@@ -41,13 +41,14 @@ public class GestorCuotas {
         List<Cuota> cuotas = new ArrayList<>();
         Cobertura coberturaSeleccionada = gestorCobertura.encontrarCobertura(idCobertura);
         AñoFabricacion anioFabricacion = gestorModelo.obtenerAnioFabricacion(idAnioModelo);
-        Float montoPoliza = anioFabricacion.getsumaAsegurada() * coberturaSeleccionada.getPorcentajeDePago();
         if(formaDePago.equals("mensual")){
+            Float montoPoliza = (float)(anioFabricacion.getsumaAsegurada()*0.06);
             for(int i=1;i<=6;i++){
                 Cuota cuota = new Cuota(i,null,(montoPoliza/6),(montoPoliza/6),null,null);
                 cuotas.add(cuota);
             }
         }else{
+            Float montoPoliza = (float)(anioFabricacion.getsumaAsegurada()*0.04);
             Cuota cuota = new Cuota(1,null,montoPoliza,montoPoliza,null,null);
             cuotas.add(cuota);
         }
@@ -60,7 +61,9 @@ public class GestorCuotas {
         fechaDeVencimiento.add(Calendar.DAY_OF_YEAR,-1);
         fechaDeVencimiento.add(Calendar.MONTH,numeroCuota-1);
         Cobertura coberturaSeleccionada = poliza.getCobertura();
-        Float montoPoliza = poliza.getSumaAsegurada() * coberturaSeleccionada.getPorcentajeDePago();
+        Float montoPoliza =  poliza.getPremio().getTotalPremio() - (poliza.getDescuentos().getDescuentoPorUnidad()
+        + (poliza.getDescuentos().getDescuentoPorPagoSemestral() == null? 0:poliza.getDescuentos().getDescuentoPorPagoSemestral()));
+        //poliza.getSumaAsegurada() * coberturaSeleccionada.getPorcentajeDePago();
         cuota.setNumeroCuota(numeroCuota);
         cuota.setFechaDeVencimiento(fechaDeVencimiento);
         if(poliza.getFormaDePago().equals(FormaDePago.MENSUAL)) {

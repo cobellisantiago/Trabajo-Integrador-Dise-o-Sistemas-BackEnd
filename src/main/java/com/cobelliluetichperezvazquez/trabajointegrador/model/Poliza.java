@@ -274,7 +274,11 @@ public class Poliza {
     }
 
     public void setHijos(List<Hijo> hijos) {
-        this.hijos = hijos;
+        try{
+            this.hijos = hijos;
+        }catch (Exception e){
+            System.out.println("No se puede setear hijos");
+        }
     }
 
     public Localidad getIdLocalidad() {

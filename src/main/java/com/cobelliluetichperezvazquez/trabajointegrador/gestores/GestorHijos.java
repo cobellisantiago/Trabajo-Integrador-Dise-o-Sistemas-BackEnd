@@ -20,20 +20,23 @@ public class GestorHijos {
 
     public List<Hijo> crearHijos(List<DTOHijo> dtoHijos, Poliza poliza) {
         List<Hijo> hijos = new ArrayList<>();
-        for(DTOHijo dto : dtoHijos) {
-            Hijo hijo = new Hijo();
-            hijo.setEstadoCivil(dto.getEstadoCivil());
-            hijo.setSexo(dto.getSexo());
-            hijo.setFechaDeNacimiento(dto.getFechaDeNacimiento());
-            hijo.setPoliza(poliza);
-            try {
+        try {
+
+            for (DTOHijo dto : dtoHijos) {
+                Hijo hijo = new Hijo();
+                hijo.setEstadoCivil(dto.getEstadoCivil());
+                hijo.setSexo(dto.getSexo());
+                hijo.setFechaDeNacimiento(dto.getFechaDeNacimiento());
+                hijo.setPoliza(poliza);
+
                 gestorBaseDeDatos.saveHijo(hijo); // save hijo me devuelve el id del hijo
                 hijos.add(hijo);
             }
-            catch (Exception e) {
+        } catch(Exception e){
                 throw new NullPointerException("El hijo no pudo ser guardado en la BDD");
-            }
         }
+
+
         return hijos;
     }
 }

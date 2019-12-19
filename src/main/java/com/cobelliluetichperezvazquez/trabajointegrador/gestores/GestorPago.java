@@ -27,12 +27,12 @@ private  GestorCuotas gestorCuotas;
         //Pago pago = modelMapper.map(dtoPago, Pago.class);
 
             Pago pago = new Pago();
-            Pago pagoNuevo;
+            //Pago pagoNuevo;
             pago.setFechaDeRealizacion(Calendar.getInstance());
             pago.setMonto((float)100);
-            pagoNuevo = gestorBaseDeDatos.savePago(pago);
+            gestorBaseDeDatos.savePago(pago);
 
-            gestorCuotas.registrarPago(dtoPago.getNumeroDePoliza(),pagoNuevo,dtoPago.getCuotasId());
+            gestorCuotas.registrarPago(dtoPago.getNumeroDePoliza(),pago,dtoPago.getCuotasId());
             return pago;
         }
 
